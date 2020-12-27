@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useDrag } from 'react-dnd'
 import {ItemTypes} from './constants'
 
-const Card = () => {
-    const[offset, setOffset] = useState({x:0, y:0})
+const Card = props => {
+    const[offset, setOffset] = useState({x:props.x, y:props.y})
     const [{ isDragging }, drag] = useDrag({
         item: { type: ItemTypes.CARD },
         end: (item,monitor) => { 
@@ -21,8 +21,8 @@ const Card = () => {
             className="card" 
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                top: offset.y - 100,
-                left: offset.x + 50
+                top: offset.y,
+                left: offset.x
             }}
   ></div>
 }
