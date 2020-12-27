@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import EditorWrapper from "./components/editor";
+import EditorWrapper from "./components/editor/editor";
 
 function App() {
   return (

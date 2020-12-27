@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import {EditorState} from 'prosemirror-state'
 import {EditorView} from 'prosemirror-view'
-import {schema}  from "../model/schema"
+import {schema}  from "../../model/schema"
 import {exampleSetup} from "prosemirror-example-setup"
 import './editor.css'
 
