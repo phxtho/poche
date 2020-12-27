@@ -1,7 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import 'remirror/styles/all.css';
 import EditorWrapper from "./components/editor";
 
 function App() {
