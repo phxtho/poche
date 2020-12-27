@@ -1,0 +1,15 @@
+.card{
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    height: 100px;
+    width: 100px;
+    border-radius: 8px;
+    cursor: move;
+    position: absolute;
+}
+
+.canvas{
+    position: relative;
+    height: 1000px;
+    width:100%; 
+    background-color:black
+}

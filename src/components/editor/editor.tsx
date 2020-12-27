@@ -7,13 +7,13 @@ import './editor.css'
 
 const Editor = () => {
   const editorRef = useRef()
-  const [editorView, setEditorView] = useState(null);
+  const [, setEditorView] = useState(null);
 
   const editorState = EditorState.create({schema: schema, plugins: exampleSetup({schema: schema})})
   
   useEffect(()=>{
-    let newEditorView = new EditorView(editorRef.current, {state: editorState})
-    setEditorView(newEditorView)
+    const editorView = new EditorView(editorRef.current, {state: editorState})
+    setEditorView(editorView)
   },[])
 
  return <div id="editorContainer">

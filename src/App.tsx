@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import EditorWrapper from "./components/editor/editor";
+import Canvas from "./components/canvas/canvas";
+
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
           reless
         </p>
       </header>
-      <EditorWrapper/>
+      <Canvas/>
     </div>
   );
 }
