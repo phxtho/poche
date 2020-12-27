@@ -1,28 +1,26 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDrag } from 'react-dnd'
-import {ItemTypes} from './constants'
+import { CanvasCard} from './constants'
 
-const Card = props => {
-    const[offset, setOffset] = useState({x:props.x, y:props.y})
+declare interface CardProps {
+  item: CanvasCard
+}
+
+const Card = (props: CardProps) => { 
     const [{ isDragging }, drag] = useDrag({
-        item: { type: ItemTypes.CARD },
-        end: (item,monitor) => { 
-            if(monitor.didDrop()){
-                const {x,y} = monitor.getDropResult()
-                setOffset({x:x,y:y})
-            }
-        },
+        item: props.item,
         collect: (monitor) => ({
           isDragging: !!monitor.isDragging()  
         })
       })
  return <div 
+            id={props.item.id}
             ref={drag}
             className="card" 
             style={{
                 opacity: isDragging ? 0.5 : 1,
-                top: offset.y,
-                left: offset.x
+                top: props.item.y,
+                left: props.item.x
             }}
   ></div>
 }

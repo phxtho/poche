@@ -3,7 +3,8 @@ export const ItemTypes = {
   }
 
 export interface CanvasCard {
-    id: string,
+  type: string,  
+  id: string,
     // The x,y co-ords of the element
     x: number,
     y: number
