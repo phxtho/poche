@@ -1,6 +1,4 @@
-import { NodeSpec, Schema } from 'prosemirror-model'
-
-const brDOM = ['br']
+import { Node as ProsemirrorNode, Mark, Schema, DOMOutputSpecArray} from 'prosemirror-model'
 
 const calcYchangeDomAttrs = (attrs: any, domAttrs: any = {}) => {
   domAttrs = Object.assign({}, domAttrs)
@@ -26,7 +24,7 @@ export const nodes = {
     content: 'inline*',
     group: 'block',
     parseDOM: [{ tag: 'p' }],
-    toDOM (node) { return ['p', calcYchangeDomAttrs(node.attrs), 0] }
+    toDOM (node: ProsemirrorNode): DOMOutputSpecArray { return ['p', calcYchangeDomAttrs(node.attrs), 0] }
   },
 
   // :: NodeSpec A blockquote (`<blockquote>`) wrapping one or more blocks.
@@ -36,7 +34,7 @@ export const nodes = {
     group: 'block',
     defining: true,
     parseDOM: [{ tag: 'blockquote' }],
-    toDOM (node) { return ['blockquote', calcYchangeDomAttrs(node.attrs), 0] }
+    toDOM (node: ProsemirrorNode): DOMOutputSpecArray { return ['blockquote', calcYchangeDomAttrs(node.attrs), 0] }
   },
 
   // :: NodeSpec A horizontal rule (`<hr>`).
@@ -44,7 +42,7 @@ export const nodes = {
     attrs: { ychange: { default: null } },
     group: 'block',
     parseDOM: [{ tag: 'hr' }],
-    toDOM (node) {
+    toDOM (node: ProsemirrorNode) : DOMOutputSpecArray {
       return ['hr', calcYchangeDomAttrs(node.attrs)]
     }
   },
@@ -66,7 +64,7 @@ export const nodes = {
       { tag: 'h4', attrs: { level: 4 } },
       { tag: 'h5', attrs: { level: 5 } },
       { tag: 'h6', attrs: { level: 6 } }],
-    toDOM (node) { return ['h' + node.attrs.level, calcYchangeDomAttrs(node.attrs), 0] }
+    toDOM (node: ProsemirrorNode): DOMOutputSpecArray { return ['h' + node.attrs.level, calcYchangeDomAttrs(node.attrs), 0] }
   },
 
   // :: NodeSpec A code listing. Disallows marks or non-text inline
@@ -79,8 +77,8 @@ export const nodes = {
     group: 'block',
     code: true,
     defining: true,
-    parseDOM: [{ tag: 'pre', preserveWhitespace: 'full' }],
-    toDOM (node: NodeSpec) { return ['pre', calcYchangeDomAttrs(node.attrs), ['code', 0]] }
+    parseDOM: [{ tag: 'pre', preserveWhitespace: 'full' as 'full' }],
+    toDOM (node: ProsemirrorNode): DOMOutputSpecArray { return ['pre', calcYchangeDomAttrs(node.attrs), ['code', 0]] }
   },
 
   // :: NodeSpec The text node.
@@ -111,7 +109,7 @@ export const nodes = {
         }
       }
     }],
-    toDOM (node) {
+    toDOM (node: ProsemirrorNode): DOMOutputSpecArray {
       const domAttrs = {
         src: node.attrs.src,
         title: node.attrs.title,
@@ -127,11 +125,9 @@ export const nodes = {
     group: 'inline',
     selectable: false,
     parseDOM: [{ tag: 'br' }],
-    toDOM () { return brDOM }
+    toDOM (): DOMOutputSpecArray { return ['br'] }
   }
 }
-
-const emDOM = ['em', 0]; const strongDOM = ['strong', 0]; const codeDOM = ['code', 0]
 
 // :: Object [Specs](#model.MarkSpec) for the marks in the schema.
 export const marks = {
@@ -150,14 +146,14 @@ export const marks = {
         return { href: dom.getAttribute('href'), title: dom.getAttribute('title') }
       }
     }],
-    toDOM (node) { return ['a', node.attrs, 0] }
+    toDOM (node: Mark): DOMOutputSpecArray { return ['a', node.attrs, 0] }
   },
 
   // :: MarkSpec An emphasis mark. Rendered as an `<em>` element.
   // Has parse rules that also match `<i>` and `font-style: italic`.
   em: {
     parseDOM: [{ tag: 'i' }, { tag: 'em' }, { style: 'font-style=italic' }],
-    toDOM () { return emDOM }
+    toDOM (): DOMOutputSpecArray { return ['em', 0] }
   },
 
   // :: MarkSpec A strong mark. Rendered as `<strong>`, parse rules
@@ -167,15 +163,15 @@ export const marks = {
       // This works around a Google Docs misbehavior where
       // pasted content will be inexplicably wrapped in `<b>`
       // tags with a font-weight normal.
-      { tag: 'b', getAttrs: (node: NodeSpec) => node.style.fontWeight !== 'normal' && null },
+      { tag: 'b', getAttrs: (node: any) => node.style.fontWeight !== 'normal' && null },
       { style: 'font-weight', getAttrs: (value: string) => /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null }],
-    toDOM () { return strongDOM }
+    toDOM (): DOMOutputSpecArray { return ['strong', 0] }
   },
 
   // :: MarkSpec Code font mark. Represented as a `<code>` element.
   code: {
     parseDOM: [{ tag: 'code' }],
-    toDOM () { return codeDOM }
+    toDOM (): DOMOutputSpecArray { return ['code', 0] }
   },
   ychange: {
     attrs: {
@@ -184,7 +180,7 @@ export const marks = {
     },
     inclusive: false,
     parseDOM: [{ tag: 'ychange' }],
-    toDOM (node) {
+    toDOM (node: Mark): DOMOutputSpecArray {
       return ['ychange', { ychange_user: node.attrs.user, ychange_state: node.attrs.state }, 0]
     }
   }
