@@ -62,6 +62,6 @@ const Canvas = (props) => {
         createCard(e.nativeEvent.offsetX, e.nativeEvent.offsetY)
     }}>
         {props.debug && <span style={{color: 'white'}}>x: {mousePos.x},y: {mousePos.y}</span>}
-        {Object.entries(cards).map(([key,card], index )=> <Card key={index} item={card} onRemove={removeCard} />)}
+        {Object.entries(cards).map(([key,card], index )=> <Card key={index} item={card} hideSourceOnDrag onRemove={removeCard} />)}
     </div>
 }

@@ -4,7 +4,8 @@ import { CanvasCard} from './constants'
 
 declare interface CardProps {
   item: CanvasCard,
-  onRemove
+  onRemove,
+  hideSourceOnDrag: boolean
 }
 
 const Card = (props: CardProps) => { 
@@ -14,6 +15,9 @@ const Card = (props: CardProps) => {
           isDragging: !!monitor.isDragging()  
         })
       })
+if(isDragging && props.hideSourceOnDrag){
+  return <div ref={drag}></div>
+}else{
  return <div 
             id={props.item.id}
             ref={drag}
@@ -23,7 +27,7 @@ const Card = (props: CardProps) => {
                 top: props.item.y,
                 left: props.item.x
             }}
-  ></div>
+  ></div>}
 }
 
 export default Card
