@@ -52,6 +52,26 @@
     "@types/prosemirror-model": "^1.11.1",
     "@types/prosemirror-state": "^1.2.5",
     "@types/prosemirror-view": "^1.16.1",
-    "husky": "^4.3.6"
+    "husky": "^4.3.6",
+    "lint-staged": "^10.5.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "prettier --write"
+    ],
+    "src/**/*.jsx": [
+      "prettier --write"
+    ],
+    "src/**/*.ts": [
+      "prettier --write"
+    ],
+    "src/**/*.tsx": [
+      "prettier --write"
+    ]
   }
 }
