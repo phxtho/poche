@@ -62,16 +62,16 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "prettier --write"
+      "npx prettier --write"
     ],
     "src/**/*.jsx": [
-      "prettier --write"
+      "npx prettier --write"
     ],
     "src/**/*.ts": [
-      "prettier --write"
+      "npx prettier --write"
     ],
     "src/**/*.tsx": [
-      "prettier --write"
+      "npx prettier --write"
     ]
   }
 }
