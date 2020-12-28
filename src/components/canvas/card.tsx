@@ -1,5 +1,6 @@
 import React from "react";
 import { useDrag } from 'react-dnd'
+import Editor from "../editor/editor";
 import { CanvasCard} from './constants'
 
 declare interface CardProps {
@@ -15,19 +16,19 @@ const Card = (props: CardProps) => {
           isDragging: !!monitor.isDragging()  
         })
       })
-if(isDragging && props.hideSourceOnDrag){
-  return <div ref={drag}></div>
-}else{
+
  return <div 
             id={props.item.id}
             ref={drag}
             className="card" 
             style={{
+                display: isDragging && props.hideSourceOnDrag ? 'none': "flex",
                 opacity: isDragging ? 0.5 : 1,
                 top: props.item.y,
                 left: props.item.x
             }}
-  ></div>}
-}
+  >
+    <Editor/>
+  </div>}
 
 export default Card

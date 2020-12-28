@@ -300,16 +300,7 @@
     margin-top: 5px;
     display: none;
   }
-  #editor, .editor {
-    background: white;
-    color: black;
-    background-clip: padding-box;
-    border-radius: 4px;
-    border: 2px solid rgba(0, 0, 0, 0.2);
-    padding: 5px 0;
-    margin-bottom: 23px;
-  }
-  
+
   .ProseMirror p:first-child,
   .ProseMirror h1:first-child,
   .ProseMirror h2:first-child,
@@ -327,3 +318,13 @@
   }
   
   .ProseMirror p { margin-bottom: 1em }
+
+  #editor, .editor {
+    color: black;
+    background-clip: padding-box;
+  }
+
+  #editorContainer {
+    border-radius: inherit;
+  }
+  

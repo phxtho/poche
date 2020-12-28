@@ -9,7 +9,7 @@ const Editor = () => {
   const editorRef = useRef()
   const [, setEditorView] = useState(null);
 
-  const editorState = EditorState.create({schema: schema, plugins: exampleSetup({schema: schema})})
+  const editorState = EditorState.create({schema: schema, plugins: exampleSetup({schema: schema, menuBar: false})})
   
   useEffect(()=>{
     const editorView = new EditorView(editorRef.current, {state: editorState})
