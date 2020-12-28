@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { EditorState } from "prosemirror-state";
 import { DirectEditorProps, EditorView } from "prosemirror-view";
-import { schema } from "../../model/schema";
-import { exampleSetup } from "prosemirror-example-setup";
+import { schema } from "./schema";
+import { basicPlugins } from "./plugins";
 import "./editor.css";
 
 interface EditorProps {
@@ -11,17 +11,16 @@ interface EditorProps {
 }
 
 const Editor = (props: EditorProps) => {
-  const createPlugins = () => {
-    try {
-      return exampleSetup({ schema: schema, menuBar: false });
-    } catch (error) {
-      console.warn(`couldn't create editor plugins: ${error}`);
-    }
-  };
+  const editorRef = useRef();
+  const [, setEditorView] = useState<EditorView>(null);
 
-  const createEditorViewProps = (
-    editorState: EditorState
-  ): DirectEditorProps => {
+  // Initialise the editor view
+  useEffect(() => {
+    const editorState = EditorState.create({
+      schema: schema,
+      plugins: basicPlugins,
+    });
+
     const editorProps: DirectEditorProps = {
       state: editorState,
       handleDOMEvents: {
@@ -40,22 +39,7 @@ const Editor = (props: EditorProps) => {
       },
     };
 
-    return editorProps;
-  };
-
-  const editorRef = useRef();
-  const [, setEditorView] = useState<EditorView>(null);
-
-  useEffect(() => {
-    // Initialise the editor view
-    const editorState = EditorState.create({
-      schema: schema,
-      plugins: createPlugins(),
-    });
-    const editorView = new EditorView(
-      editorRef.current,
-      createEditorViewProps(editorState)
-    );
+    const editorView = new EditorView(editorRef.current, editorProps);
     setEditorView(editorView);
   }, []);
 
