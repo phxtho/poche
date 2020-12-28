@@ -3,7 +3,8 @@ import { useDrag } from 'react-dnd'
 import { CanvasCard} from './constants'
 
 declare interface CardProps {
-  item: CanvasCard
+  item: CanvasCard,
+  onRemove
 }
 
 const Card = (props: CardProps) => { 
