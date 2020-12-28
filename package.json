@@ -51,6 +51,7 @@
   "devDependencies": {
     "@types/prosemirror-model": "^1.11.1",
     "@types/prosemirror-state": "^1.2.5",
-    "@types/prosemirror-view": "^1.16.1"
+    "@types/prosemirror-view": "^1.16.1",
+    "husky": "^4.3.6"
   }
 }

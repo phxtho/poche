@@ -1,18 +1,23 @@
-.card{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-width: 50px;
-    border-radius: 8px;
-    cursor: move;
-    position: absolute;
-    background-color: whitesmoke;
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 50px;
+  border-radius: 8px;
+  cursor: move;
+  position: absolute;
+  background-color: whitesmoke;
 }
 
-.canvas{
-    position: relative;
-    height: 1000px;
-    width:100%; 
-    background:linear-gradient(140deg, rgb(214, 205, 219) 0%, rgb(167, 157, 157) 50%, rgba(252,176,69,1) 100%);
+.canvas {
+  position: relative;
+  height: 1000px;
+  width: 100%;
+  background: linear-gradient(
+    140deg,
+    rgb(214, 205, 219) 0%,
+    rgb(167, 157, 157) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
 }
