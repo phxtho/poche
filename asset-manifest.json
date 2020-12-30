@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/expirement-501.V2/static/css/main.1785d63c.chunk.css",
-    "main.js": "/expirement-501.V2/static/js/main.617c55e8.chunk.js",
-    "main.js.map": "/expirement-501.V2/static/js/main.617c55e8.chunk.js.map",
-    "runtime-main.js": "/expirement-501.V2/static/js/runtime-main.04cf4777.js",
-    "runtime-main.js.map": "/expirement-501.V2/static/js/runtime-main.04cf4777.js.map",
-    "static/js/2.2b3f2efa.chunk.js": "/expirement-501.V2/static/js/2.2b3f2efa.chunk.js",
-    "static/js/2.2b3f2efa.chunk.js.map": "/expirement-501.V2/static/js/2.2b3f2efa.chunk.js.map",
-    "static/js/3.a717f30c.chunk.js": "/expirement-501.V2/static/js/3.a717f30c.chunk.js",
-    "static/js/3.a717f30c.chunk.js.map": "/expirement-501.V2/static/js/3.a717f30c.chunk.js.map",
-    "index.html": "/expirement-501.V2/index.html",
-    "static/css/main.1785d63c.chunk.css.map": "/expirement-501.V2/static/css/main.1785d63c.chunk.css.map",
-    "static/js/2.2b3f2efa.chunk.js.LICENSE.txt": "/expirement-501.V2/static/js/2.2b3f2efa.chunk.js.LICENSE.txt"
+    "main.css": "/experiment-501.V2/static/css/main.1785d63c.chunk.css",
+    "main.js": "/experiment-501.V2/static/js/main.617c55e8.chunk.js",
+    "main.js.map": "/experiment-501.V2/static/js/main.617c55e8.chunk.js.map",
+    "runtime-main.js": "/experiment-501.V2/static/js/runtime-main.678465e2.js",
+    "runtime-main.js.map": "/experiment-501.V2/static/js/runtime-main.678465e2.js.map",
+    "static/js/2.6d84089e.chunk.js": "/experiment-501.V2/static/js/2.6d84089e.chunk.js",
+    "static/js/2.6d84089e.chunk.js.map": "/experiment-501.V2/static/js/2.6d84089e.chunk.js.map",
+    "static/js/3.a717f30c.chunk.js": "/experiment-501.V2/static/js/3.a717f30c.chunk.js",
+    "static/js/3.a717f30c.chunk.js.map": "/experiment-501.V2/static/js/3.a717f30c.chunk.js.map",
+    "index.html": "/experiment-501.V2/index.html",
+    "static/css/main.1785d63c.chunk.css.map": "/experiment-501.V2/static/css/main.1785d63c.chunk.css.map",
+    "static/js/2.6d84089e.chunk.js.LICENSE.txt": "/experiment-501.V2/static/js/2.6d84089e.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.04cf4777.js",
-    "static/js/2.2b3f2efa.chunk.js",
+    "static/js/runtime-main.678465e2.js",
+    "static/js/2.6d84089e.chunk.js",
     "static/css/main.1785d63c.chunk.css",
     "static/js/main.617c55e8.chunk.js"
   ]
