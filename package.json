@@ -31,6 +31,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -56,6 +57,7 @@
     "@types/prosemirror-model": "^1.11.1",
     "@types/prosemirror-state": "^1.2.5",
     "@types/prosemirror-view": "^1.16.1",
+    "gh-pages": "^3.1.0",
     "husky": "^4.3.6",
     "lint-staged": "^10.5.3"
   },
@@ -77,5 +79,6 @@
     "src/**/*.tsx": [
       "npx prettier --write"
     ]
-  }
+  },
+  "homepage": "https://phxtho.github.io/experiment-501.V2"
 }
