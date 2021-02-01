@@ -2,6 +2,7 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import Editor from "../editor/editor";
 import { CanvasCard } from "./constants";
+import { VscGripper } from "react-icons/vsc";
 
 declare interface CardProps {
   item: CanvasCard;
@@ -10,7 +11,7 @@ declare interface CardProps {
 }
 
 const Card = (props: CardProps) => {
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     item: props.item,
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
@@ -20,7 +21,7 @@ const Card = (props: CardProps) => {
   return (
     <div
       id={props.item.id}
-      ref={drag}
+      ref={preview}
       className="card"
       style={{
         display: isDragging && props.hideSourceOnDrag ? "none" : "flex",
@@ -29,6 +30,13 @@ const Card = (props: CardProps) => {
         left: props.item.x,
       }}
     >
+      <div
+        ref={drag}
+        id={`${props.item.id}-drag-handle`}
+        className="card-drag-handle"
+      >
+        <VscGripper />
+      </div>
       <Editor />
     </div>
   );
