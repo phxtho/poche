@@ -1,0 +1,15 @@
+.card {
+  display: flex;
+  min-width: 50px;
+  max-width: 500px;
+  border-radius: 8px;
+  cursor: move;
+  position: absolute;
+  background-color: whitesmoke;
+}
+
+.card-drag-handle:hover {
+  background-color: grey;
+  color: white;
+  border-radius: 8px 0 0 8px;
+}

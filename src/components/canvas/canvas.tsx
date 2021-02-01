@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Card from "./card";
+import Card from "../card/card";
 import { ItemTypes, CanvasCard } from "./constants";
 import { v4 as uuidv4 } from "uuid";
 import update from "immutability-helper";
 import "./canvas.css";
 
-const CanvasContainer = () => {
+function CanvasContainer() {
   return (
     <DndProvider backend={HTML5Backend}>
       <Canvas />
     </DndProvider>
   );
-};
+}
 
 export default CanvasContainer;
 

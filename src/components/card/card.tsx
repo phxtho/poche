@@ -1,7 +1,7 @@
 import React from "react";
 import { useDrag } from "react-dnd";
 import Editor from "../editor/editor";
-import { CanvasCard } from "./constants";
+import { CanvasCard } from "../canvas/constants";
 import { VscGripper } from "react-icons/vsc";
 
 declare interface CardProps {
