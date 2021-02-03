@@ -1,8 +1,9 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import Editor from "../editor/editor";
+import EditorContainer from "../editor/container";
 import { CanvasCard } from "../canvas/constants";
 import { VscGripper } from "react-icons/vsc";
+import "./card.css";
 
 declare interface CardProps {
   item: CanvasCard;
@@ -37,7 +38,7 @@ const Card = (props: CardProps) => {
       >
         <VscGripper />
       </div>
-      <Editor />
+      <EditorContainer />
     </div>
   );
 };
