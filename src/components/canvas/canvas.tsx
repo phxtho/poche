@@ -5,6 +5,7 @@ import Card from "../card/card";
 import { ItemTypes, CanvasCard } from "./constants";
 import { v4 as uuidv4 } from "uuid";
 import update from "immutability-helper";
+import EditorContainer from "../editor/container";
 import "./canvas.css";
 
 function CanvasContainer() {
@@ -25,12 +26,13 @@ const Canvas = (props) => {
   }>({});
 
   const [, drop] = useDrop({
-    accept: ItemTypes.CARD,
+    accept: [ItemTypes.CARD],
     drop: (item: CanvasCard, monitor) => {
       const delta = monitor.getDifferenceFromInitialOffset() as XYCoord;
       const x = Math.round(item.x + delta.x);
       const y = Math.round(item.y + delta.y);
       moveCardPosition(item.id, x, y);
+
       return { x, y };
     },
   });
@@ -76,8 +78,11 @@ const Canvas = (props) => {
           x: {mousePos.x},y: {mousePos.y}
         </span>
       )}
+
       {Object.entries(cards).map(([key, card], index) => (
-        <Card key={index} item={card} hideSourceOnDrag onRemove={removeCard} />
+        <Card key={index} item={card} hideSourceOnDrag onRemove={removeCard}>
+          <EditorContainer />
+        </Card>
       ))}
     </div>
   );

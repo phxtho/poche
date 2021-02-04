@@ -6,11 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 PouchDB.plugin(Upsert);
 let db = new PouchDB("notes");
 
-db.changes({
-  since: "now",
-  live: true,
-}).on("change", () => console.log("db updated"));
-
 export async function updateNote(inputDocument: Note) {
   try {
     const response = await db.upsert(inputDocument.id, () => inputDocument);
@@ -43,4 +38,20 @@ export async function insertNote(
   } catch (error) {
     console.log(`FAILED: couldn't create doc ${error}`);
   }
+}
+
+export async function getNotes() {
+  try {
+    let result = await db.allDocs({ include_docs: true });
+    return result?.rows;
+  } catch (error) {
+    console.log(`Couldn't fetch data ${error}`);
+  }
+}
+
+export function onChange(callback) {
+  db.changes({
+    since: "now",
+    live: true,
+  }).on("change", () => callback());
 }
