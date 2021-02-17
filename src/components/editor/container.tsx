@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useReducer } from "react";
 import Editor from "./editor";
 import { insertNote, updateNote } from "db/pouch/notes";
-import { Note } from "db/contants";
+import { Note } from "model/interfaces";
 import { EditorView } from "prosemirror-view";
 
 interface EditorContainerProps {

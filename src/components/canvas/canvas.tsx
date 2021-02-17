@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Card from "../card/card";
-import { ItemTypes, CanvasCard } from "./constants";
+import Card from "components/card/card";
+import { ItemTypes, CanvasCard } from "model/interfaces";
 import { v4 as uuidv4 } from "uuid";
 import update from "immutability-helper";
 import EditorContainer from "components/editor/container";
