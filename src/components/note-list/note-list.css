@@ -2,3 +2,7 @@
   position: absolute;
   top: 0;
 }
+
+.note-list-item:hover {
+  cursor: pointer;
+}

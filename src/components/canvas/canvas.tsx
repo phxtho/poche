@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "components/card/card";
 import { ItemTypes, CanvasCard } from "model/interfaces";
 import { v4 as uuidv4 } from "uuid";
-import update from "immutability-helper";
 import EditorContainer from "components/editor/container";
+import { useSelector, useDispatch } from "react-redux";
+import { ADD_ITEM_TO_CANVAS, UPDATE_ITEM } from "store";
 import "./canvas.css";
 
 function CanvasContainer() {
@@ -19,11 +20,11 @@ function CanvasContainer() {
 export default CanvasContainer;
 
 const Canvas = (props) => {
+  const debug = false;
   const [mousePos, setMousePos] = useState<XYCoord>({ x: 0, y: 0 });
 
-  const [cards, setCards] = useState<{
-    [key: string]: CanvasCard;
-  }>({});
+  const cards: CanvasCard[] = useSelector((state) => state.openCanvas.items);
+  const dispatch = useDispatch();
 
   const [, drop] = useDrop({
     accept: [ItemTypes.CARD],
@@ -37,30 +38,19 @@ const Canvas = (props) => {
     },
   });
 
-  const createCard = (x: number, y: number) => {
+  const createCard = useCallback((x: number, y: number) => {
     const newCard: CanvasCard = {
       type: ItemTypes.CARD,
       id: uuidv4(),
       x: x,
       y: y,
     };
-    setCards({ ...cards, [newCard.id]: newCard });
-  };
+    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
+  }, []);
 
-  const removeCard = (id: string) => {
-    const { [id]: oldCard, ...restOfCards } = cards;
-    setCards(restOfCards);
-  };
-
-  const moveCardPosition = (id: string, x: number, y: number) => {
-    setCards(
-      update(cards, {
-        [id]: {
-          $merge: { x, y },
-        },
-      })
-    );
-  };
+  const moveCardPosition = useCallback((id: string, x: number, y: number) => {
+    dispatch({ type: UPDATE_ITEM, payload: { id: id, x: x, y: y } });
+  }, []);
 
   return (
     <div
@@ -73,14 +63,14 @@ const Canvas = (props) => {
         createCard(e.nativeEvent.offsetX, e.nativeEvent.offsetY);
       }}
     >
-      {props.debug && (
+      {debug && (
         <span style={{ color: "white" }}>
           x: {mousePos.x},y: {mousePos.y}
         </span>
       )}
 
       {Object.entries(cards).map(([key, card], index) => (
-        <Card key={index} item={card} hideSourceOnDrag onRemove={removeCard}>
+        <Card key={index} item={card} hideSourceOnDrag>
           <EditorContainer />
         </Card>
       ))}
