@@ -5,7 +5,7 @@ import Card from "../card/card";
 import { ItemTypes, CanvasCard } from "./constants";
 import { v4 as uuidv4 } from "uuid";
 import update from "immutability-helper";
-import EditorContainer from "../editor/container";
+import EditorContainer from "components/editor/container";
 import "./canvas.css";
 
 function CanvasContainer() {

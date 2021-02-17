@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { getNotes, onChange } from "../../db/pouch";
+import { getNotes, onChange } from "db/pouch";
 import "./note-list.css";
 
 const NoteList = () => {

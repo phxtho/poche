@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { CanvasCard } from "../canvas/constants";
+import { CanvasCard } from "components/canvas/constants";
 import { VscGripper } from "react-icons/vsc";
 import "./card.css";
 
