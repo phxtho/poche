@@ -38,19 +38,25 @@ const Canvas = (props) => {
     },
   });
 
-  const createCard = useCallback((x: number, y: number) => {
-    const newCard: CanvasCard = {
-      type: ItemTypes.CARD,
-      id: uuidv4(),
-      x: x,
-      y: y,
-    };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
-  }, []);
+  const createCard = useCallback(
+    (x: number, y: number) => {
+      const newCard: CanvasCard = {
+        type: ItemTypes.CARD,
+        id: uuidv4(),
+        x: x,
+        y: y,
+      };
+      dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
+    },
+    [dispatch]
+  );
 
-  const moveCardPosition = useCallback((id: string, x: number, y: number) => {
-    dispatch({ type: UPDATE_ITEM, payload: { id: id, x: x, y: y } });
-  }, []);
+  const moveCardPosition = useCallback(
+    (id: string, x: number, y: number) => {
+      dispatch({ type: UPDATE_ITEM, payload: { id: id, x: x, y: y } });
+    },
+    [dispatch]
+  );
 
   return (
     <div
@@ -71,7 +77,7 @@ const Canvas = (props) => {
 
       {Object.entries(cards).map(([key, card], index) => (
         <Card key={index} item={card} hideSourceOnDrag>
-          <EditorContainer />
+          <EditorContainer id={card.id} />
         </Card>
       ))}
     </div>

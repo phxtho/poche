@@ -8,15 +8,21 @@ let db = new PouchDB("notes");
 
 export async function updateNote(inputDocument: Note) {
   try {
-    const response = await db.upsert(inputDocument.id, () => inputDocument);
+    const docId = inputDocument.id || inputDocument["_id"];
+    const response = await db.upsert(docId, (doc) => {
+      return inputDocument as Partial<PouchDB.Core.IdMeta>;
+    });
+    console.log(response);
+
     return response;
   } catch (error) {
-    console.log(`FAILED: couldn't update ${error}`);
+    console.log(`ERROR: couldn't update ${error}`);
   }
 }
 
 // Create a new note
 export async function insertNote(
+  id?: string,
   title?: string,
   meta?: object,
   body?: object,
@@ -25,7 +31,7 @@ export async function insertNote(
 ) {
   try {
     let newDocument = {
-      _id: uuidv4(),
+      _id: id || uuidv4(),
       title: title || null,
       meta: meta || {},
       body: body || {},
@@ -36,7 +42,7 @@ export async function insertNote(
     const storedDocument = await db.putIfNotExists(newDocument);
     return storedDocument;
   } catch (error) {
-    console.log(`FAILED: couldn't create doc ${error}`);
+    console.log(`ERROR: couldn't create doc ${error}`);
   }
 }
 
@@ -45,7 +51,16 @@ export async function getNotes() {
     let result = await db.allDocs({ include_docs: true });
     return result?.rows;
   } catch (error) {
-    console.log(`Couldn't fetch data ${error}`);
+    console.log(`ERROR fetching all notes ${error}`);
+  }
+}
+
+export async function getNoteById(id: string) {
+  try {
+    const doc = await db.get(id);
+    return doc;
+  } catch (error) {
+    console.log(`ERROR fetching  ${id} ${error}`);
   }
 }
 
