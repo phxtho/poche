@@ -1,7 +1,7 @@
 /* Manage the editor's interaction with the db */
 import React, { useCallback, useEffect, useReducer } from "react";
 import Editor from "./editor";
-import { insertNote, updateNote } from "db/pouch";
+import { insertNote, updateNote } from "db/pouch/notes";
 import { Note } from "db/contants";
 import { EditorView } from "prosemirror-view";
 

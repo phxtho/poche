@@ -1,6 +1,6 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { Note } from "./contants";
+import { Note } from "../contants";
 import { v4 as uuidv4 } from "uuid";
 
 PouchDB.plugin(Upsert);
