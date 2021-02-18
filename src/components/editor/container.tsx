@@ -1,4 +1,4 @@
-/* Manage the editor's interaction with the db */
+/* Manage the editor's interaction with the db & global state */
 import React, { useCallback, useEffect, useReducer } from "react";
 import Editor from "./editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
@@ -11,7 +11,7 @@ interface EditorContainerProps {
 }
 
 const SET_NOTE = "SET_NOTE";
-const SET_BODY = "SET_BODY";
+const SET_NOTE_STATE = "SET_NOTE_STATE";
 const NEW_NOTE = "NEW_NOTE";
 
 const reducer = (note: Note, { type, payload }) => {
@@ -26,10 +26,10 @@ const reducer = (note: Note, { type, payload }) => {
         lastEditedTime: currentTime,
       };
       return newNote;
-    case SET_BODY:
+    case SET_NOTE_STATE:
       const updatedNote = {
         ...note,
-        body: payload,
+        state: payload,
         lastEditedTime: Date.now(),
       };
       return updatedNote;
@@ -63,16 +63,26 @@ const Container = (props: EditorContainerProps) => {
   }, [initialiseNote]);
 
   const handleOnChange = useCallback((editorView: EditorView) => {
-    dispatch({ type: SET_BODY, payload: editorView?.state?.toJSON() });
+    dispatch({
+      type: SET_NOTE_STATE,
+      payload: editorView?.state?.toJSON(),
+    });
   }, []);
 
-  const handleBlur = useCallback(() => {
-    void updateNote(localNote);
-  }, [localNote]);
+  const handleBlur = useCallback(
+    (editorView: EditorView) => {
+      void updateNote(localNote);
+    },
+    [localNote]
+  );
 
   return (
     <>
-      <Editor onChange={handleOnChange} onBlur={handleBlur} />
+      <Editor
+        state={localNote?.state}
+        onChange={handleOnChange}
+        onBlur={handleBlur}
+      />
     </>
   );
 };

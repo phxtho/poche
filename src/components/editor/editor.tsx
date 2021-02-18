@@ -1,14 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { EditorState } from "prosemirror-state";
+import { EditorState, Selection } from "prosemirror-state";
 import { DirectEditorProps, EditorView } from "prosemirror-view";
 import { schema } from "./schema";
 import { basicPlugins } from "./plugins";
 import "./editor.css";
+import { PMState } from "model/interfaces";
 
 interface EditorProps {
   onFocus?;
   onBlur?;
   onChange?;
+  state?: PMState;
 }
 
 const Editor = (props: EditorProps) => {
@@ -40,15 +42,27 @@ const Editor = (props: EditorProps) => {
     };
   }, [onChange, onBlur, onFocus, editorView]);
 
-  // Initialise the editor view
-  useEffect(() => {
-    const editorState = EditorState.create({
+  const generateEditorState = useCallback((): EditorState => {
+    let options: any = {
       schema: schema,
       plugins: basicPlugins,
-    });
+    };
 
+    if (props.state) {
+      options.doc = schema.nodeFromJSON(props.state.doc);
+      options.selection = Selection.fromJSON(
+        options.doc,
+        props.state.selection
+      );
+    }
+
+    return EditorState.create(options);
+  }, [props.state]);
+
+  // Initialise the editor view
+  useEffect(() => {
     const editorProps: DirectEditorProps = {
-      state: editorState,
+      state: generateEditorState(),
       ...generateEditorViewProps(),
     };
 
@@ -60,10 +74,15 @@ const Editor = (props: EditorProps) => {
     };
   }, []);
 
+  // Update the editor props to sync editor event callbacks
   useEffect(() => {
-    // Update the editor props to sync callbacks
     editorView?.setProps(generateEditorViewProps());
   }, [generateEditorViewProps, editorView]);
+
+  // Update editor state to sync with state prop
+  useEffect(() => {
+    editorView?.updateState(generateEditorState());
+  }, [generateEditorState, editorView]);
 
   return (
     <div id="editorContainer">

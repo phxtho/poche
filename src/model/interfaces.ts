@@ -22,5 +22,11 @@ export interface Note {
   createdTime: number;
   lastEditedTime: number;
   meta: object;
-  body: object;
+  state: PMState;
+}
+
+// JSON serialised prosemirror state returned by state.toJSON()
+export interface PMState {
+  doc: object;
+  selection: object;
 }

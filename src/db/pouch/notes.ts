@@ -12,8 +12,6 @@ export async function updateNote(inputDocument: Note) {
     const response = await db.upsert(docId, (doc) => {
       return inputDocument as Partial<PouchDB.Core.IdMeta>;
     });
-    console.log(response);
-
     return response;
   } catch (error) {
     console.log(`ERROR: couldn't update ${error}`);
