@@ -48,12 +48,15 @@ const Editor = (props: EditorProps) => {
       plugins: basicPlugins,
     };
 
-    if (props.state) {
+    if (props.state?.doc) {
       options.doc = schema.nodeFromJSON(props.state.doc);
-      options.selection = Selection.fromJSON(
-        options.doc,
-        props.state.selection
-      );
+
+      if (props.state?.selection) {
+        options.selection = Selection.fromJSON(
+          options.doc,
+          props.state.selection
+        );
+      }
     }
 
     return EditorState.create(options);

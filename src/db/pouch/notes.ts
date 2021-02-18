@@ -1,6 +1,6 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { Note } from "model/interfaces";
+import { Note, PMState } from "model/interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 PouchDB.plugin(Upsert);
@@ -23,7 +23,7 @@ export async function insertNote(
   id?: string,
   title?: string,
   meta?: object,
-  body?: object,
+  state?: PMState,
   createdTime?: string,
   lastEditedTime?: string
 ) {
@@ -32,7 +32,7 @@ export async function insertNote(
       _id: id || uuidv4(),
       title: title || null,
       meta: meta || {},
-      body: body || {},
+      state: state || {},
       createdTime: createdTime || Date.now(),
       lastEditedTime: lastEditedTime || Date.now(),
     };
