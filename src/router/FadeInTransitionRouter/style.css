@@ -1,0 +1,14 @@
+.transition-group {
+  flex: 1;
+  position: relative;
+}
+
+.transition-group > .fade-enter {
+  opacity: 0;
+  z-index: 1;
+}
+
+.transition-group > .fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 450ms ease-in;
+}
