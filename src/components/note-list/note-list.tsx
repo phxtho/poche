@@ -1,13 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "db/pouch/notes";
-import { useDispatch } from "react-redux";
-import { ADD_ITEM_TO_CANVAS } from "store";
-import { CanvasCard, ItemTypes } from "model/interfaces";
-import "./note-list.css";
+import { schema } from "components/editor/schema";
+import { Note } from "model/interfaces";
 
-const NoteList = () => {
+interface NoteListProps {
+  handleNoteButtonClick(note: Note): any;
+}
+
+const NoteList = (props: NoteListProps) => {
   const [allNotes, setAllNotes] = useState([]);
-  const dispatch = useDispatch();
 
   const fetchAllNotes = useCallback(async () => {
     const response = await getNotes();
@@ -20,24 +21,24 @@ const NoteList = () => {
   }, [fetchAllNotes]);
 
   return (
-    <div className="note-list">
-      {allNotes.map((note, idx) => (
-        <div
-          className="note-list-item"
-          key={idx}
-          onClick={() => {
-            const item: CanvasCard = {
-              id: note?.id,
-              type: ItemTypes.CARD,
-              x: 690,
-              y: 320,
-            };
-            dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
-          }}
-        >
-          {note.id}
-        </div>
-      ))}
+    <div className="flex w-64 flex-col rounded shadow-md items-center divide-y divide-gray-200 divide-opacity-50">
+      {allNotes.map((note, idx) => {
+        const noteText = note?.state?.doc
+          ? schema.nodeFromJSON(note.state.doc).textContent
+          : "";
+
+        return (
+          <button
+            className="truncate w-full transition duration-250 ease-in-out bg-gradient-to-r hover:from-gray-100 hover:to-gray-200"
+            key={idx}
+            onClick={() => {
+              props.handleNoteButtonClick(note);
+            }}
+          >
+            {note.title || noteText}
+          </button>
+        );
+      })}
     </div>
   );
 };

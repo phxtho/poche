@@ -1,5 +1,6 @@
 export const ItemTypes = {
   CARD: "card",
+  COLLECTION: "collection",
 };
 
 export interface CanvasCard {

@@ -44,10 +44,12 @@ export async function insertNote(
   }
 }
 
-export async function getNotes() {
+export async function getNotes(): Promise<
+  PouchDB.Core.ExistingDocument<PouchDB.Core.AllDocsMeta>[]
+> {
   try {
     let result = await db.allDocs({ include_docs: true });
-    return result?.rows;
+    return result?.rows?.map((row) => row.doc);
   } catch (error) {
     console.log(`ERROR fetching all notes ${error}`);
   }
