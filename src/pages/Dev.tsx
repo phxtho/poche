@@ -5,18 +5,16 @@ import { Note } from "model/interfaces";
 
 export default function Dev() {
   return (
-    <div className="bg-gray round">
-      <Link to="/">
-        <div className="flex bg-black h-12 text-white">
-          <h1 className="mx-auto">Dev</h1>
+    <div className="min-h-screen">
+      <div id="top-bar" className="flex flex-row-reverse p-8">
+        <div className="h-14 w-80 border border-black rounded-full flex justify-between pl-6 items-center">
+          <input
+            className="w-3/4 h-full bg-transparent overflow-ellipsis"
+            type="text"
+          />
+          <button className="h-14 w-14 rounded-full bg-black">0</button>
         </div>
-      </Link>
-
-      <NoteList
-        handleNoteButtonClick={(note: Note) => {
-          console.log(note.id);
-        }}
-      />
+      </div>
     </div>
   );
 }
