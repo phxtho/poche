@@ -31,13 +31,14 @@ const Card = (props: CardProps) => {
         left: props.item.x,
       }}
     >
-      <div
-        ref={drag}
-        id={`${props.item.id}-drag-handle`}
-        className="card-drag-handle"
-      >
-        <VscGripper />
+      <div className="flex justify-end p-3">
+        <div
+          ref={drag}
+          id={`${props.item.id}-drag-handle`}
+          className="card-drag-handle"
+        ></div>
       </div>
+
       {props.children}
     </div>
   );

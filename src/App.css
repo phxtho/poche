@@ -36,6 +36,18 @@
   }
 }
 
-*:focus-visible {
+*:focus-visible,
+*:focus,
+*:focus-within {
   outline-width: 0px;
+}
+
+h1 {
+  font-size: xxx-large;
+}
+h2 {
+  font-size: xx-large;
+}
+h3 {
+  font-size: x-large;
 }
