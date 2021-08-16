@@ -3,7 +3,7 @@ export const ItemTypes = {
   COLLECTION: "collection",
 };
 
-export interface CanvasCard {
+export interface ICanvasCard {
   type: string;
   id: string;
   // The x,y co-ords of the element
@@ -11,13 +11,13 @@ export interface CanvasCard {
   y: number;
 }
 
-export interface Canvas {
+export interface ICanvas {
   id: string;
   title: string;
-  items: CanvasCard[];
+  items: ICanvasCard[];
 }
 
-export interface Note {
+export interface INote {
   id: string;
   title: string;
   createdTime: number;

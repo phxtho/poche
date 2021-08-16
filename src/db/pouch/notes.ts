@@ -1,12 +1,12 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { Note, PMState } from "model/interfaces";
+import { INote, PMState } from "model/interfaces";
 import { v4 as uuidv4 } from "uuid";
 
 PouchDB.plugin(Upsert);
 let db = new PouchDB("notes");
 
-export async function updateNote(inputDocument: Note) {
+export async function updateNote(inputDocument: INote) {
   try {
     const docId = inputDocument.id || inputDocument["_id"];
     const response = await db.upsert(docId, (doc) => {

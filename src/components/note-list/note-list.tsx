@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "db/pouch/notes";
 import { schema } from "components/editor/schema";
-import { Note } from "model/interfaces";
+import { INote } from "model/interfaces";
 
 interface NoteListProps {
-  handleNoteButtonClick(note: Note): any;
+  handleNoteButtonClick(note: INote): any;
 }
 
 const NoteList = (props: NoteListProps) => {

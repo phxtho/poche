@@ -1,12 +1,12 @@
 import { createStore, compose } from "redux";
-import { Canvas } from "model/interfaces";
+import { ICanvas } from "model/interfaces";
 import update from "immutability-helper";
 
 export const ADD_ITEM_TO_CANVAS = "ADD_ITEM_TO_CANVAS";
 export const REMOVE_ITEM_FROM_CANVAS = "REMOVE_ITEM_FROM_CANVAS";
 export const UPDATE_ITEM = "UPDATE_ITEM_POSITION";
 
-const openCanvas: Canvas = {
+const openCanvas: ICanvas = {
   id: "randomID",
   title: "Main Canvas",
   items: [],

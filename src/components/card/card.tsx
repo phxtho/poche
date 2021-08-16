@@ -1,11 +1,11 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { CanvasCard } from "model/interfaces";
+import { ICanvasCard } from "model/interfaces";
 import { VscGripper } from "react-icons/vsc";
 import "./card.css";
 
 declare interface CardProps {
-  item: CanvasCard;
+  item: ICanvasCard;
   onRemove?;
   hideSourceOnDrag?: boolean;
   children?: any;

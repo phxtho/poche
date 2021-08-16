@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "components/card/card";
-import { ItemTypes, CanvasCard, Note } from "model/interfaces";
+import { ItemTypes, ICanvasCard, INote, ICanvas } from "model/interfaces";
 import { v4 as uuidv4 } from "uuid";
 import EditorContainer from "components/editor/container";
 import { useSelector, useDispatch } from "react-redux";
@@ -25,12 +25,14 @@ const Canvas = (props) => {
   const [mousePos, setMousePos] = useState<XYCoord>({ x: 0, y: 0 });
   const [noteListPos, setNoteListPos] = useState<XYCoord>({ x: 0, y: 0 });
 
-  const cards: CanvasCard[] = useSelector((state) => state.openCanvas.items);
+  const cards: ICanvasCard[] = useSelector(
+    (state: { openCanvas: ICanvas }) => state.openCanvas.items
+  );
   const dispatch = useDispatch();
 
   const [, drop] = useDrop({
     accept: [ItemTypes.CARD, ItemTypes.COLLECTION],
-    drop: (item: CanvasCard, monitor) => {
+    drop: (item: ICanvasCard, monitor) => {
       const delta = monitor.getDifferenceFromInitialOffset() as XYCoord;
       const x = Math.round(item.x + delta.x);
       const y = Math.round(item.y + delta.y);
@@ -44,7 +46,7 @@ const Canvas = (props) => {
 
   const createCard = useCallback(
     (x: number, y: number) => {
-      const newCard: CanvasCard = {
+      const newCard: ICanvasCard = {
         type: ItemTypes.CARD,
         id: uuidv4(),
         x: x,
@@ -62,8 +64,8 @@ const Canvas = (props) => {
     [dispatch]
   );
 
-  const addNoteToCanvas = (note: Note) => {
-    const item: CanvasCard = {
+  const addNoteToCanvas = (note: INote) => {
+    const item: ICanvasCard = {
       id: note?.id,
       type: ItemTypes.CARD,
       x: 690,

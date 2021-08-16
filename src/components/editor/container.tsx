@@ -2,19 +2,19 @@
 import React, { useCallback, useEffect, useReducer } from "react";
 import Editor from "./editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
-import { Note } from "model/interfaces";
+import { INote } from "model/interfaces";
 import { EditorView } from "prosemirror-view";
 
 interface EditorContainerProps {
   id?: string;
-  note?: Note;
+  note?: INote;
 }
 
 const SET_NOTE = "SET_NOTE";
 const SET_NOTE_STATE = "SET_NOTE_STATE";
 const NEW_NOTE = "NEW_NOTE";
 
-const reducer = (note: Note, { type, payload }) => {
+const reducer = (note: INote, { type, payload }) => {
   switch (type) {
     case SET_NOTE:
       return payload;
