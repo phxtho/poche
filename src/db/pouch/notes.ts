@@ -87,10 +87,8 @@ export async function search(
   fields = ["title", "text"]
 ): Promise<SearchResult> {
   return (db as any)
-    ?.search({ query: query, fields: fields })
+    ?.search({ query: query, fields: fields, include_docs: true })
     .then((res) => {
-      console.log(res);
-      console.log(`Search found ${res.total_rows}`);
       return res;
     })
     .catch((err) => console.log(`Search failed ${err}`));

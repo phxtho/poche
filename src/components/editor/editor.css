@@ -331,7 +331,7 @@ li.ProseMirror-selectednode:after {
 }
 
 .ProseMirror {
-  padding: 4px 8px 4px 14px;
+  text-align: start;
   line-height: 1.2;
   outline: none;
 }

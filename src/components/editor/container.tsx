@@ -77,13 +77,26 @@ const Container = (props: EditorContainerProps) => {
   );
 
   return (
-    <>
+    <div>
+      <div className="flex">
+        <input
+          type="text"
+          placeholder="Title"
+          value={localNote?.title}
+          className="font-medium"
+          onChange={(e) => {
+            localNote.title = e.target.value;
+            updateNote(localNote);
+          }}
+        />
+        <button className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"></button>
+      </div>
       <Editor
         state={localNote?.state}
         onChange={handleOnChange}
         onBlur={handleBlur}
       />
-    </>
+    </div>
   );
 };
 

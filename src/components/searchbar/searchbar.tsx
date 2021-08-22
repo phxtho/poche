@@ -3,7 +3,9 @@ import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import { search } from "db/pouch/notes";
 import "./searchbar.css";
-import { SearchResult } from "model/interfaces";
+import { ICanvasCard, INote, ItemTypes, SearchResult } from "model/interfaces";
+import { useDispatch } from "react-redux";
+import { ADD_ITEM_TO_CANVAS } from "store";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);
@@ -14,6 +16,18 @@ export default function SearchBar() {
     search(query).then((res) => setResults(res));
   };
 
+  const dispatch = useDispatch();
+
+  const addNoteToCanvas = (note: INote) => {
+    const item: ICanvasCard = {
+      id: note?.id,
+      type: ItemTypes.CARD,
+      x: 690,
+      y: 320,
+    };
+    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
+  };
+
   return (
     <div className="relative">
       <div className="h-14 w-80 border border-black rounded-full flex justify-between pl-6 items-center relative">
@@ -21,7 +35,7 @@ export default function SearchBar() {
           placeholder="Search"
           className="w-3/4 h-full bg-transparent overflow-ellipsis"
           type="text"
-          // value={query}
+          value={query}
           onChange={(e) => {
             const { value } = e.target;
             setQuery(value);
@@ -35,12 +49,19 @@ export default function SearchBar() {
         </button>
       </div>
 
-      {focused && query !== "" && results.total_rows > 0 && (
+      {query !== "" && results?.total_rows > 0 && (
         <div className="search-results border border-black border-t-0 rounded-b-lg overflow-hidden">
           {results?.rows?.map((val, idx) => {
             return (
-              <button key={idx} className="result">
-                {val.id}
+              <button
+                key={idx}
+                className="result"
+                onClick={(_) => {
+                  addNoteToCanvas(val.doc);
+                  setQuery("");
+                }}
+              >
+                {val.doc.title ?? val.doc.title}
               </button>
             );
           })}

@@ -35,10 +35,11 @@ export interface PMState {
 
 export interface SearchResult {
   rows: SearchResultRow[];
-  total_rows;
+  total_rows: number;
 }
 
 export interface SearchResultRow {
   id: string;
   score: number;
+  doc: INote;
 }
