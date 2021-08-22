@@ -1,15 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
+import { search } from "db/pouch/notes";
 import "./searchbar.css";
+import { SearchResult } from "model/interfaces";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+  const [results, setResults] = useState<SearchResult>();
 
-  const Search = (query: string): any[] => {
-    return [1, 2, 3];
+  const Search = (query: string) => {
+    search(query).then((res) => setResults(res));
   };
 
   return (
@@ -19,11 +21,11 @@ export default function SearchBar() {
           placeholder="Search"
           className="w-3/4 h-full bg-transparent overflow-ellipsis"
           type="text"
-          value={query}
+          // value={query}
           onChange={(e) => {
             const { value } = e.target;
             setQuery(value);
-            setResults(Search(value));
+            Search(value);
           }}
           onFocus={(e) => setFocused(true)}
           onBlur={(e) => setFocused(false)}
@@ -33,12 +35,12 @@ export default function SearchBar() {
         </button>
       </div>
 
-      {focused && query != "" && (
+      {focused && query !== "" && results.total_rows > 0 && (
         <div className="search-results border border-black border-t-0 rounded-b-lg overflow-hidden">
-          {results.map((val, idx) => {
+          {results?.rows?.map((val, idx) => {
             return (
               <button key={idx} className="result">
-                {val}
+                {val.id}
               </button>
             );
           })}

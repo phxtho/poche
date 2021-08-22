@@ -1,20 +1,31 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { INote, PMState } from "model/interfaces";
+import { INote, PMState, SearchResult } from "model/interfaces";
+import QuickSearch from "pouchdb-quick-search";
 import { v4 as uuidv4 } from "uuid";
+import { schema } from "components/editor/schema";
 
 PouchDB.plugin(Upsert);
+PouchDB.plugin(QuickSearch);
+
 let db = new PouchDB("notes");
+
+(db as any)
+  .search({ fields: ["title", "text"], build: true })
+  .then(() => console.log("Index created succesfully"))
+  .catch((err) => console.log("ERROR failed to build index"));
 
 export async function updateNote(inputDocument: INote) {
   try {
+    let text = schema.nodeFromJSON(inputDocument.state.doc).textContent;
+    inputDocument.text = text;
     const docId = inputDocument.id || inputDocument["_id"];
     const response = await db.upsert(docId, (doc) => {
       return inputDocument as Partial<PouchDB.Core.IdMeta>;
     });
     return response;
   } catch (error) {
-    console.log(`ERROR: couldn't update ${error}`);
+    console.log(`ERROR: couldn't update \n${error}`);
   }
 }
 
@@ -51,7 +62,7 @@ export async function getNotes(): Promise<
     let result = await db.allDocs({ include_docs: true });
     return result?.rows?.map((row) => row.doc);
   } catch (error) {
-    console.log(`ERROR fetching all notes ${error}`);
+    console.log(`ERROR fetching all notes \n${error}`);
   }
 }
 
@@ -60,7 +71,7 @@ export async function getNoteById(id: string) {
     const doc = await db.get(id);
     return doc;
   } catch (error) {
-    console.log(`ERROR fetching  ${id} ${error}`);
+    console.log(`ERROR fetching  ${id} \n${error}`);
   }
 }
 
@@ -69,4 +80,18 @@ export function onChange(callback) {
     since: "now",
     live: true,
   }).on("change", () => callback());
+}
+
+export async function search(
+  query: string,
+  fields = ["title", "text"]
+): Promise<SearchResult> {
+  return (db as any)
+    ?.search({ query: query, fields: fields })
+    .then((res) => {
+      console.log(res);
+      console.log(`Search found ${res.total_rows}`);
+      return res;
+    })
+    .catch((err) => console.log(`Search failed ${err}`));
 }

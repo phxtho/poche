@@ -24,10 +24,21 @@ export interface INote {
   lastEditedTime: number;
   meta: object;
   state: PMState;
+  text: string;
 }
 
 // JSON serialised prosemirror state returned by state.toJSON()
 export interface PMState {
   doc: object;
   selection: object;
+}
+
+export interface SearchResult {
+  rows: SearchResultRow[];
+  total_rows;
+}
+
+export interface SearchResultRow {
+  id: string;
+  score: number;
 }
