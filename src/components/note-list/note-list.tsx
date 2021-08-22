@@ -23,9 +23,7 @@ const NoteList = (props: NoteListProps) => {
   return (
     <div className="flex w-64 flex-col rounded shadow-md items-center divide-y divide-gray-200 divide-opacity-50">
       {allNotes.map((note, idx) => {
-        const noteText = note?.state?.doc
-          ? schema.nodeFromJSON(note.state.doc).textContent
-          : "";
+        const noteText = note?.state?.doc ? note.text : "";
 
         return (
           <button
