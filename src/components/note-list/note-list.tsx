@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "db/pouch/notes";
-import { schema } from "components/editor/schema";
 import { INote } from "model/interfaces";
 
 interface NoteListProps {

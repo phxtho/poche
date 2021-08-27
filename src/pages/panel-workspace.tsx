@@ -26,7 +26,7 @@ export default function PanelWorkspace() {
       <div id="top-bar" className="flex flex-row-reverse p-8">
         <SearchBar />
       </div>
-      <div className="flex h-full w-full space-x-1">
+      <div className="flex h-full w-full space-x-4">
         <NoteList handleNoteButtonClick={addNoteToCanvas} />
         {cards.map((card, idx) => (
           <EditorContainer key={idx} id={card.id} />

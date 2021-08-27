@@ -4,6 +4,9 @@ import Editor from "./editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
 import { INote } from "model/interfaces";
 import { EditorView } from "prosemirror-view";
+import { useDispatch } from "react-redux";
+import { REMOVE_ITEM_FROM_CANVAS } from "store";
+import { useState } from "react";
 
 interface EditorContainerProps {
   id?: string;
@@ -38,6 +41,8 @@ const reducer = (note: INote, { type, payload }) => {
 const Container = (props: EditorContainerProps) => {
   const { note } = props;
   const [localNote, dispatch] = useReducer(reducer, note);
+  const reduxDispatch = useDispatch();
+  const [focused, setFocused] = useState(false);
 
   const initialiseNote = useCallback(async () => {
     if (props.id) {
@@ -72,6 +77,7 @@ const Container = (props: EditorContainerProps) => {
   const handleBlur = useCallback(
     (editorView: EditorView) => {
       void updateNote(localNote);
+      setFocused(false);
     },
     [localNote]
   );
@@ -89,12 +95,21 @@ const Container = (props: EditorContainerProps) => {
             updateNote(localNote);
           }}
         />
-        <button className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"></button>
+        <button
+          className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"
+          onClick={(_) =>
+            reduxDispatch({
+              type: REMOVE_ITEM_FROM_CANVAS,
+              payload: localNote,
+            })
+          }
+        />
       </div>
       <Editor
         state={localNote?.state}
         onChange={handleOnChange}
         onBlur={handleBlur}
+        onFocus={(_) => setFocused(true)}
       />
     </div>
   );
