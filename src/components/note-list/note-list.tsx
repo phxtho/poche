@@ -20,7 +20,7 @@ const NoteList = (props: NoteListProps) => {
   }, [fetchAllNotes]);
 
   return (
-    <div className="flex w-64 flex-col rounded shadow-md items-center divide-y divide-gray-200 divide-opacity-50">
+    <div className="flex w-64 flex-col rounded items-center divide-y divide-gray-200 divide-opacity-50">
       {allNotes.map((note, idx) => {
         const noteText = note?.state?.doc ? note.text : "";
 

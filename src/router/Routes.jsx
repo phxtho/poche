@@ -10,7 +10,7 @@ export default function Routes(props) {
     <FadeInTransitionRouter>
       <Redirect from="/" to="experiment-501.V2" noThrow />
       <NestedRoute path="experiment-501.V2">
-        <CanvasWorkspace path="/c" />
+        <CanvasWorkspace path="c" />
         <PanelWorkspace path="/" />
       </NestedRoute>
     </FadeInTransitionRouter>
