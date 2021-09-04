@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/experiment-501.V2/static/css/main.e495c509.chunk.css",
-    "main.js": "/experiment-501.V2/static/js/main.95dac03d.chunk.js",
-    "main.js.map": "/experiment-501.V2/static/js/main.95dac03d.chunk.js.map",
+    "main.css": "/experiment-501.V2/static/css/main.694ed88e.chunk.css",
+    "main.js": "/experiment-501.V2/static/js/main.b3a1fc85.chunk.js",
+    "main.js.map": "/experiment-501.V2/static/js/main.b3a1fc85.chunk.js.map",
     "runtime-main.js": "/experiment-501.V2/static/js/runtime-main.7b82187a.js",
     "runtime-main.js.map": "/experiment-501.V2/static/js/runtime-main.7b82187a.js.map",
     "static/js/2.0bb82840.chunk.js": "/experiment-501.V2/static/js/2.0bb82840.chunk.js",
@@ -10,13 +10,13 @@
     "static/js/3.cc55ca8b.chunk.js": "/experiment-501.V2/static/js/3.cc55ca8b.chunk.js",
     "static/js/3.cc55ca8b.chunk.js.map": "/experiment-501.V2/static/js/3.cc55ca8b.chunk.js.map",
     "index.html": "/experiment-501.V2/index.html",
-    "static/css/main.e495c509.chunk.css.map": "/experiment-501.V2/static/css/main.e495c509.chunk.css.map",
+    "static/css/main.694ed88e.chunk.css.map": "/experiment-501.V2/static/css/main.694ed88e.chunk.css.map",
     "static/js/2.0bb82840.chunk.js.LICENSE.txt": "/experiment-501.V2/static/js/2.0bb82840.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7b82187a.js",
     "static/js/2.0bb82840.chunk.js",
-    "static/css/main.e495c509.chunk.css",
-    "static/js/main.95dac03d.chunk.js"
+    "static/css/main.694ed88e.chunk.css",
+    "static/js/main.b3a1fc85.chunk.js"
   ]
 }
