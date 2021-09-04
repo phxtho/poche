@@ -4,6 +4,7 @@ import FadeInTransitionRouter from "./FadeInTransitionRouter";
 import NestedRoute from "./NestedRoute";
 import CanvasWorkspace from "pages/canvas-workspace";
 import PanelWorkspace from "pages/panel-workspace";
+import Demo from "pages/demo";
 
 export default function Routes(props) {
   return (
@@ -12,6 +13,7 @@ export default function Routes(props) {
       <NestedRoute path="experiment-501.V2">
         <CanvasWorkspace path="c" />
         <PanelWorkspace path="/" />
+        <Demo path="demo" />
       </NestedRoute>
     </FadeInTransitionRouter>
   );
