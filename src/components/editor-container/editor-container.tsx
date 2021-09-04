@@ -1,6 +1,6 @@
 /* Manage the editor's interaction with the db & global state */
 import React, { useCallback, useEffect, useReducer } from "react";
-import Editor from "./editor";
+import Editor from "../editor/editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
 import { INote } from "model/interfaces";
 import { EditorView } from "prosemirror-view";
@@ -38,7 +38,7 @@ const reducer = (note: INote, { type, payload }) => {
       return updatedNote;
   }
 };
-const Container = (props: EditorContainerProps) => {
+const EditorContainer = (props: EditorContainerProps) => {
   const { note } = props;
   const [localNote, dispatch] = useReducer(reducer, note);
   const reduxDispatch = useDispatch();
@@ -99,7 +99,7 @@ const Container = (props: EditorContainerProps) => {
         />
         <button
           className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"
-          onClick={(_) =>
+          onClick={() =>
             reduxDispatch({
               type: REMOVE_ITEM_FROM_CANVAS,
               payload: localNote,
@@ -111,10 +111,10 @@ const Container = (props: EditorContainerProps) => {
         state={localNote?.state}
         onChange={handleOnChange}
         onBlur={handleBlur}
-        onFocus={(_) => setFocused(true)}
+        onFocus={() => setFocused(true)}
       />
     </div>
   );
 };
 
-export default Container;
+export default EditorContainer;

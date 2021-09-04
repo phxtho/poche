@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ICanvas, ICanvasCard, INote, ItemTypes } from "model/interfaces";
 import NoteList from "components/note-list/note-list";
 import { ADD_ITEM_TO_CANVAS } from "store";
-import EditorContainer from "components/editor/container";
+import EditorContainer from "components/editor-container/editor-container";
 import AddNoteFAB from "components/add-note-fab/add-note-fab";
 
 export default function PanelWorkspace() {
