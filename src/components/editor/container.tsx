@@ -83,17 +83,19 @@ const Container = (props: EditorContainerProps) => {
   );
 
   return (
-    <div>
-      <div className="flex">
-        <input
-          type="text"
+    <div className="w-1/4 shadow-lg rounded-lg p-5 mr-4 mb-4">
+      <div className="flex justify-between">
+        <textarea
           placeholder="Title"
-          value={localNote?.title}
-          className="font-medium"
+          defaultValue={localNote?.title}
+          className="font-medium text-3xl w-11/12"
           onChange={(e) => {
-            localNote.title = e.target.value;
+            let title = e.target.value;
+            title.replace(/\n/, "");
+            localNote.title = title;
             updateNote(localNote);
           }}
+          wrap="soft"
         />
         <button
           className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"

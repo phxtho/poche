@@ -27,8 +27,10 @@ export default function PanelWorkspace() {
       <div id="top-bar" className="flex flex-row-reverse p-8">
         <SearchBar />
       </div>
-      <div className="flex flex-wrap h-full w-full space-x-4">
+      <div>
         <NoteList handleNoteButtonClick={addNoteToCanvas} />
+      </div>
+      <div className="flex flex-wrap h-full w-full justify-center">
         {cards.map((card, idx) => (
           <EditorContainer key={idx} id={card.id} />
         ))}
