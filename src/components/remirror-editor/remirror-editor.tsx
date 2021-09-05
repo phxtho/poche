@@ -8,7 +8,6 @@ import {
   HeadingExtension,
   ImageExtension,
   ItalicExtension,
-  LinkExtension,
   BulletListExtension,
   OrderedListExtension,
   TaskListExtension,
@@ -26,6 +25,7 @@ import {
   RemirrorEventListenerProps,
 } from "@remirror/core";
 import { PMState } from "model/interfaces";
+import { LinkExtension } from "components/remirror-editor/extensions";
 
 interface EditorProps {
   onFocus?: (
@@ -55,7 +55,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new BoldExtension({}),
         new ItalicExtension(),
         new BlockquoteExtension(),
-        new LinkExtension({}),
+        new LinkExtension({ defaultTarget: "_blank", autoLink: true }),
         new HeadingExtension({}),
         new BulletListExtension({}),
         new OrderedListExtension(),
