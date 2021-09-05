@@ -1,3 +1,24 @@
 .ProseMirror.remirror-editor {
   overflow: hidden;
+  box-shadow: none;
+  padding: 0;
+}
+
+.remirror-theme .ProseMirror:active,
+.remirror-theme .ProseMirror:focus {
+  box-shadow: none;
+}
+
+.remirror-editor-wrapper {
+  padding: 0;
+}
+
+.ProseMirror ul,
+ol {
+  list-style-type: initial;
+  padding-left: 1.15rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
 }

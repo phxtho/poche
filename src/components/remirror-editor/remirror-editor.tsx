@@ -58,25 +58,28 @@ const Editor = (props: EditorProps) => {
       new CodeExtension(),
     ],
     onError: handleOnError,
+    content: props.state?.doc,
   });
 
   return (
-    <Remirror
-      manager={manager}
-      initialContent={props.state?.doc}
-      onChange={(params) => {
-        setState(params.state);
-        props.onChange?.(params);
-      }}
-      onFocus={(params, event) => {
-        props.onFocus?.(params, event);
-      }}
-      onBlur={(params, event) => {
-        props.onBlur?.(params, event);
-      }}
-    >
-      <EditorComponent />
-    </Remirror>
+    <div className="remirror-theme">
+      <Remirror
+        manager={manager}
+        initialContent={state}
+        onChange={(params) => {
+          setState(params.state);
+          props.onChange?.(params);
+        }}
+        onFocus={(params, event) => {
+          props.onFocus?.(params, event);
+        }}
+        onBlur={(params, event) => {
+          props.onBlur?.(params, event);
+        }}
+      >
+        <EditorComponent />
+      </Remirror>
+    </div>
   );
 };
 
