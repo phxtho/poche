@@ -8,7 +8,6 @@ import { REMOVE_ITEM_FROM_CANVAS } from "store";
 import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
 import { Extension } from "@remirror/core";
-
 interface EditorContainerProps {
   id?: string;
   note?: INote;
@@ -88,7 +87,7 @@ const EditorContainer = (props: EditorContainerProps) => {
   if (!note) return null;
 
   return (
-    <div className="w-1/4 shadow-lg rounded-lg p-5 mr-4 mb-4">
+    <div className="w-full lg:w-1/4 shadow-lg rounded-lg p-5 mr-4 mb-4">
       <div className="flex justify-between">
         <textarea
           placeholder="Title"
