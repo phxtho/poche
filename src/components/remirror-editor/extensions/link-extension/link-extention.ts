@@ -12,6 +12,7 @@ class LinkExtension extends RemirrorLinkExtension {
   }
 
   createInputRules(): InputRule[] {
+    return [];
     return [
       markInputRule({
         regexp: /\[(?<text>.+)\]\((?<url>[^ ]+)(?: "(?<title>.+)")?\)/,

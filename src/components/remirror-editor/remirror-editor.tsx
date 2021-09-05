@@ -6,7 +6,6 @@ import {
   BlockquoteExtension,
   CodeExtension,
   HeadingExtension,
-  ImageExtension,
   ItalicExtension,
   BulletListExtension,
   OrderedListExtension,
@@ -25,7 +24,10 @@ import {
   RemirrorEventListenerProps,
 } from "@remirror/core";
 import { PMState } from "model/interfaces";
-import { LinkExtension } from "components/remirror-editor/extensions";
+import {
+  LinkExtension,
+  ImageExtension,
+} from "components/remirror-editor/extensions";
 
 interface EditorProps {
   onFocus?: (
