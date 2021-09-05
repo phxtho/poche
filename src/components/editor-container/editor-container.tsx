@@ -1,11 +1,13 @@
 /* Manage the editor's interaction with the db & global state */
-import React, { useCallback, useEffect, useReducer } from "react";
+import React, { useCallback, useEffect, useReducer, useRef } from "react";
 import Editor from "components/remirror-editor/remirror-editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
 import { INote } from "model/interfaces";
 import { useDispatch } from "react-redux";
 import { REMOVE_ITEM_FROM_CANVAS } from "store";
 import { useState } from "react";
+import { ReactFrameworkOutput } from "@remirror/react";
+import { Extension } from "@remirror/core";
 
 interface EditorContainerProps {
   id?: string;
@@ -42,6 +44,8 @@ const EditorContainer = (props: EditorContainerProps) => {
   const reduxDispatch = useDispatch();
   const [focused, setFocused] = useState(false);
 
+  const ctxRef = useRef<ReactFrameworkOutput<Extension>>();
+
   const initialiseNote = useCallback(async () => {
     if (props.id) {
       // try fetch the note from the db
@@ -72,10 +76,14 @@ const EditorContainer = (props: EditorContainerProps) => {
     });
   }, []);
 
-  const handleBlur = useCallback(() => {
-    void updateNote(note);
-    setFocused(false);
-  }, [note]);
+  const handleBlur = useCallback(
+    (params, e) => {
+      note.text = ctxRef.current.getState().doc.textContent;
+      void updateNote(note);
+      setFocused(false);
+    },
+    [note]
+  );
 
   if (!note) return null;
 
@@ -109,6 +117,7 @@ const EditorContainer = (props: EditorContainerProps) => {
         onChange={handleOnChange}
         onBlur={handleBlur}
         onFocus={() => setFocused(true)}
+        ref={ctxRef}
       />
     </div>
   );

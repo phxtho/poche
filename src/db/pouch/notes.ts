@@ -19,8 +19,6 @@ export const defaultState = { type: "doc", content: [{ type: "paragraph" }] };
 
 export async function updateNote(inputDocument: INote) {
   try {
-    let text = schema.nodeFromJSON(inputDocument.state.doc).textContent;
-    inputDocument.text = text;
     const docId = inputDocument.id || inputDocument["_id"];
     const response = await db.upsert(docId, (doc) => {
       return inputDocument as Partial<PouchDB.Core.IdMeta>;
