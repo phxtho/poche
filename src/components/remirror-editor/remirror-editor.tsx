@@ -1,5 +1,6 @@
 import "remirror/styles/all.css";
-import React from "react";
+import "./remirror-editor.css";
+import React, { useCallback } from "react";
 import {
   BoldExtension,
   BlockquoteExtension,
@@ -13,12 +14,13 @@ import {
   TaskListExtension,
 } from "remirror/extensions";
 import { EditorComponent, Remirror, useRemirror } from "@remirror/react";
-import { RemirrorJSON } from "@remirror/core-types";
 import {
   Extension,
+  InvalidContentHandler,
   RemirrorEventListener,
   RemirrorEventListenerProps,
 } from "@remirror/core";
+import { PMState } from "model/interfaces";
 
 interface EditorProps {
   onFocus?: (
@@ -30,10 +32,18 @@ interface EditorProps {
     event: Event
   ) => void;
   onChange?: RemirrorEventListener<Extension>;
-  state?: RemirrorJSON;
+  state?: PMState;
 }
 
 const Editor = (props: EditorProps) => {
+  const handleOnError: InvalidContentHandler = useCallback(
+    ({ json, invalidContent, transformers }) => {
+      // Automatically remove all invalid nodes and marks.
+      return transformers.remove(json, invalidContent);
+    },
+    []
+  );
+
   const { manager, state, setState } = useRemirror({
     extensions: () => [
       new BoldExtension({}),
@@ -47,12 +57,13 @@ const Editor = (props: EditorProps) => {
       new ImageExtension(),
       new CodeExtension(),
     ],
+    onError: handleOnError,
   });
 
   return (
     <Remirror
       manager={manager}
-      initialContent={state}
+      initialContent={props.state?.doc}
       onChange={(params) => {
         setState(params.state);
         props.onChange?.(params);

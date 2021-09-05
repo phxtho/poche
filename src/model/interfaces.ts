@@ -29,7 +29,7 @@ export interface INote {
 
 // JSON serialised prosemirror state returned by state.toJSON()
 export interface PMState {
-  doc: object;
+  doc: any;
   selection: object;
 }
 
