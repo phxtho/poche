@@ -15,6 +15,8 @@ let db = new PouchDB("notes");
   .then(() => console.log("Index created succesfully"))
   .catch((err) => console.log("ERROR failed to build index"));
 
+export const defaultState = { type: "doc", content: [{ type: "paragraph" }] };
+
 export async function updateNote(inputDocument: INote) {
   try {
     let text = schema.nodeFromJSON(inputDocument.state.doc).textContent;
@@ -43,7 +45,7 @@ export async function insertNote(
       _id: id || uuidv4(),
       title: title || null,
       meta: meta || {},
-      state: state || {},
+      state: state || defaultState,
       createdTime: createdTime || Date.now(),
       lastEditedTime: lastEditedTime || Date.now(),
     };
@@ -52,6 +54,16 @@ export async function insertNote(
     return storedDocument;
   } catch (error) {
     console.log(`ERROR: couldn't create doc ${error}`);
+  }
+}
+
+export async function deleteNote(inputDocument: INote) {
+  try {
+    const docId = inputDocument.id || inputDocument["_id"];
+    const response = await db.remove(docId);
+    return response;
+  } catch (error) {
+    console.log(`ERROR: couldn't delete \n${error}`);
   }
 }
 
