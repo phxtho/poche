@@ -1,9 +1,8 @@
 /* Manage the editor's interaction with the db & global state */
 import React, { useCallback, useEffect, useReducer } from "react";
-import Editor from "../editor/editor";
+import Editor from "components/remirror-editor/remirror-editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
 import { INote } from "model/interfaces";
-import { EditorView } from "prosemirror-view";
 import { useDispatch } from "react-redux";
 import { REMOVE_ITEM_FROM_CANVAS } from "store";
 import { useState } from "react";
@@ -39,8 +38,7 @@ const reducer = (note: INote, { type, payload }) => {
   }
 };
 const EditorContainer = (props: EditorContainerProps) => {
-  const { note } = props;
-  const [localNote, dispatch] = useReducer(reducer, note);
+  const [note, dispatch] = useReducer(reducer, props.note);
   const reduxDispatch = useDispatch();
   const [focused, setFocused] = useState(false);
 
@@ -67,33 +65,32 @@ const EditorContainer = (props: EditorContainerProps) => {
     void initialiseNote();
   }, [initialiseNote]);
 
-  const handleOnChange = useCallback((editorView: EditorView) => {
+  const handleOnChange = useCallback((params) => {
     dispatch({
       type: SET_NOTE_STATE,
-      payload: editorView?.state?.toJSON(),
+      payload: params.state.toJSON(),
     });
   }, []);
 
-  const handleBlur = useCallback(
-    (editorView: EditorView) => {
-      void updateNote(localNote);
-      setFocused(false);
-    },
-    [localNote]
-  );
+  const handleBlur = useCallback(() => {
+    void updateNote(note);
+    setFocused(false);
+  }, [note]);
+
+  if (!note) return null;
 
   return (
     <div className="w-1/4 shadow-lg rounded-lg p-5 mr-4 mb-4">
       <div className="flex justify-between">
         <textarea
           placeholder="Title"
-          defaultValue={localNote?.title}
+          defaultValue={note?.title}
           className="font-medium text-3xl w-11/12"
           onChange={(e) => {
             let title = e.target.value;
             title.replace(/\n/, "");
-            localNote.title = title;
-            updateNote(localNote);
+            note.title = title;
+            updateNote(note);
           }}
           wrap="soft"
         />
@@ -102,13 +99,13 @@ const EditorContainer = (props: EditorContainerProps) => {
           onClick={() =>
             reduxDispatch({
               type: REMOVE_ITEM_FROM_CANVAS,
-              payload: localNote,
+              payload: note,
             })
           }
         />
       </div>
       <Editor
-        state={localNote?.state}
+        state={note.state}
         onChange={handleOnChange}
         onBlur={handleBlur}
         onFocus={() => setFocused(true)}
