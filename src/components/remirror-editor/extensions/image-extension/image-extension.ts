@@ -6,7 +6,7 @@ class ImageExtension extends RemirrorImageExtension {
   createInputRules(): InputRule[] {
     return [
       nodeInputRule({
-        regexp: /!\[(?<altText>.+)\]\((?<src>[^ ]+)(?: "(?<caption>.+)")?\)/,
+        regexp: /!\[(.+?)\]\((.+?)\)/,
         type: this.type,
         getAttributes: (matches: string[]) => {
           const [_, alt, src] = matches;
