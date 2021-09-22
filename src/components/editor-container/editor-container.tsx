@@ -87,7 +87,7 @@ const EditorContainer = (props: EditorContainerProps) => {
   if (!note) return null;
 
   return (
-    <div className="w-full lg:w-1/4 shadow-lg rounded-lg p-5 mr-4 mb-4">
+    <div className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4">
       <div className="flex justify-between">
         <textarea
           placeholder="Title"
