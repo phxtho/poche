@@ -1,6 +1,7 @@
 import { InputRule } from "@remirror/pm";
 import { LinkExtension as RemirrorLinkExtension } from "remirror/extensions";
 import { markInputRule } from "@remirror/core-utils";
+import { MarkPasteRule } from "@remirror/pm/paste-rules";
 
 class LinkExtension extends RemirrorLinkExtension {
   constructor(args) {
@@ -12,17 +13,21 @@ class LinkExtension extends RemirrorLinkExtension {
   }
 
   createInputRules(): InputRule[] {
-    return [];
     return [
       markInputRule({
-        regexp: /\[(?<text>.+)\]\((?<url>[^ ]+)(?: "(?<title>.+)")?\)/,
+        regexp: /(?<!!)\[(.*?)\]\((.*?)\)/,
         type: this.type,
         getAttributes: (matches: string[]) => {
-          const [_, text, href, title] = matches;
-          return { text: text, href: href, title: title };
+          const [_, text, href] = matches;
+          return { text: text, href: href };
         },
       }),
     ];
+  }
+
+  // Overwrite the paste rule
+  createPasteRules(): MarkPasteRule[] {
+    return [];
   }
 }
 
