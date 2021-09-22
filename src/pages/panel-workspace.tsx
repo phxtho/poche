@@ -30,7 +30,7 @@ export default function PanelWorkspace() {
       <div>
         <NoteList handleNoteButtonClick={addNoteToCanvas} />
       </div>
-      <div className="flex flex-wrap h-full w-full justify-center">
+      <div className="flex flex-wrap h-full w-full justify-center sibling-fade">
         {cards.map((card, idx) => (
           <EditorContainer key={idx} id={card.id} />
         ))}
