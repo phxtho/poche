@@ -6,6 +6,7 @@ import NoteList from "components/note-list/note-list";
 import { ADD_ITEM_TO_CANVAS } from "store";
 import EditorContainer from "components/editor-container/editor-container";
 import AddNoteFAB from "components/add-note-fab/add-note-fab";
+import "./panel-workspace.css";
 
 export default function PanelWorkspace() {
   const cards: ICanvasCard[] = useSelector(
@@ -24,13 +25,13 @@ export default function PanelWorkspace() {
 
   return (
     <div className="min-h-screen">
-      <div id="top-bar" className="flex flex-row-reverse p-8">
+      <div id="top-bar" className="hidden md:flex flex-row-reverse p-8">
         <SearchBar />
       </div>
-      <div>
+      {/* <div>
         <NoteList handleNoteButtonClick={addNoteToCanvas} />
-      </div>
-      <div className="flex flex-wrap h-full w-full justify-center sibling-fade">
+      </div> */}
+      <div className="editor-list sibling-fade">
         {cards.map((card, idx) => (
           <EditorContainer key={idx} id={card.id} />
         ))}
