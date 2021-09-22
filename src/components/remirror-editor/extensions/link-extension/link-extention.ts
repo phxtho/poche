@@ -15,7 +15,7 @@ class LinkExtension extends RemirrorLinkExtension {
   createInputRules(): InputRule[] {
     return [
       markInputRule({
-        regexp: /(?<!!)\[(.*?)\]\((.*?)\)/,
+        regexp: /[^!]\[(.+?)\]\((.+?)\)/, // regexp: /(?<!!)\[(.*?)\]\((.*?)\)/, Safari doesn't support lookbehind
         type: this.type,
         getAttributes: (matches: string[]) => {
           const [_, text, href] = matches;

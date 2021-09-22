@@ -51,7 +51,7 @@ export default function Library() {
                 navigate("/experiment-501.V2/p");
               }}
             >
-              {note.title || noteText}
+              {note.title || noteText || "Empty"}
             </button>
           );
         })}
