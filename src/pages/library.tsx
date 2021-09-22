@@ -4,14 +4,17 @@ import { ADD_ITEM_TO_CANVAS } from "store";
 import { useDispatch, useSelector } from "react-redux";
 import { ICanvas, ICanvasCard, INote, ItemTypes } from "model/interfaces";
 import { useNavigate } from "@reach/router";
+import AddNoteFAB from "components/add-note-fab/add-note-fab";
 
 export default function Library() {
   const [allNotes, setAllNotes] = useState([]);
 
+  const navigate = useNavigate();
+
   const openCanvasCards: ICanvasCard[] = useSelector(
     (state: { openCanvas: ICanvas }) => state.openCanvas.items
   );
-  const navigate = useNavigate();
+
   const dispatch = useDispatch();
   const addNoteToCanvas = (note: INote) => {
     const item: ICanvasCard = {
@@ -52,6 +55,7 @@ export default function Library() {
             </button>
           );
         })}
+        <AddNoteFAB handleClick={() => navigate("/experiment-501.V2/p")} />
       </div>
     </div>
   );

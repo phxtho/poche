@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 import { ADD_ITEM_TO_CANVAS } from "store";
 
-export default function AddNoteFAB() {
+export default function AddNoteFAB(props) {
   const dispatch = useDispatch();
 
   const createCard = useCallback(() => {
@@ -20,7 +20,10 @@ export default function AddNoteFAB() {
 
   return (
     <button
-      onClick={() => createCard()}
+      onClick={() => {
+        createCard();
+        props?.handleClick?.();
+      }}
       className="rounded-full h-16 w-16 fixed right-8 bottom-8 bg-black text-white flex justify-center items-center shadow-md hover:pointer"
     >
       <VscAdd />
