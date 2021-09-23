@@ -23,15 +23,3 @@ textarea {
   overflow: auto;
   resize: none;
 }
-
-.sibling-fade > * {
-  transition: opacity 0.3s;
-}
-
-.sibling-fade > *:not(:focus-within) {
-  opacity: 0.5;
-}
-
-.sibling-fade > *:hover {
-  opacity: 1;
-}
