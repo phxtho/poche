@@ -38,7 +38,7 @@ export default function Library() {
 
   return (
     <div className="min-h-screen">
-      <div className="h-full w-full rounded-lg divide-y divide-gray-200">
+      <div className="h-full w-full rounded-lg divide-y divide-gray-200 flex flex-col p-5">
         {allNotes.map((note, idx) => {
           const noteText = note?.state?.doc ? note.text : "";
 

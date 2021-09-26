@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "components/searchbar/searchbar";
-import { Connect, Replicate } from "replication/webrtc";
+import Replicator from "replication/webrtc";
 import QRCode from "qrcode";
 import jsQR from "jsqr";
 
@@ -10,8 +10,10 @@ export default function Demo() {
   let qrcode;
   let video;
   let canvasElement: HTMLCanvasElement;
+  let replicator: Replicator;
 
   useEffect(() => {
+    replicator = new Replicator();
     // Generate QR Code
     let canvas = document.getElementById("qrcode");
     QRCode.toCanvas(canvas, localStorage.getItem("peerId"));
@@ -84,7 +86,7 @@ export default function Demo() {
           <button
             className="rounded bg-blue-500 text-white"
             onClick={(e) => {
-              Connect(peerId);
+              replicator.Connect(peerId);
             }}
           >
             Connect
@@ -100,7 +102,7 @@ export default function Demo() {
           <button
             className="bg-green-500 text-white rounded"
             onClick={(e) => {
-              Replicate();
+              replicator.Replicate();
             }}
           >
             Send
