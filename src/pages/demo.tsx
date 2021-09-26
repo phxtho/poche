@@ -7,13 +7,13 @@ import jsQR from "jsqr";
 export default function Demo() {
   const [peerId, setPeerId] = useState<string>("");
   const [dataToSend, setDataToSend] = useState<string>();
+  const [replicator, setReplicator] = useState<Replicator>();
   let qrcode;
   let video;
   let canvasElement: HTMLCanvasElement;
-  let replicator: Replicator;
 
   useEffect(() => {
-    replicator = new Replicator();
+    setReplicator(new Replicator());
     // Generate QR Code
     let canvas = document.getElementById("qrcode");
     QRCode.toCanvas(canvas, localStorage.getItem("peerId"));

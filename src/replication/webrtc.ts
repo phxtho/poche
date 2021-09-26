@@ -4,6 +4,7 @@ import { getNotes, updateNote } from "db/pouch/notes";
 class Replicator {
   id: string;
   peer: Peer;
+  dataConnection: Peer.DataConnection;
 
   constructor() {
     this.id = localStorage.getItem("peerId");
@@ -15,8 +16,11 @@ class Replicator {
     });
 
     this.peer.on("connection", (dataConnection) => {
+      console.log(`Connected to ${dataConnection.peer}`);
+      this.dataConnection = dataConnection;
       dataConnection.on("data", (data) => {
-        console.log(`Recieved data from ${dataConnection.peer}`);
+        console.log(`Recieved data from ${this.dataConnection.peer}`);
+        console.log(data);
         if (Array.isArray(data)) {
           data.forEach((item) => updateNote(item));
         }
@@ -29,12 +33,14 @@ class Replicator {
   }
 
   Connect(peerId: string) {
-    this.peer.connect(peerId);
+    this.dataConnection = this.peer.connect(peerId, { serialization: "json" });
+    console.log(`Connected to ${this.dataConnection.peer}`);
   }
 
   async Replicate() {
     try {
       let dataToSend = await getNotes();
+      this.dataConnection.send(dataToSend);
     } catch (e) {
       console.log(e);
     }
