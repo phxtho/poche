@@ -1,0 +1,14 @@
+table.note-list {
+  border-collapse: collapse;
+}
+table.note-list tbody > tr:nth-child(odd) {
+  background-color: #f9fafc;
+}
+
+/* table.note-list tbody > tr {
+  border-bottom: 1px solid #ebebeb;
+} */
+
+table.note-list tbody > tr:last-child {
+  border-bottom: none;
+}
