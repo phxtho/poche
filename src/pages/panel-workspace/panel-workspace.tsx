@@ -1,9 +1,7 @@
 import React from "react";
 import SearchBar from "components/searchbar/searchbar";
-import { useDispatch, useSelector } from "react-redux";
-import { ICanvas, ICanvasCard, INote, ItemTypes } from "model/interfaces";
-import NoteList from "components/note-list/note-list";
-import { ADD_ITEM_TO_CANVAS } from "store";
+import { useSelector } from "react-redux";
+import { ICanvas, ICanvasCard } from "model/interfaces";
 import EditorContainer from "components/editor-container/editor-container";
 import AddNoteFAB from "components/add-note-fab/add-note-fab";
 import "./panel-workspace.css";
@@ -12,26 +10,13 @@ export default function PanelWorkspace() {
   const cards: ICanvasCard[] = useSelector(
     (state: { openCanvas: ICanvas }) => state.openCanvas.items
   );
-  const dispatch = useDispatch();
-  const addNoteToCanvas = (note: INote) => {
-    const item: ICanvasCard = {
-      id: note?.id,
-      type: ItemTypes.CARD,
-      x: 690,
-      y: 320,
-    };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
-  };
 
   return (
     <div className="min-h-screen">
       <div id="top-bar" className="hidden md:flex flex-row-reverse p-8">
         <SearchBar />
       </div>
-      {/* <div>
-        <NoteList handleNoteButtonClick={addNoteToCanvas} />
-      </div> */}
-      <div className="editor-list sibling-fade">
+      <div className="editor-list">
         {cards.map((card, idx) => (
           <EditorContainer key={idx} id={card.id} />
         ))}
