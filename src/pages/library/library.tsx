@@ -66,9 +66,16 @@ export default function Library() {
                         }}
                       >
                         <div className="flex flex-col text-left">
-                          <span className="font-medium">
-                            {note.title || "No Title"}
-                          </span>
+                          <div className="font-medium flex space-x-1">
+                            <span>{note.title || "No Title"}</span>
+                            <span
+                              className={`rounded-full h-2 w-2 bg-green-500 ${
+                                openCanvasCards.find((el) => el.id == note.id)
+                                  ? "inline"
+                                  : "hidden"
+                              } `}
+                            ></span>
+                          </div>
                           <span className="text-sm text-gray-500 font-light">
                             {note.text || "empty"}
                           </span>
