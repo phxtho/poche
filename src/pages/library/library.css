@@ -1,5 +1,9 @@
 table.note-list {
   border-collapse: collapse;
+  overflow: hidden;
+  table-layout: fixed;
+  width: 100%;
+  height: 100%;
 }
 table.note-list tbody > tr:nth-child(odd) {
   background-color: #f9fafc;
@@ -11,4 +15,13 @@ table.note-list tbody > tr:nth-child(odd) {
 
 table.note-list tbody > tr:last-child {
   border-bottom: none;
+}
+
+table.note-list tr {
+  text-align: left;
+}
+
+table.note-list tr td:first-child,
+table.note-list tr th:first-child {
+  padding-left: 0.5rem;
 }

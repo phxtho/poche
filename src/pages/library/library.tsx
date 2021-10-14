@@ -39,13 +39,14 @@ export default function Library() {
   }, [fetchAllNotes]);
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen max-w-full">
       <div className="p-5">
-        <table className="h-full w-full rounded-lg divide-y divide-gray-200 note-list">
+        <table className="rounded-lg divide-y divide-gray-200 note-list shadow-md">
           <thead>
             <tr>
-              <th>Note</th>
-              <th>Edited</th>
+              <th className="w-11/12 lg:w-9/12">Note</th>
+              <th className="hidden lg:block w-2/12">Edited</th>
+              <th className="w-1/12"></th>
             </tr>
           </thead>
           <tbody>
@@ -82,7 +83,7 @@ export default function Library() {
                         </div>
                       </button>
                     </td>
-                    <td className="text-center">
+                    <td className="hidden md:block">
                       {new Date(note.lastEditedTime).toLocaleString()}
                     </td>
                     <td>
