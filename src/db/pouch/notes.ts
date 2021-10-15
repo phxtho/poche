@@ -3,10 +3,14 @@ import Upsert from "pouchdb-upsert";
 import { INote, PMState, SearchResult } from "model/interfaces";
 import QuickSearch from "pouchdb-quick-search";
 import { v4 as uuidv4 } from "uuid";
-import { schema } from "components/editor/schema";
+import Debug from "pouchdb-debug";
 
 PouchDB.plugin(Upsert);
 PouchDB.plugin(QuickSearch);
+
+//Enables debugging
+// PouchDB.plugin(Debug);
+// PouchDB.debug.enable("*");
 
 let db = new PouchDB("notes");
 
@@ -58,7 +62,8 @@ export async function insertNote(
 export async function deleteNote(inputDocument: INote) {
   try {
     const docId = inputDocument.id || inputDocument["_id"];
-    const response = await db.remove(docId);
+    const rev = await db.get(docId).then((res) => res._rev);
+    const response = await db.remove(docId, rev);
     return response;
   } catch (error) {
     console.log(`ERROR: couldn't delete \n${error}`);
@@ -98,8 +103,6 @@ export async function search(
 ): Promise<SearchResult> {
   return (db as any)
     ?.search({ query: query, fields: fields, include_docs: true })
-    .then((res) => {
-      return res;
-    })
+    .then((res) => res)
     .catch((err) => console.log(`Search failed ${err}`));
 }
