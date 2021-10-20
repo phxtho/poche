@@ -1,7 +1,7 @@
 import React from "react";
 import { INote } from "model/interfaces";
 import { deleteNote } from "db/pouch/notes";
-import { FiDownload, FiTrash, FiTool } from "react-icons/fi";
+import { FiDownload, FiTrash, FiTool, FiX } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { REMOVE_ITEM_FROM_CANVAS } from "store";
 import Modal, { Styles } from "react-modal";
@@ -17,6 +17,9 @@ const modalStyle: Styles = {
   content: {
     borderRadius: ".5rem",
     height: "fit-content",
+    maxWidth: "40rem",
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 };
 
@@ -37,6 +40,19 @@ const NoteOptionsModal = (props: NoteOptionsModalProps) => {
         <div className="flex flex-col space-y-4">
           <button
             className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
+            onClick={() => {
+              dispatch({
+                type: REMOVE_ITEM_FROM_CANVAS,
+                payload: { id: props.note.id },
+              });
+              props.onRequestClose();
+            }}
+          >
+            <FiX className="mx-auto" /> Close
+          </button>
+
+          {/* <button
+            className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
             onClick={() => props.onRequestClose()}
           >
             <FiTool className="mx-auto" /> Properties
@@ -47,7 +63,7 @@ const NoteOptionsModal = (props: NoteOptionsModalProps) => {
             onClick={() => props.onRequestClose()}
           >
             <FiDownload className="mx-auto" /> Download
-          </button>
+          </button> */}
 
           <button
             className="w-full h-16 rounded-lg shadow-md bg-red-500 text-white hover:shadow-lg hover:bg-red-600"

@@ -3,8 +3,6 @@ import React, { useCallback, useEffect, useReducer, useRef } from "react";
 import Editor from "components/remirror-editor/remirror-editor";
 import { insertNote, updateNote, getNoteById } from "db/pouch/notes";
 import { INote } from "model/interfaces";
-import { useDispatch } from "react-redux";
-import { REMOVE_ITEM_FROM_CANVAS } from "store";
 import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
 import { Extension } from "@remirror/core";
@@ -42,7 +40,6 @@ const reducer = (note: INote, { type, payload }) => {
 };
 const EditorContainer = (props: EditorContainerProps) => {
   const [note, dispatch] = useReducer(reducer, props.note);
-  const reduxDispatch = useDispatch();
   const [focused, setFocused] = useState(false);
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
 
@@ -109,15 +106,6 @@ const EditorContainer = (props: EditorContainerProps) => {
             <button
               className="h-4 w-4 rounded-full bg-green-300 hover:bg-green-500"
               onClick={() => setNoteOptionsOpen(true)}
-            />
-            <button
-              className="h-4 w-4 rounded-full bg-red-300 hover:bg-red-500"
-              onClick={() =>
-                reduxDispatch({
-                  type: REMOVE_ITEM_FROM_CANVAS,
-                  payload: note,
-                })
-              }
             />
           </div>
         </div>
