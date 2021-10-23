@@ -1,6 +1,19 @@
 import Peer from "peerjs";
 import { getNotes, updateNote } from "db/pouch/notes";
 
+const addPeer = (peerId: string) => {
+  let peers = JSON.parse(localStorage.getItem("peers"));
+  if (Array.isArray(peers)) {
+    if (!peers.find((x) => x == peerId)) {
+      (peers as Array<string>).push(peerId);
+      localStorage.setItem("peers", JSON.stringify(peers));
+    }
+  } else {
+    peers = [peerId];
+    localStorage.setItem("peers", JSON.stringify(peers));
+  }
+};
+
 class Replicator {
   id: string;
   peer: Peer;
@@ -17,7 +30,10 @@ class Replicator {
 
     this.peer.on("connection", (dataConnection) => {
       console.log(`Connected to ${dataConnection.peer}`);
+      this.peer.listAllPeers((peers) => peers.forEach((x) => addPeer(x)));
+
       this.dataConnection = dataConnection;
+
       dataConnection.on("data", (data) => {
         console.log(`Recieved data from ${this.dataConnection.peer}`);
         console.log(data);
@@ -34,7 +50,7 @@ class Replicator {
 
   Connect(peerId: string) {
     this.dataConnection = this.peer.connect(peerId, { serialization: "json" });
-    console.log(`Connected to ${this.dataConnection.peer}`);
+    this.peer.listAllPeers((peers) => peers.forEach((x) => addPeer(x)));
   }
 
   async Replicate() {
