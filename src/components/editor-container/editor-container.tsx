@@ -84,6 +84,10 @@ const EditorContainer = (props: EditorContainerProps) => {
     [note]
   );
 
+  const handleFocus = useCallback((params, e) => {
+    setFocused(true);
+  }, []);
+
   if (!note) return null;
 
   return (
@@ -113,7 +117,7 @@ const EditorContainer = (props: EditorContainerProps) => {
           state={note.state}
           onChange={handleOnChange}
           onBlur={handleBlur}
-          onFocus={() => setFocused(true)}
+          onFocus={handleFocus}
           ref={ctxRef}
         />
       </div>
