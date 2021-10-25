@@ -1,66 +1,64 @@
 import Peer from "peerjs";
 import { getNotes, updateNote } from "db/pouch/notes";
+import { upsertPeer } from "db/pouch/peers";
+import { IPeer } from "model/interfaces";
 
-const addPeer = (peerId: string) => {
-  let peers = JSON.parse(localStorage.getItem("peers"));
-  if (Array.isArray(peers)) {
-    if (!peers.find((x) => x == peerId)) {
-      (peers as Array<string>).push(peerId);
-      localStorage.setItem("peers", JSON.stringify(peers));
-    }
-  } else {
-    peers = [peerId];
-    localStorage.setItem("peers", JSON.stringify(peers));
-  }
-};
+let id: string;
+let peer: Peer;
+let dataConnection: Peer.DataConnection;
 
-class Replicator {
-  id: string;
-  peer: Peer;
-  dataConnection: Peer.DataConnection;
+id = localStorage.getItem("peerId");
 
-  constructor() {
-    this.id = localStorage.getItem("peerId");
-    this.peer = new Peer(this.id);
-
-    this.peer.on("open", function (id) {
-      localStorage.setItem("peerId", id);
-      console.log("My peer ID is: " + id);
-    });
-
-    this.peer.on("connection", (dataConnection) => {
-      console.log(`Connected to ${dataConnection.peer}`);
-      this.peer.listAllPeers((peers) => peers.forEach((x) => addPeer(x)));
-
-      this.dataConnection = dataConnection;
-
-      dataConnection.on("data", (data) => {
-        console.log(`Recieved data from ${this.dataConnection.peer}`);
-        console.log(data);
-        if (Array.isArray(data)) {
-          data.forEach((item) => updateNote(item));
-        }
-      });
-    });
-
-    this.peer.on("error", (error) => {
-      console.error(error);
-    });
-  }
-
-  Connect(peerId: string) {
-    this.dataConnection = this.peer.connect(peerId, { serialization: "json" });
-    this.peer.listAllPeers((peers) => peers.forEach((x) => addPeer(x)));
-  }
-
-  async Replicate() {
-    try {
-      let dataToSend = await getNotes();
-      this.dataConnection.send(dataToSend);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+try {
+  peer = new Peer(id);
+} catch {
+  peer = new Peer();
+  id = peer.id;
 }
 
-export default Replicator;
+peer.on("open", function (id) {
+  localStorage.setItem("peerId", id);
+  console.log("My peer ID is: " + id);
+});
+
+peer.on("connection", (dataConnection) => {
+  console.log(`Connected to ${dataConnection.peer}`);
+  Object.keys(peer.connections).forEach((x) => {
+    addPeer(x);
+  });
+
+  dataConnection = dataConnection;
+
+  dataConnection.on("data", (data) => {
+    console.log(`Recieved data from ${dataConnection.peer}`);
+    console.log(data);
+    if (Array.isArray(data)) {
+      data.forEach((item) => updateNote(item));
+    }
+  });
+});
+
+peer.on("error", (error) => {
+  console.error(error);
+});
+
+const addPeer = (peerId: string) => {
+  let peer: IPeer = { id: peerId };
+  upsertPeer(peer);
+};
+
+export function Connect(peerId: string) {
+  dataConnection = peer.connect(peerId, { serialization: "json" });
+  Object.keys(peer.connections).forEach((x) => {
+    addPeer(x);
+  });
+}
+
+export async function Replicate() {
+  try {
+    let dataToSend = await getNotes();
+    dataConnection.send(dataToSend);
+  } catch (e) {
+    console.log(e);
+  }
+}

@@ -43,3 +43,8 @@ export interface SearchResultRow {
   score: number;
   doc: INote;
 }
+
+export interface IPeer {
+  id: string;
+  name?: string;
+}

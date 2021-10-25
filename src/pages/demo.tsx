@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "components/searchbar/searchbar";
-import Replicator from "replication/webrtc";
+import { Connect, Replicate } from "replication/webrtc";
 import QRCode from "qrcode";
 import jsQR from "jsqr";
+import PeerConnections from "components/peer-connections/peer-connections";
 
 export default function Demo() {
   const [peerId, setPeerId] = useState<string>("");
   const [dataToSend, setDataToSend] = useState<string>();
-  const [replicator, setReplicator] = useState<Replicator>();
   let qrcode;
   let video;
   let canvasElement: HTMLCanvasElement;
 
   useEffect(() => {
-    setReplicator(new Replicator());
     // Generate QR Code
     let canvas = document.getElementById("qrcode");
-    QRCode.toCanvas(canvas, localStorage.getItem("peerId"));
+    QRCode?.toCanvas(canvas, localStorage.getItem("peerId"));
 
     // Read QR Code
     canvasElement = document.getElementById(
@@ -86,7 +85,7 @@ export default function Demo() {
           <button
             className="rounded bg-blue-500 text-white"
             onClick={(e) => {
-              replicator.Connect(peerId);
+              Connect(peerId);
             }}
           >
             Connect
@@ -102,13 +101,15 @@ export default function Demo() {
           <button
             className="bg-green-500 text-white rounded"
             onClick={(e) => {
-              replicator.Replicate();
+              Replicate();
             }}
           >
             Send
           </button>
         </div>
       </div>
+
+      <PeerConnections />
 
       <canvas id="qrcode"></canvas>
       <canvas id="outputCanvas" hidden></canvas>
