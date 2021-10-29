@@ -10,6 +10,7 @@ import {
   BulletListExtension,
   OrderedListExtension,
   TaskListExtension,
+  UnderlineExtension,
 } from "remirror/extensions";
 import {
   EditorComponent,
@@ -64,6 +65,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new TaskListExtension(),
         new ImageExtension({ enableResizing: true }),
         new CodeExtension(),
+        new UnderlineExtension(),
       ],
       onError: handleOnError,
       content: props.state?.doc,
