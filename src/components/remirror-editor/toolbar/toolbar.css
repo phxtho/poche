@@ -1,0 +1,37 @@
+.toolbar {
+  display: flex;
+  background-color: black;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  height: 4rem;
+  width: 100%;
+  align-items: center;
+}
+
+.toolbar > button {
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toolbar > button:hover,
+.toolbar > button.active {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+@media (min-width: 768px) {
+  .toolbar {
+    width: 25rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0 1rem 0 1rem;
+    justify-content: space-between;
+  }
+}
