@@ -72,7 +72,7 @@ const NoteOptionsModal = (props: NoteOptionsModalProps) => {
                 type: REMOVE_ITEM_FROM_CANVAS,
                 payload: { id: props.note.id },
               });
-              deleteNote(props.note);
+              deleteNote(props.note.id);
               props.onRequestClose();
             }}
           >

@@ -10,28 +10,23 @@ import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 
 interface EditorContainerProps {
   id: string;
-  note?: INote;
   handleFocus?;
 }
 
 const EditorContainer = (props: EditorContainerProps) => {
-  // const [note, dispatch] = useReducer(reducer, props.note);
-  const [note, setNote] = useState<INote>(props.note);
+  const [note, setNote] = useState<any>();
   const [focused, setFocused] = useState(false);
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
 
   const ctxRef = useRef<ReactFrameworkOutput<Extension>>();
 
   const initialiseNote = useCallback(async () => {
-    if (props.id && !props.note) {
+    if (props.id) {
       // try fetch the note from the db
       let doc = await getNoteById(props.id);
       if (doc) {
-        setNote(doc as unknown as INote);
+        setNote(doc);
       }
-    } else if (props.note) {
-      // Use the passed in note
-      setNote(props.note);
     }
   }, [props.id]);
 
@@ -40,14 +35,17 @@ const EditorContainer = (props: EditorContainerProps) => {
     void initialiseNote();
   }, [initialiseNote]);
 
-  const handleOnChange = useCallback((params) => {
-    const updatedNote = {
-      ...note,
-      state: params.state.toJSON(),
-      lastEditedTime: Date.now(),
-    };
-    setNote(updatedNote);
-  }, []);
+  const handleOnChange = useCallback(
+    (params) => {
+      const updatedNote = {
+        ...note,
+        state: params.state.toJSON(),
+        lastEditedTime: Date.now(),
+      };
+      setNote(updatedNote);
+    },
+    [note]
+  );
 
   const handleBlur = useCallback(
     (params, e) => {
@@ -60,7 +58,7 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   const handleFocus = useCallback((params, e) => {
     setFocused(true);
-    props.handleFocus(ctxRef.current);
+    props.handleFocus?.(ctxRef.current);
   }, []);
 
   if (!note) return null;

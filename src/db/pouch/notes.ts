@@ -45,6 +45,7 @@ export async function insertNote(
   try {
     let newDocument = {
       _id: id || uuidv4(),
+      id: null,
       title: title || null,
       meta: meta || {},
       state: state || defaultState,
@@ -52,6 +53,7 @@ export async function insertNote(
       lastEditedTime: lastEditedTime || Date.now(),
     };
 
+    newDocument.id = newDocument._id;
     const storedDocument = await db.putIfNotExists(newDocument);
     return storedDocument;
   } catch (error) {
@@ -59,11 +61,10 @@ export async function insertNote(
   }
 }
 
-export async function deleteNote(inputDocument: INote) {
+export async function deleteNote(id: string) {
   try {
-    const docId = inputDocument.id || inputDocument["_id"];
-    const rev = await db.get(docId).then((res) => res._rev);
-    const response = await db.remove(docId, rev);
+    const rev = await db.get(id).then((res) => res._rev);
+    const response = await db.remove(id, rev);
     return response;
   } catch (error) {
     console.log(`ERROR: couldn't delete \n${error}`);

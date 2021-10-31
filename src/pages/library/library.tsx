@@ -9,6 +9,8 @@ import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 import "./library.css";
 
+const cardSelector = (state: { openCanvas: ICanvas }) => state.openCanvas.items;
+
 export default function Library() {
   const [allNotes, setAllNotes] = useState<INote[]>([]);
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
@@ -16,9 +18,7 @@ export default function Library() {
 
   const navigate = useNavigate();
 
-  const openCanvasCards: ICanvasCard[] = useSelector(
-    (state: { openCanvas: ICanvas }) => state.openCanvas.items
-  );
+  const openCanvasCards: ICanvasCard[] = useSelector(cardSelector);
 
   const dispatch = useDispatch();
   const addNoteToCanvas = (note: INote) => {
