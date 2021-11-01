@@ -30,6 +30,16 @@ const Toolbar = () => {
       >
         <VscDiscard />
       </button>
+
+      <button
+        onClick={() => {
+          commands.redo();
+          commands.focus();
+        }}
+      >
+        <VscRedo />
+      </button>
+
       <button
         className={ActiveClass(active.bold())}
         onClick={() => {
@@ -96,15 +106,6 @@ const Toolbar = () => {
         }}
       >
         <VscChecklist />
-      </button>
-
-      <button
-        onClick={() => {
-          commands.redo();
-          commands.focus();
-        }}
-      >
-        <VscRedo />
       </button>
     </div>
   );
