@@ -7,6 +7,7 @@ import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 import "./library.css";
 import NotesContext from "components/NotesContext";
+import SettingsFab from "components/settings-fab/settings-fab";
 
 export default function Library() {
   const [allNotes, setAllNotes] = useState<INote[]>([]);
@@ -91,6 +92,7 @@ export default function Library() {
           </tbody>
         </table>
 
+        <SettingsFab />
         <AddNoteFAB handleClick={() => navigate("/experiment-501.V2/p")} />
       </div>
 
