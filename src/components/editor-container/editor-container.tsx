@@ -2,7 +2,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import Editor from "components/remirror-editor/remirror-editor";
 import { updateNote, getNoteById } from "db/pouch/notes";
-import { INote } from "model/interfaces";
 import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
 import { Extension } from "@remirror/core";
@@ -49,7 +48,7 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   const handleBlur = useCallback(
     (params, e) => {
-      note.text = ctxRef.current.getState().doc.textContent;
+      note.text = ctxRef.current?.getState().doc.textContent;
       void updateNote(note);
       setFocused(false);
     },

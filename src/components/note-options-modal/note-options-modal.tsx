@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { INote } from "model/interfaces";
 import { deleteNote } from "db/pouch/notes";
-import { FiDownload, FiTrash, FiTool, FiX } from "react-icons/fi";
-import { useDispatch } from "react-redux";
-import { REMOVE_ITEM_FROM_CANVAS } from "store";
+import { FiTrash, FiX } from "react-icons/fi";
 import Modal, { Styles } from "react-modal";
+import NotesContext from "components/NotesContext";
 
 interface NoteOptionsModalProps {
   note?: INote;
@@ -26,7 +25,7 @@ const modalStyle: Styles = {
 const NoteOptionsModal = (props: NoteOptionsModalProps) => {
   Modal.setAppElement("#root");
 
-  const dispatch = useDispatch();
+  const { items, removeItem } = useContext(NotesContext);
 
   return (
     <Modal
@@ -41,37 +40,17 @@ const NoteOptionsModal = (props: NoteOptionsModalProps) => {
           <button
             className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
             onClick={() => {
-              dispatch({
-                type: REMOVE_ITEM_FROM_CANVAS,
-                payload: { id: props.note.id },
-              });
+              removeItem(items, props.note.id);
               props.onRequestClose();
             }}
           >
             <FiX className="mx-auto" /> Close
           </button>
 
-          {/* <button
-            className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
-            onClick={() => props.onRequestClose()}
-          >
-            <FiTool className="mx-auto" /> Properties
-          </button>
-
-          <button
-            className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
-            onClick={() => props.onRequestClose()}
-          >
-            <FiDownload className="mx-auto" /> Download
-          </button> */}
-
           <button
             className="w-full h-16 rounded-lg shadow-md bg-red-500 text-white hover:shadow-lg hover:bg-red-600"
             onClick={() => {
-              dispatch({
-                type: REMOVE_ITEM_FROM_CANVAS,
-                payload: { id: props.note.id },
-              });
+              removeItem(items, props.note.id);
               deleteNote(props.note.id);
               props.onRequestClose();
             }}

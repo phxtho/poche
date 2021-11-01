@@ -9,7 +9,7 @@
   scroll-snap-type: x mandatory;
 }
 
-.editor-list > * {
+.editor-list > .editor-container {
   scroll-snap-align: center;
   min-width: 100vw;
   min-height: 98vh;
@@ -22,7 +22,7 @@
     justify-content: center;
   }
 
-  .editor-list > * {
+  .editor-list > .editor-container {
     min-width: auto;
     min-height: auto;
   }

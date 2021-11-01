@@ -1,31 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import { search } from "db/pouch/notes";
 import "./searchbar.css";
-import { ICanvasCard, INote, ItemTypes, SearchResult } from "model/interfaces";
-import { useDispatch } from "react-redux";
-import { ADD_ITEM_TO_CANVAS } from "store";
+import { SearchResult } from "model/interfaces";
+import NotesContext from "components/NotesContext";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult>();
 
+  const { items, addItem } = useContext(NotesContext);
+
   const Search = (query: string) => {
     search(query).then((res) => setResults(res));
-  };
-
-  const dispatch = useDispatch();
-
-  const addNoteToCanvas = (note: INote) => {
-    const item: ICanvasCard = {
-      id: note?.id,
-      type: ItemTypes.CARD,
-      x: 690,
-      y: 320,
-    };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
   };
 
   return (
@@ -57,7 +46,7 @@ export default function SearchBar() {
                 key={idx}
                 className="result"
                 onClick={(_) => {
-                  addNoteToCanvas(val.doc);
+                  addItem(items, val.doc.id);
                   setQuery("");
                 }}
               >

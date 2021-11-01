@@ -1,15 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useContext, useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "db/pouch/notes";
-import { ADD_ITEM_TO_CANVAS } from "store";
-import { useDispatch, useSelector } from "react-redux";
-import { ICanvas, ICanvasCard, INote, ItemTypes } from "model/interfaces";
+import { INote } from "model/interfaces";
 import { useNavigate } from "@reach/router";
 import AddNoteFAB from "components/add-note-fab/add-note-fab";
 import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 import "./library.css";
-
-const cardSelector = (state: { openCanvas: ICanvas }) => state.openCanvas.items;
+import NotesContext from "components/NotesContext";
 
 export default function Library() {
   const [allNotes, setAllNotes] = useState<INote[]>([]);
@@ -17,19 +14,7 @@ export default function Library() {
   const [selectedNote, setSelectedNote] = useState<INote>();
 
   const navigate = useNavigate();
-
-  const openCanvasCards: ICanvasCard[] = useSelector(cardSelector);
-
-  const dispatch = useDispatch();
-  const addNoteToCanvas = (note: INote) => {
-    const item: ICanvasCard = {
-      id: note?.id,
-      type: ItemTypes.CARD,
-      x: 690,
-      y: 320,
-    };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
-  };
+  const { items, addItem } = useContext(NotesContext);
 
   const fetchAllNotes = useCallback(async () => {
     const response = (await getNotes()) as any;
@@ -66,15 +51,13 @@ export default function Library() {
               {allNotes
                 .sort((a, b) => (a.lastEditedTime < b.lastEditedTime ? 1 : -1)) // Sort by last edited date descending
                 .map((note, idx) => {
-                  const noteText = note?.state?.doc ? note.text : "";
-
                   return (
                     <tr key={idx} id={`row-${note.id}`}>
                       <td>
                         <button
                           className="truncate w-full transition duration-250 ease-in-out bg-gradient-to-r hover:from-gray-100 hover:to-gray-200"
                           onClick={() => {
-                            addNoteToCanvas(note);
+                            addItem(items, note.id);
                             navigate("/experiment-501.V2/p");
                           }}
                         >
@@ -83,7 +66,7 @@ export default function Library() {
                               <span>{note.title || "No Title"}</span>
                               <span
                                 className={`rounded-full h-2 w-2 bg-green-500 ${
-                                  openCanvasCards.find((el) => el.id == note.id)
+                                  items.find((el) => el == note.id)
                                     ? "inline"
                                     : "hidden"
                                 } `}

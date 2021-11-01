@@ -1,23 +1,15 @@
-import React, { useCallback } from "react";
-import { ItemTypes, ICanvasCard } from "model/interfaces";
+import React, { useCallback, useContext } from "react";
 import { VscAdd } from "react-icons/vsc";
-import { useDispatch } from "react-redux";
-import { ADD_ITEM_TO_CANVAS } from "store";
 import { insertNote } from "db/pouch/notes";
+import NotesContext from "components/NotesContext";
 
 export default function AddNoteFAB(props) {
-  const dispatch = useDispatch();
+  const { items, addItem } = useContext(NotesContext);
 
   const createCard = useCallback(async () => {
     let newNote = await insertNote();
-    const newCard: ICanvasCard = {
-      type: ItemTypes.CARD,
-      id: newNote.id,
-      x: 0,
-      y: 0,
-    };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
-  }, [dispatch]);
+    addItem(items, newNote.id);
+  }, [addItem, items]);
 
   return (
     <button

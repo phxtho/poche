@@ -26,9 +26,9 @@ const Canvas = (props) => {
   const [noteListPos, setNoteListPos] = useState<XYCoord>({ x: 0, y: 0 });
 
   const cards: ICanvasCard[] = useSelector(
-    (state: { openCanvas: ICanvas }) => state.openCanvas.items
+    (state: { cards: ICanvasCard[] }) => state.cards
   );
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const [, drop] = useDrop({
     accept: [ItemTypes.CARD, ItemTypes.COLLECTION],
@@ -44,25 +44,19 @@ const Canvas = (props) => {
     },
   });
 
-  const createCard = useCallback(
-    (x: number, y: number) => {
-      const newCard: ICanvasCard = {
-        type: ItemTypes.CARD,
-        id: uuidv4(),
-        x: x,
-        y: y,
-      };
-      dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
-    },
-    [dispatch]
-  );
+  const createCard = useCallback((x: number, y: number) => {
+    const newCard: ICanvasCard = {
+      type: ItemTypes.CARD,
+      id: uuidv4(),
+      x: x,
+      y: y,
+    };
+    // dispatch({ type: ADD_ITEM_TO_CANVAS, payload: newCard });
+  }, []);
 
-  const moveCardPosition = useCallback(
-    (id: string, x: number, y: number) => {
-      dispatch({ type: UPDATE_ITEM, payload: { id: id, x: x, y: y } });
-    },
-    [dispatch]
-  );
+  const moveCardPosition = useCallback((id: string, x: number, y: number) => {
+    // dispatch({ type: UPDATE_ITEM, payload: { id: id, x: x, y: y } });
+  }, []);
 
   const addNoteToCanvas = (note: INote) => {
     const item: ICanvasCard = {
@@ -71,7 +65,7 @@ const Canvas = (props) => {
       x: 690,
       y: 320,
     };
-    dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
+    // dispatch({ type: ADD_ITEM_TO_CANVAS, payload: item });
   };
 
   return (

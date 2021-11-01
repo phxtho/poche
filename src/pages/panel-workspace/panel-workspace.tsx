@@ -1,24 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { useNavigate } from "@reach/router";
 import SearchBar from "components/searchbar/searchbar";
-import { useSelector } from "react-redux";
-import { ICanvas, ICanvasCard } from "model/interfaces";
 import EditorContainer from "components/editor-container/editor-container";
 import AddNoteFAB from "components/add-note-fab/add-note-fab";
+import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
+import Toolbar from "components/remirror-editor/toolbar";
+import NotesContext from "components/NotesContext";
 import "./panel-workspace.css";
-import { useNavigate } from "@reach/router";
 
 export default function PanelWorkspace() {
-  const cards: ICanvasCard[] = useSelector(
-    (state: { openCanvas: ICanvas }) => state.openCanvas.items
-  );
+  const { items } = useContext(NotesContext);
+
+  const [focusedEditorContext, setEditorContext] =
+    useState<ReactFrameworkOutput<any>>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (cards.length == 0) {
+    if (items.length === 0) {
       navigate("/experiment-501.V2");
     }
-  }, [cards, navigate]);
+  }, [items]);
 
   return (
     <div className="min-h-screen">
@@ -26,11 +28,20 @@ export default function PanelWorkspace() {
         <SearchBar />
       </div>
       <div className="editor-list">
-        {cards.map((card, idx) => (
-          <EditorContainer key={idx} id={card.id} />
+        {items.map((item, idx) => (
+          <EditorContainer
+            key={idx}
+            id={item}
+            handleFocus={(editorCtx) => setEditorContext(editorCtx)}
+          />
         ))}
       </div>
 
+      {focusedEditorContext && (
+        <RemirrorContext.Provider value={focusedEditorContext}>
+          <Toolbar />
+        </RemirrorContext.Provider>
+      )}
       <AddNoteFAB />
     </div>
   );
