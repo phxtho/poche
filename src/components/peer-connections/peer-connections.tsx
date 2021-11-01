@@ -20,12 +20,12 @@ const PeerConnections = () => {
   return (
     <div className="flex space-x-2">
       {peers?.map((peer, idx) => (
-        <div
+        <button
           key={idx}
-          className="rounded-sm shadow-lg bg-black text-white h-10 w-10 flex flex-col justify-center items-center overflow-hidden "
+          className="rounded-3xl shadow-lg bg-black text-white h-10 w-10 flex flex-col justify-center items-center overflow-hidden "
         >
           <VscVm />
-        </div>
+        </button>
       ))}
     </div>
   );

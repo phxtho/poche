@@ -10,7 +10,20 @@ export default function Demo() {
   const [dataToSend, setDataToSend] = useState<string>();
   let qrcode;
   let video;
-  let canvasElement: HTMLCanvasElement;
+  let videoOutCanvasElement: HTMLCanvasElement;
+
+  const setupVideoStream = async () => {
+    const constraints = {
+      video: { facingMode: "environment", frameRate: { ideal: 10, max: 15 } },
+    };
+
+    let stream = await navigator.mediaDevices.getUserMedia(constraints);
+
+    video = document.getElementById("video");
+    video.srcObject = stream;
+    video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
+    video.play();
+  };
 
   useEffect(() => {
     // Generate QR Code
@@ -18,39 +31,29 @@ export default function Demo() {
     QRCode?.toCanvas(canvas, localStorage.getItem("peerId"));
 
     // Read QR Code
-    canvasElement = document.getElementById(
-      "outputCanvas"
+    videoOutCanvasElement = document.getElementById(
+      "videoOutCanvas"
     ) as HTMLCanvasElement;
-
-    video = document.getElementById("video");
-
-    navigator.mediaDevices
-      .getUserMedia({ video: { facingMode: "environment" } })
-      .then(function (stream) {
-        video.srcObject = stream;
-        video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-        video.play();
-      });
   }, []);
 
   let tick = () => {
     if (video && video.readyState === video.HAVE_ENOUGH_DATA) {
-      let canvasCtx = canvasElement.getContext("2d");
+      let canvasCtx = videoOutCanvasElement.getContext("2d");
 
-      canvasElement.height = video.videoHeight;
-      canvasElement.width = video.videoWidth;
+      videoOutCanvasElement.height = video.videoHeight;
+      videoOutCanvasElement.width = video.videoWidth;
       canvasCtx.drawImage(
         video,
         0,
         0,
-        canvasElement.width,
-        canvasElement.height
+        videoOutCanvasElement.width,
+        videoOutCanvasElement.height
       );
       var imageData = canvasCtx.getImageData(
         0,
         0,
-        canvasElement.width,
-        canvasElement.height
+        videoOutCanvasElement.width,
+        videoOutCanvasElement.height
       );
       var code = jsQR(imageData.data, imageData.width, imageData.height, {
         inversionAttempts: "dontInvert",
@@ -110,9 +113,7 @@ export default function Demo() {
       </div>
 
       <PeerConnections />
-
-      <canvas id="qrcode"></canvas>
-      <canvas id="outputCanvas" hidden></canvas>
+      <canvas id="videoOutCanvas" hidden></canvas>
       <video id="video"></video>
     </div>
   );
