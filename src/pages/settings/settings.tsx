@@ -11,7 +11,7 @@ const Settings: FunctionComponent<SettingsProps> = () => {
 
   return (
     <>
-      <div className="min-h-screen p-5">
+      <div className="p-5">
         <div className="flex flex-col items-center">
           <h1>Connected Devices</h1>
           <PeerConnections />

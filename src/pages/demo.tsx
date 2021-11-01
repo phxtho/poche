@@ -71,10 +71,7 @@ export default function Demo() {
   requestAnimationFrame(tick);
 
   return (
-    <div className="min-h-screen">
-      <div id="top-bar" className="flex flex-row-reverse p-8">
-        <SearchBar />
-      </div>
+    <>
       <div className="flex">
         <div className="flex flex-col">
           <input
@@ -115,6 +112,6 @@ export default function Demo() {
       <PeerConnections />
       <canvas id="videoOutCanvas" hidden></canvas>
       <video id="video"></video>
-    </div>
+    </>
   );
 }

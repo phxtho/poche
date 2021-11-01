@@ -23,10 +23,7 @@ export default function PanelWorkspace() {
   }, [items]);
 
   return (
-    <div className="min-h-screen">
-      <div id="top-bar" className="hidden md:flex flex-row-reverse p-8">
-        <SearchBar />
-      </div>
+    <>
       <div className="editor-list">
         {items.map((item, idx) => (
           <EditorContainer
@@ -43,6 +40,6 @@ export default function PanelWorkspace() {
         </RemirrorContext.Provider>
       )}
       <AddNoteFAB />
-    </div>
+    </>
   );
 }
