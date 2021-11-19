@@ -48,16 +48,21 @@ const addPeer = (peerId: string) => {
 };
 
 export function Connect(peerId: string) {
-  dataConnection = peer.connect(peerId, { serialization: "json" });
-  Object.keys(peer.connections).forEach((x) => {
-    addPeer(x);
-  });
+  try {
+    dataConnection = peer.connect(peerId, { serialization: "json" });
+    Object.keys(peer.connections).forEach((x) => {
+      addPeer(x);
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export async function Replicate() {
   try {
     let dataToSend = await getNotes();
     dataConnection.send(dataToSend);
+    console.log("data sent");
   } catch (e) {
     console.log(e);
   }

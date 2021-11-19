@@ -46,6 +46,7 @@ const Settings: FunctionComponent<SettingsProps> = () => {
         onScanned={async (data) => {
           Connect(data);
           await Replicate();
+          setShowQRCodeScanner(false);
         }}
       />
     </>
