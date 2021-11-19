@@ -53,25 +53,20 @@ const QRCodeScanner: FunctionComponent<QRCodeScannerProps> = (props) => {
           videoEl.srcObject = mediaStream;
           videoEl.setAttribute("playsinline", "true"); // required to tell iOS safari we don't want fullscreen
           videoEl.play();
+          requestAnimationFrame(tick);
         }
       });
     } catch (error) {
       console.log(`Couldn't set up video stream \n:${error}`);
     }
 
-    return () =>
+    return () => {
+      tick = null;
       stream?.getTracks().forEach((track) => {
         track.stop();
       });
-  }, [videoEl]);
-
-  useEffect(() => {
-    const requestId = requestAnimationFrame(tick);
-
-    return () => {
-      cancelAnimationFrame(requestId);
     };
-  }, []);
+  }, [videoEl]);
 
   // Attempt to close the video stream while QRCode component is in the DOM
   useEffect(() => {
@@ -106,7 +101,7 @@ const QRCodeScanner: FunctionComponent<QRCodeScannerProps> = (props) => {
         props?.onScanned(code.data);
       }
     }
-    requestAnimationFrame(tick);
+    if (tick) requestAnimationFrame(tick);
   };
 
   return (
