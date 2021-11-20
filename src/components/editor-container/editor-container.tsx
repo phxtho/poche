@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
 import { Extension } from "@remirror/core";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
+import "./editor-container.css";
 
 interface EditorContainerProps {
   id: string;
@@ -64,7 +65,7 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   return (
     <>
-      <div className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4">
+      <div className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4 editor-container">
         <div className="flex justify-between">
           <textarea
             placeholder="Title"

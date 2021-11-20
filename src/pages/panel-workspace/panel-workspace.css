@@ -1,10 +1,11 @@
 .editor-list {
   height: 100%;
   width: 100%;
-  display: grid;
-  grid-auto-flow: column;
+  display: flex;
+  flex-wrap: nowrap;
   gap: 1rem;
   overflow-y: hidden;
+  overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
 }
@@ -12,19 +13,30 @@
 .editor-list > * {
   scroll-snap-align: center;
   min-width: 100vw;
-  min-height: 98vh;
+  min-height: 46rem;
+}
+
+.editor-list::-webkit-scrollbar {
+  display: none;
 }
 
 @media (min-width: 768px) {
   .editor-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   .editor-list > * {
-    min-width: auto;
-    min-height: auto;
+    min-width: 30vw;
+    height: 85vh;
+  }
+
+  .editor-list > *:first-child {
+    margin-left: auto;
+  }
+
+  .editor-list > *:last-child {
+    margin-right: auto;
   }
 }
 

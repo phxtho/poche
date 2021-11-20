@@ -1,0 +1,10 @@
+.editor-container {
+  overflow: auto;
+  -ms-overflow-style: none; /*Hide scrollbar on IE and Edge */
+  scrollbar-width: none; /*Hide scrollbar on Firefox */
+}
+
+/*Hide scrollbar on Chrome & Safari*/
+.editor-container::-webkit-scrollbar {
+  display: none;
+}
