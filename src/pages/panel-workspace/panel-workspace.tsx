@@ -24,9 +24,9 @@ export default function PanelWorkspace() {
   return (
     <>
       <div className="editor-list">
-        {items.map((item, idx) => (
+        {items.map((item) => (
           <EditorContainer
-            key={idx}
+            key={item}
             id={item}
             handleFocus={(editorCtx) => setEditorContext(editorCtx)}
           />
