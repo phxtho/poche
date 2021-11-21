@@ -94,11 +94,12 @@ const QRCodeScanner: FunctionComponent<QRCodeScannerProps> = (props) => {
         inversionAttempts: "dontInvert",
       });
 
-      if (code) {
+      if (code?.data) {
         console.log("Got QR Code");
         console.log(code.data);
         setScannedData(code.data);
         props?.onScanned(code.data);
+        tick = null;
       }
     }
     if (tick) requestAnimationFrame(tick);

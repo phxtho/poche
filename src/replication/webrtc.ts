@@ -28,13 +28,15 @@ peer.on("connection", (dataConnection) => {
   });
 
   dataConnection = dataConnection;
-
-  dataConnection.on("data", (data) => {
-    console.log(`Recieved data from ${dataConnection.peer}`);
-    console.log(data);
-    if (Array.isArray(data)) {
-      data.forEach((item) => updateNote(item));
-    }
+  dataConnection.on("open", () => {
+    // Emitted when the connection is established and ready-to-use.
+    dataConnection.on("data", (data) => {
+      console.log(`Recieved data from ${dataConnection.peer}`);
+      console.log(data);
+      if (Array.isArray(data)) {
+        data.forEach((item) => updateNote(item));
+      }
+    });
   });
 });
 
@@ -60,9 +62,12 @@ export function Connect(peerId: string) {
 
 export async function Replicate() {
   try {
-    let dataToSend = await getNotes();
-    dataConnection.send(dataToSend);
-    console.log("data sent");
+    dataConnection.on("open", async () => {
+      // Emitted when the connection is established and ready-to-use.
+      let dataToSend = await getNotes();
+      dataConnection.send(dataToSend);
+      console.log("data sent");
+    });
   } catch (e) {
     console.log(e);
   }
