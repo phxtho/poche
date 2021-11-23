@@ -1,17 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, FunctionComponent } from "react";
 import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import { search } from "db/pouch/notes";
 import "./searchbar.css";
 import { SearchResult } from "model/interfaces";
 import NotesContext from "components/NotesContext";
+import Fuse from "fuse.js";
+import { useNavigate, useLocation } from "@reach/router";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchResult>();
+  const [results, setResults] = useState<SearchResult[]>([]);
 
   const { items, addItem } = useContext(NotesContext);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const pathToPanel = "/experiment-501.V2/p";
 
   const Search = (query: string) => {
     search(query).then((res) => setResults(res));
@@ -38,20 +44,19 @@ export default function SearchBar() {
         </button>
       </div>
 
-      {query !== "" && results?.total_rows > 0 && (
+      {query !== "" && results.length > 0 && (
         <div className="search-results rounded-b-lg overflow-hidden">
-          {results?.rows?.map((val, idx) => {
+          {results.map((val) => {
             return (
-              <button
-                key={idx}
-                className="result"
-                onClick={(_) => {
-                  addItem(items, val.doc.id);
+              <SearchBarResult
+                key={val.item.id}
+                onResultClick={() => {
                   setQuery("");
+                  addItem(items, val.item.id);
+                  if (location.pathname !== pathToPanel) navigate(pathToPanel);
                 }}
-              >
-                {val.doc.title ?? val.doc.title}
-              </button>
+                result={val}
+              />
             );
           })}
         </div>
@@ -59,3 +64,60 @@ export default function SearchBar() {
     </div>
   );
 }
+
+interface SearchBarResultProps {
+  onResultClick?;
+  result: SearchResult;
+}
+
+const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
+  result,
+  onResultClick,
+}) => {
+  const matchTitle = result.matches.some((match) => match.key === "title");
+  const matchText = result.matches.some((match) => match.key === "text");
+
+  return (
+    <button
+      className="result bg-white text-left p-2"
+      onClick={(_) => {
+        onResultClick?.();
+      }}
+    >
+      <div className="text-sm">
+        {matchTitle &&
+          result.matches.map((match, idx) => {
+            if (match.key === "title") {
+              return <HighlightMatch key={idx} match={match} />;
+            } else return null;
+          })}
+        {!matchTitle && result.item.title}
+      </div>
+      <div className="text-xs font-extralight">
+        {matchText &&
+          result.matches.map((match, idx) => {
+            if (match.key === "text") {
+              return <HighlightMatch key={idx} match={match} />;
+            } else return null;
+          })}
+        {!matchText && result.item.text}
+      </div>
+    </button>
+  );
+};
+
+interface HiglightMatchProps {
+  match: Fuse.FuseResultMatch;
+}
+const HighlightMatch: FunctionComponent<HiglightMatchProps> = ({ match }) => {
+  const [[start, end]] = match.indices;
+  return (
+    <>
+      {match.value?.substring(0, start)}
+      <span className="bg-yellow-300">
+        {match.value?.substring(start, end)}
+      </span>
+      {match.value?.substring(end, match.value?.length)}
+    </>
+  );
+};

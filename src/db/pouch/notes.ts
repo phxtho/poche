@@ -1,23 +1,17 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
 import { INote, PMState, SearchResult } from "model/interfaces";
-import QuickSearch from "pouchdb-quick-search";
+import Fuse from "fuse.js";
 import { v4 as uuidv4 } from "uuid";
 import Debug from "pouchdb-debug";
 
 PouchDB.plugin(Upsert);
-PouchDB.plugin(QuickSearch);
 
 //Enables debugging
 // PouchDB.plugin(Debug);
 // PouchDB.debug.enable("*");
 
 let db = new PouchDB("notes");
-
-(db as any)
-  .search({ fields: ["title", "text"], build: true })
-  .then(() => console.log("Index created succesfully"))
-  .catch((err) => console.log("ERROR failed to build index"));
 
 export const defaultState = { type: "doc", content: [{ type: "paragraph" }] };
 
@@ -98,12 +92,15 @@ export function onChange(callback) {
   }).on("change", () => callback());
 }
 
-export async function search(
-  query: string,
-  fields = ["title", "text"]
-): Promise<SearchResult> {
-  return (db as any)
-    ?.search({ query: query, fields: fields, include_docs: true })
-    .then((res) => res)
-    .catch((err) => console.log(`Search failed ${err}`));
+export async function search(query: string): Promise<SearchResult[]> {
+  let fuse = new Fuse(await getNotes(), {
+    keys: ["title", "text"],
+    includeMatches: true,
+    minMatchCharLength: 2,
+    includeScore: true,
+    threshold: 0.5,
+  });
+
+  let results = fuse.search(query) as any as SearchResult[];
+  return results;
 }
