@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
 import { Extension } from "@remirror/core";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
+import { useLocation } from "@reach/router";
 import "./editor-container.css";
 
 interface EditorContainerProps {
@@ -19,6 +20,9 @@ const EditorContainer = (props: EditorContainerProps) => {
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
 
   const ctxRef = useRef<ReactFrameworkOutput<Extension>>();
+  const elRef = useRef<HTMLDivElement>();
+
+  const location = useLocation();
 
   const initialiseNote = useCallback(async () => {
     if (props.id) {
@@ -34,6 +38,15 @@ const EditorContainer = (props: EditorContainerProps) => {
   useEffect(() => {
     void initialiseNote();
   }, [initialiseNote]);
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.substr(1);
+      if (props.id == id && elRef.current) {
+        elRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location.hash, elRef.current, props.id]);
 
   const handleOnChange = useCallback(
     (params) => {
@@ -65,7 +78,11 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   return (
     <>
-      <div className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4 editor-container">
+      <div
+        id={props.id}
+        ref={elRef}
+        className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4 editor-container"
+      >
         <div className="flex justify-between">
           <textarea
             placeholder="Title"

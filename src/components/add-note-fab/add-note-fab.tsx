@@ -9,13 +9,14 @@ export default function AddNoteFAB(props) {
   const createCard = useCallback(async () => {
     let newNote = await insertNote();
     addItem(items, newNote.id);
+    return newNote.id;
   }, [addItem, items]);
 
   return (
     <button
       onClick={async () => {
-        await createCard();
-        props?.handleClick?.();
+        const id = await createCard();
+        props?.handleClick?.(id);
       }}
       className="rounded-full h-16 w-16 fixed right-8 bottom-8 bg-black text-white flex justify-center items-center shadow-md hover:pointer border-2 border-white"
     >
