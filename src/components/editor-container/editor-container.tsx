@@ -70,7 +70,7 @@ const EditorContainer = (props: EditorContainerProps) => {
           <textarea
             placeholder="Title"
             defaultValue={note?.title}
-            className="font-medium text-3xl w-11/12"
+            className="font-semibold text-4xl w-11/12"
             onChange={(e) => {
               let title = e.target.value;
               title.replace(/\n/, "");

@@ -40,3 +40,43 @@ ol {
   cursor: pointer;
   text-decoration: underline;
 }
+
+.ProseMirror {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+.ProseMirror :is(h1, h2, h3, h4, h5, h6) {
+  font-weight: 500;
+}
+
+.ProseMirror :is(h1, h2, h3, h4, h5, h6)::before {
+  padding-right: 5 px;
+  content: "#";
+  text-align: left;
+  font-size: small;
+  color: rgba(0, 0, 0, 0.1);
+}
+
+.ProseMirror h1::before {
+  content: "h1";
+}
+
+.ProseMirror h2::before {
+  content: "h2";
+}
+
+.ProseMirror h3::before {
+  content: "h3";
+}
+
+.ProseMirror h4::before {
+  content: "h4";
+}
+
+.ProseMirror h5::before {
+  content: "h5";
+}
+
+.ProseMirror h6::before {
+  content: "h6";
+}
