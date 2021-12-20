@@ -28,6 +28,7 @@ import { PMState } from "model/interfaces";
 import {
   LinkExtension,
   ImageExtension,
+  MathInlineExtension,
 } from "components/remirror-editor/extensions";
 
 interface EditorProps {
@@ -66,6 +67,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new ImageExtension({ enableResizing: true }),
         new CodeExtension(),
         new UnderlineExtension(),
+        new MathInlineExtension(),
       ],
       onError: handleOnError,
       content: props.state?.doc,
