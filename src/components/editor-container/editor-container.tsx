@@ -4,7 +4,7 @@ import Editor from "components/remirror-editor/remirror-editor";
 import { updateNote, getNoteById } from "db/pouch/notes";
 import { useState } from "react";
 import { ReactFrameworkOutput } from "@remirror/react";
-import { Extension } from "@remirror/core";
+import { Extension, RemirrorEventListenerProps } from "@remirror/core";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 import { useLocation } from "@reach/router";
 import "./editor-container.css";
@@ -19,7 +19,7 @@ const EditorContainer = (props: EditorContainerProps) => {
   const [focused, setFocused] = useState(false);
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
 
-  const ctxRef = useRef<ReactFrameworkOutput<Extension>>();
+  const remirrorContextRef = useRef<ReactFrameworkOutput<Extension>>();
   const elRef = useRef<HTMLDivElement>();
 
   const location = useLocation();
@@ -41,18 +41,18 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.substr(1);
-      if (props.id == id && elRef.current) {
+      const id = location.hash.substring(1);
+      if (props.id === id && elRef.current) {
         elRef.current.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, [location.hash, elRef.current, props.id]);
+  }, [location.hash, props.id]);
 
   const handleOnChange = useCallback(
-    (params) => {
+    (params: RemirrorEventListenerProps<Remirror.Extensions>) => {
       const updatedNote = {
         ...note,
-        state: params.state.toJSON(),
+        state: params.helpers.getJSON(),
         lastEditedTime: Date.now(),
       };
       setNote(updatedNote);
@@ -61,18 +61,21 @@ const EditorContainer = (props: EditorContainerProps) => {
   );
 
   const handleBlur = useCallback(
-    (params, e) => {
-      note.text = ctxRef.current?.getState().doc.textContent;
+    (params: RemirrorEventListenerProps<Remirror.Extensions>, e) => {
+      note.text = params.helpers.getText();
       void updateNote(note);
       setFocused(false);
     },
     [note]
   );
 
-  const handleFocus = useCallback((params, e) => {
-    setFocused(true);
-    props.handleFocus?.(ctxRef.current);
-  }, []);
+  const handleFocus = useCallback(
+    (params: RemirrorEventListenerProps<Remirror.Extensions>, e) => {
+      setFocused(true);
+      props.handleFocus?.(remirrorContextRef.current);
+    },
+    [props]
+  );
 
   if (!note) return null;
 
@@ -108,7 +111,7 @@ const EditorContainer = (props: EditorContainerProps) => {
           onChange={handleOnChange}
           onBlur={handleBlur}
           onFocus={handleFocus}
-          ref={ctxRef}
+          ref={remirrorContextRef}
         />
       </div>
       <NoteOptionsModal
