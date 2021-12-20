@@ -52,7 +52,7 @@ const EditorContainer = (props: EditorContainerProps) => {
     (params: RemirrorEventListenerProps<Remirror.Extensions>) => {
       const updatedNote = {
         ...note,
-        state: params.helpers.getJSON(),
+        state: params.state.toJSON(),
         lastEditedTime: Date.now(),
       };
       setNote(updatedNote);
