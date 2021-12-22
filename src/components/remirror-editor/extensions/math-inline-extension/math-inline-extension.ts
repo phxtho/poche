@@ -7,12 +7,19 @@ import {
   NodeExtension,
   NodeExtensionSpec,
   NodeSpecOverride,
+  PrioritizedKeyBindings,
 } from "@remirror/core";
 import { nodeInputRule } from "@remirror/core-utils";
-import { InputRule, ProsemirrorPlugin } from "@remirror/pm";
+import { chainCommands, InputRule, ProsemirrorPlugin } from "@remirror/pm";
+import {
+  deleteSelection,
+  selectNodeBackward,
+  joinBackward,
+} from "@remirror/pm/commands";
 import {
   REGEX_INLINE_MATH_DOLLARS_ESCAPED,
   insertMathCmd,
+  mathBackspaceCmd,
   mathPlugin,
 } from "@benrbray/prosemirror-math";
 // CSS
@@ -66,6 +73,18 @@ export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
 
   createExternalPlugins(): ProsemirrorPlugin[] {
     return [mathPlugin];
+  }
+
+  createKeymap(
+    extractShortcutNames: (shortcut: string) => string[]
+  ): PrioritizedKeyBindings {
+    const command = chainCommands(
+      deleteSelection,
+      mathBackspaceCmd,
+      joinBackward,
+      selectNodeBackward
+    );
+    return { Backspace: command as any }; // TODO: Plz fix
   }
 
   @command()
