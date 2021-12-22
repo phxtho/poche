@@ -9,8 +9,12 @@ import {
   NodeSpecOverride,
   PrioritizedKeyBindings,
 } from "@remirror/core";
-import { nodeInputRule } from "@remirror/core-utils";
-import { chainCommands, InputRule, ProsemirrorPlugin } from "@remirror/pm";
+import {
+  nodeInputRule,
+  chainKeyBindingCommands,
+  convertCommand,
+} from "@remirror/core-utils";
+import { InputRule, ProsemirrorPlugin } from "@remirror/pm";
 import {
   deleteSelection,
   selectNodeBackward,
@@ -78,13 +82,13 @@ export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
   createKeymap(
     extractShortcutNames: (shortcut: string) => string[]
   ): PrioritizedKeyBindings {
-    const command = chainCommands(
-      deleteSelection,
-      mathBackspaceCmd,
-      joinBackward,
-      selectNodeBackward
+    const command = chainKeyBindingCommands(
+      convertCommand(deleteSelection),
+      convertCommand(mathBackspaceCmd),
+      convertCommand(joinBackward),
+      convertCommand(selectNodeBackward)
     );
-    return { Backspace: command as any }; // TODO: Plz fix
+    return { Backspace: command };
   }
 
   @command()
