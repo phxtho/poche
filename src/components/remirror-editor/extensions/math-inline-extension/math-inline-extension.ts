@@ -9,11 +9,7 @@ import {
   NodeSpecOverride,
   PrioritizedKeyBindings,
 } from "@remirror/core";
-import {
-  nodeInputRule,
-  chainKeyBindingCommands,
-  convertCommand,
-} from "@remirror/core-utils";
+import { chainKeyBindingCommands, convertCommand } from "@remirror/core-utils";
 import { InputRule, ProsemirrorPlugin } from "@remirror/pm";
 import {
   deleteSelection,
@@ -25,6 +21,7 @@ import {
   insertMathCmd,
   mathBackspaceCmd,
   mathPlugin,
+  makeInlineMathInputRule,
 } from "@benrbray/prosemirror-math";
 // CSS
 import "@benrbray/prosemirror-math/style/math.css";
@@ -68,10 +65,7 @@ export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
 
   createInputRules(): InputRule[] {
     return [
-      nodeInputRule({
-        regexp: REGEX_INLINE_MATH_DOLLARS_ESCAPED,
-        type: this.type,
-      }),
+      makeInlineMathInputRule(REGEX_INLINE_MATH_DOLLARS_ESCAPED, this.type),
     ];
   }
 
@@ -94,7 +88,7 @@ export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
   @command()
   insertMathInline(): CommandFunction {
     return (props) => {
-      insertMathCmd(props.state.schema.spec.nodes["math_inline"]);
+      insertMathCmd(this.type);
       return null;
     };
   }
