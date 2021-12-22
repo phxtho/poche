@@ -23,6 +23,7 @@ import {
   mathPlugin,
   makeInlineMathInputRule,
 } from "@benrbray/prosemirror-math";
+import { defaultInlineMathParseRules } from "./math-parse-rules";
 // CSS
 import "@benrbray/prosemirror-math/style/math.css";
 import "katex/dist/katex.min.css";
@@ -58,6 +59,7 @@ export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
         {
           tag: "math-inline",
         },
+        ...defaultInlineMathParseRules,
       ],
       toDOM: () => ["math-inline", { class: "math-node" }, 0],
     };
