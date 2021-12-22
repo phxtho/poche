@@ -1,27 +1,28 @@
 {
   "files": {
     "main.css": "/experiment-501.V2/static/css/main.40fde7fe.chunk.css",
-    "main.js": "/experiment-501.V2/static/js/main.57e4841e.chunk.js",
-    "main.js.map": "/experiment-501.V2/static/js/main.57e4841e.chunk.js.map",
-    "runtime-main.js": "/experiment-501.V2/static/js/runtime-main.3eb690c7.js",
-    "runtime-main.js.map": "/experiment-501.V2/static/js/runtime-main.3eb690c7.js.map",
-    "static/css/2.f3505c64.chunk.css": "/experiment-501.V2/static/css/2.f3505c64.chunk.css",
-    "static/js/2.2e9bf852.chunk.js": "/experiment-501.V2/static/js/2.2e9bf852.chunk.js",
-    "static/js/2.2e9bf852.chunk.js.map": "/experiment-501.V2/static/js/2.2e9bf852.chunk.js.map",
-    "static/js/3.1cdf075e.chunk.js": "/experiment-501.V2/static/js/3.1cdf075e.chunk.js",
-    "static/js/3.1cdf075e.chunk.js.map": "/experiment-501.V2/static/js/3.1cdf075e.chunk.js.map",
+    "main.js": "/experiment-501.V2/static/js/main.ed9ea394.chunk.js",
+    "main.js.map": "/experiment-501.V2/static/js/main.ed9ea394.chunk.js.map",
+    "runtime-main.js": "/experiment-501.V2/static/js/runtime-main.08604d58.js",
+    "runtime-main.js.map": "/experiment-501.V2/static/js/runtime-main.08604d58.js.map",
+    "static/css/2.6a92fc6a.chunk.css": "/experiment-501.V2/static/css/2.6a92fc6a.chunk.css",
+    "static/js/2.60deabea.chunk.js": "/experiment-501.V2/static/js/2.60deabea.chunk.js",
+    "static/js/2.60deabea.chunk.js.map": "/experiment-501.V2/static/js/2.60deabea.chunk.js.map",
+    "static/js/3.d82c564a.chunk.js": "/experiment-501.V2/static/js/3.d82c564a.chunk.js",
+    "static/js/3.d82c564a.chunk.js.map": "/experiment-501.V2/static/js/3.d82c564a.chunk.js.map",
     "index.html": "/experiment-501.V2/index.html",
     "service-worker.js": "/experiment-501.V2/service-worker.js",
     "service-worker.js.map": "/experiment-501.V2/service-worker.js.map",
-    "static/css/2.f3505c64.chunk.css.map": "/experiment-501.V2/static/css/2.f3505c64.chunk.css.map",
+    "static/css/2.6a92fc6a.chunk.css.map": "/experiment-501.V2/static/css/2.6a92fc6a.chunk.css.map",
     "static/css/main.40fde7fe.chunk.css.map": "/experiment-501.V2/static/css/main.40fde7fe.chunk.css.map",
-    "static/js/2.2e9bf852.chunk.js.LICENSE.txt": "/experiment-501.V2/static/js/2.2e9bf852.chunk.js.LICENSE.txt"
+    "static/js/2.60deabea.chunk.js.LICENSE.txt": "/experiment-501.V2/static/js/2.60deabea.chunk.js.LICENSE.txt",
+    "static/media/katex.min.css": "/experiment-501.V2/static/media/KaTeX_Typewriter-Regular.c5c02d76.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.3eb690c7.js",
-    "static/css/2.f3505c64.chunk.css",
-    "static/js/2.2e9bf852.chunk.js",
+    "static/js/runtime-main.08604d58.js",
+    "static/css/2.6a92fc6a.chunk.css",
+    "static/js/2.60deabea.chunk.js",
     "static/css/main.40fde7fe.chunk.css",
-    "static/js/main.57e4841e.chunk.js"
+    "static/js/main.ed9ea394.chunk.js"
   ]
 }
