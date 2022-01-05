@@ -4,7 +4,9 @@ import { ImQrcode } from "react-icons/im";
 import { BsUpcScan } from "react-icons/bs";
 import PeerConnections from "components/peer-connections/peer-connections";
 import QRCodeScanner from "components/qr-code-scanner/qr-code-scanner";
+import FileUploadBtn from "components/file-upload-btn/file-upload-btn";
 import { Connect, Replicate } from "replication/webrtc";
+import ImportFromAugio from "utils/import/augio";
 
 interface SettingsProps {}
 
@@ -14,11 +16,25 @@ const Settings: FunctionComponent<SettingsProps> = () => {
   return (
     <>
       <div className="p-5">
+        <h1>Import Data</h1>
+        <FileUploadBtn
+          accept=".json"
+          onUpload={(files) => {
+            const file = files[0];
+            const fileReader = new FileReader();
+            fileReader.onload = (e) => {
+              const result = JSON.parse(e.target.result as any);
+              ImportFromAugio(result);
+            };
+            fileReader.readAsText(file);
+          }}
+        />
+        <h1>Replication</h1>
         <div className="flex flex-col items-center">
-          <h1>Connected Devices</h1>
+          <h3>Connected Devices</h3>
           <PeerConnections />
 
-          <h1>Add Devices</h1>
+          <h3>Add Devices</h3>
           <div className="flex items-center justify-center w-full flex-wrap md:space-x-4">
             <button
               className="rounded-3xl bg-black text-white flex space-x-1 p-2 items-center justify-center w-full md:w-1/3 mb-2"
