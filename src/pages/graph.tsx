@@ -1,14 +1,50 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useState } from "react";
 import {
   deleteTriple,
   getTriplesFromNode,
   getTriplesToNode,
   insertTriple,
 } from "db/level/graph";
+import { getNotes } from "db/pouch/notes";
+import { Graph, GraphData } from "react-d3-graph";
+import { INote } from "model/interfaces";
 
-interface GraphProps {}
+// the graph configuration, you only need to pass down properties
+// that you want to override, otherwise default ones will be used
+const myConfig = {
+  nodeHighlightBehavior: true,
+  node: {
+    color: "lightgreen",
+    size: 120,
+    highlightStrokeColor: "blue",
+  },
+  link: {
+    highlightColor: "lightblue",
+  },
+};
 
-const Graph: FunctionComponent<GraphProps> = () => {
+interface GraphPageProps {}
+
+const GraphPage: FunctionComponent<GraphPageProps> = () => {
+  const [data, setData] = useState<GraphData<any, any>>({
+    nodes: [],
+    links: [],
+  });
+
+  useEffect(() => {
+    getNotes().then((x) => {
+      let tempData: GraphData<any, any> = { nodes: [], links: [] };
+      (x as any as INote[]).forEach((y) => {
+        tempData.nodes.push({ id: y.id });
+        // Create a random link
+        const randomNote = (x as any as INote[])[
+          Math.floor(Math.random() * x.length)
+        ];
+        tempData.links.push({ source: y.id, target: randomNote.id });
+      });
+      setData(tempData);
+    });
+  }, []);
   return (
     <>
       <h1>Graph stuff</h1>
@@ -17,7 +53,7 @@ const Graph: FunctionComponent<GraphProps> = () => {
           className="bg-black text-white"
           onClick={() =>
             insertTriple({
-              subject: "x",
+              subject: Math.random().toString(),
               predicate: "references",
               object: "y",
             }).then((x) => console.log(x))
@@ -46,8 +82,13 @@ const Graph: FunctionComponent<GraphProps> = () => {
           Delete triple
         </button>
       </div>
+      <Graph
+        id="graph-id" // id is mandatory, if no id is defined rd3g will throw an error
+        data={data}
+        config={myConfig}
+      ></Graph>
     </>
   );
 };
 
-export default Graph;
+export default GraphPage;

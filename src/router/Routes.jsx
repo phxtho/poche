@@ -7,7 +7,7 @@ import Library from "pages/library/library";
 import Demo from "pages/demo";
 import Settings from "pages/settings/settings";
 import AppShell from "components/shell/shell";
-import Graph from "pages/graph";
+import GraphPage from "pages/graph";
 
 export default function Routes(props) {
   return (
@@ -19,7 +19,7 @@ export default function Routes(props) {
         <Library path="/" />
         <Settings path="/settings" />
         <Demo path="/demo" />
-        <Graph path="/graph" />
+        <GraphPage path="/graph" />
       </AppShell>
     </FadeInTransitionRouter>
   );
