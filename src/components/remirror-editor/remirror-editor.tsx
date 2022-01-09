@@ -11,6 +11,7 @@ import {
   OrderedListExtension,
   TaskListExtension,
   UnderlineExtension,
+  CodeBlockExtension,
 } from "remirror/extensions";
 import {
   EditorComponent,
@@ -29,6 +30,7 @@ import {
   LinkExtension,
   ImageExtension,
   MathInlineExtension,
+  SupportedLanguages,
 } from "components/remirror-editor/extensions";
 
 interface EditorProps {
@@ -68,6 +70,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new CodeExtension(),
         new UnderlineExtension(),
         new MathInlineExtension(),
+        new CodeBlockExtension({ supportedLanguages: SupportedLanguages }),
       ],
       onError: handleOnError,
       content: props.state?.doc,

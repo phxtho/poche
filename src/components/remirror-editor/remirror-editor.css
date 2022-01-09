@@ -23,7 +23,7 @@ ol {
   list-style-type: decimal;
 }
 
-.ProseMirror code {
+.ProseMirror p > code {
   padding: 0 0.25rem;
   border-radius: 0.25rem;
   font-size: 85%;
