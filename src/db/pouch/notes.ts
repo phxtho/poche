@@ -99,6 +99,7 @@ export async function search(query: string): Promise<SearchResult[]> {
     minMatchCharLength: 2,
     includeScore: true,
     threshold: 0.5,
+    ignoreLocation: true,
   });
 
   let results = fuse.search(query) as any as SearchResult[];
