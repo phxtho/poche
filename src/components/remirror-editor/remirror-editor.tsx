@@ -71,7 +71,10 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new CodeExtension(),
         new UnderlineExtension(),
         new MathInlineExtension(),
-        new CodeBlockExtension({ supportedLanguages: SupportedLanguages }),
+        new CodeBlockExtension({
+          supportedLanguages: SupportedLanguages,
+          defaultLanguage: "typescript",
+        }),
         new HorizontalRuleExtension(),
       ],
       onError: handleOnError,
