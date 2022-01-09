@@ -12,6 +12,7 @@ import {
   TaskListExtension,
   UnderlineExtension,
   CodeBlockExtension,
+  HorizontalRuleExtension,
 } from "remirror/extensions";
 import {
   EditorComponent,
@@ -71,6 +72,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new UnderlineExtension(),
         new MathInlineExtension(),
         new CodeBlockExtension({ supportedLanguages: SupportedLanguages }),
+        new HorizontalRuleExtension(),
       ],
       onError: handleOnError,
       content: props.state?.doc,
