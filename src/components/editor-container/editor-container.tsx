@@ -3,10 +3,11 @@ import React, { useCallback, useEffect, useRef } from "react";
 import Editor from "components/remirror-editor/remirror-editor";
 import { updateNote, getNoteById } from "db/pouch/notes";
 import { useState } from "react";
-import { ReactFrameworkOutput } from "@remirror/react";
+import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react";
 import { Extension, RemirrorEventListenerProps } from "@remirror/core";
 import NoteOptionsModal from "components/note-options-modal/note-options-modal";
 import { useLocation } from "@reach/router";
+import ExportOption from "components/export-options/export-options";
 import "./editor-container.css";
 
 interface EditorContainerProps {
@@ -116,13 +117,24 @@ const EditorContainer = (props: EditorContainerProps) => {
           ref={remirrorContextRef}
         />
       </div>
-      <NoteOptionsModal
-        isOpen={noteOptionsOpen}
-        note={note}
-        onRequestClose={() => {
-          setNoteOptionsOpen(false);
-        }}
-      />
+      {remirrorContextRef.current && (
+        <RemirrorContext.Provider value={remirrorContextRef.current}>
+          <NoteOptionsModal
+            isOpen={noteOptionsOpen}
+            note={note}
+            onRequestClose={() => {
+              setNoteOptionsOpen(false);
+            }}
+          >
+            <ExportOption
+              note={note}
+              onRequestClose={() => {
+                setNoteOptionsOpen(false);
+              }}
+            />
+          </NoteOptionsModal>
+        </RemirrorContext.Provider>
+      )}
     </>
   );
 };

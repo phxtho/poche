@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, FunctionComponent } from "react";
 import { INote } from "model/interfaces";
 import { deleteNote } from "db/pouch/notes";
 import { FiTrash, FiX } from "react-icons/fi";
@@ -22,7 +22,7 @@ const modalStyle: Styles = {
   },
 };
 
-const NoteOptionsModal = (props: NoteOptionsModalProps) => {
+const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
   Modal.setAppElement("#root");
 
   const { items, removeItem } = useContext(NotesContext);
@@ -37,6 +37,7 @@ const NoteOptionsModal = (props: NoteOptionsModalProps) => {
       <div>
         <h1 className="text-center mb-2">actions</h1>
         <div className="flex flex-col space-y-4">
+          {props.children}
           <button
             className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
             onClick={() => {
