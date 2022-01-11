@@ -9,7 +9,7 @@ const SettingsFab: FunctionComponent<SettingsFabProps> = () => {
   return (
     <button
       onClick={() => navigate("/experiment-501.V2/settings")}
-      className="rounded-full h-16 w-16 fixed left-8 bottom-8 hover:bg-black hover:text-white flex justify-center items-center shadow-md hover:pointer"
+      className="rounded-full h-16 w-16 fixed left-8 bottom-8 bg:white hover:bg-black hover:text-white flex justify-center items-center shadow-md hover:pointer"
     >
       <BsGearWideConnected />
     </button>
