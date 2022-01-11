@@ -35,7 +35,7 @@ export interface MathInlineOptions {}
 })
 export class MathInlineExtension extends NodeExtension<MathInlineOptions> {
   get name() {
-    return "mathInline" as const;
+    return "math_inline" as const;
   }
 
   createTags() {

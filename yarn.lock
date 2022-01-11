@@ -8525,7 +8525,7 @@ html-tags@^3.1.0:
 
 "html-to-prosemirror@https://github.com/phxtho/html-to-prosemirror":
   version "1.0.3"
-  resolved "https://github.com/phxtho/html-to-prosemirror#f31317b6d0f0bd93f490178a5ffc0e47bfa81151"
+  resolved "https://github.com/phxtho/html-to-prosemirror#6edb3a724b5d60c7a5f41106f7b6e1871317c120"
   dependencies:
     jsdom "15.1.1"
 
