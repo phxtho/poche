@@ -6,7 +6,7 @@ import PeerConnections from "components/peer-connections/peer-connections";
 import QRCodeScanner from "components/qr-code-scanner/qr-code-scanner";
 import FileUploadBtn from "components/file-upload-btn/file-upload-btn";
 import { Connect, Replicate } from "replication/webrtc";
-import ImportFromAugio from "utils/import/augio";
+import ImportFromHtml from "utils/import/importHtml";
 
 interface SettingsProps {}
 
@@ -16,18 +16,10 @@ const Settings: FunctionComponent<SettingsProps> = () => {
   return (
     <>
       <div className="p-5">
-        <h1>Import Data</h1>
+        <h1>Import HTML</h1>
         <FileUploadBtn
-          accept=".json"
-          onUpload={(files) => {
-            const file = files[0];
-            const fileReader = new FileReader();
-            fileReader.onload = (e) => {
-              const result = JSON.parse(e.target.result as any);
-              ImportFromAugio(result);
-            };
-            fileReader.readAsText(file);
-          }}
+          accept=".html"
+          onUpload={(files) => ImportFromHtml(files)}
         />
         <h1>Replication</h1>
         <div className="flex flex-col items-center">
