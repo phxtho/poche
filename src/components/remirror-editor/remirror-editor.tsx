@@ -13,6 +13,7 @@ import {
   UnderlineExtension,
   CodeBlockExtension,
   HorizontalRuleExtension,
+  MarkdownExtension,
 } from "remirror/extensions";
 import {
   EditorComponent,
@@ -59,6 +60,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
 
     const { manager, state, setState, getContext } = useRemirror({
       extensions: () => [
+        new MarkdownExtension({}),
         new BoldExtension({}),
         new ItalicExtension(),
         new BlockquoteExtension(),
