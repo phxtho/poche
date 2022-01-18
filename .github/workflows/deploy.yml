@@ -13,11 +13,5 @@ jobs:
 
       - name: Install and Build 🔧
         run: |
-          npm i
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.2.2
-        with:
-          branch: gh-pages
-          folder: build
+          yarn
+          yarn deploy
