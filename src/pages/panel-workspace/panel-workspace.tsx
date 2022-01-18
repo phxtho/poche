@@ -17,7 +17,7 @@ export default function PanelWorkspace() {
 
   useEffect(() => {
     if (items.length === 0) {
-      navigate("/experiment-501.V2");
+      navigate("/poche");
     }
   }, [items]);
 

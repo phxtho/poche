@@ -17,7 +17,7 @@ export default function SearchBar() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const pathToPanel = "/experiment-501.V2/p";
+  const pathToPanel = "/poche/p";
 
   const Search = (query: string) => {
     search(query).then((res) => setResults(res));

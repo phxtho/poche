@@ -11,8 +11,8 @@ import AppShell from "components/shell/shell";
 export default function Routes(props) {
   return (
     <FadeInTransitionRouter>
-      <Redirect from="/" to="experiment-501.V2" noThrow />
-      <AppShell path="/experiment-501.V2">
+      <Redirect from="/" to="poche" noThrow />
+      <AppShell path="/poche">
         <CanvasWorkspace path="/c" />
         <PanelWorkspace path="/p" />
         <Library path="/" />

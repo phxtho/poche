@@ -8,7 +8,7 @@ const SettingsFab: FunctionComponent<SettingsFabProps> = () => {
   const navigate = useNavigate();
   return (
     <button
-      onClick={() => navigate("/experiment-501.V2/settings")}
+      onClick={() => navigate("/poche/settings")}
       className="rounded-full h-16 w-16 fixed left-8 bottom-8 bg:white hover:bg-black hover:text-white flex justify-center items-center shadow-md hover:pointer"
     >
       <BsGearWideConnected />

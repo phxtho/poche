@@ -58,7 +58,7 @@ export default function Library() {
                         className="truncate w-full transition duration-250 ease-in-out bg-gradient-to-r hover:from-gray-100 hover:to-gray-200"
                         onClick={() => {
                           addItem(items, note.id);
-                          navigate(`/experiment-501.V2/p#${note.id}`);
+                          navigate(`/poche/p#${note.id}`);
                         }}
                       >
                         <div className="flex flex-col text-left">
@@ -94,7 +94,7 @@ export default function Library() {
 
         <SettingsFab />
         <AddNoteFAB
-          handleClick={(id) => navigate(`/experiment-501.V2/p#${id}`)}
+          handleClick={(id) => navigate(`/poche/p#${id}`)}
         />
       </div>
 
