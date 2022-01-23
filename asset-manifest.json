@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/experiment-501.V2/static/css/main.98143add.chunk.css",
-    "main.js": "/experiment-501.V2/static/js/main.cac5d348.chunk.js",
-    "main.js.map": "/experiment-501.V2/static/js/main.cac5d348.chunk.js.map",
-    "runtime-main.js": "/experiment-501.V2/static/js/runtime-main.0ef048a0.js",
-    "runtime-main.js.map": "/experiment-501.V2/static/js/runtime-main.0ef048a0.js.map",
-    "static/css/2.6a92fc6a.chunk.css": "/experiment-501.V2/static/css/2.6a92fc6a.chunk.css",
-    "static/js/2.74eab375.chunk.js": "/experiment-501.V2/static/js/2.74eab375.chunk.js",
-    "static/js/2.74eab375.chunk.js.map": "/experiment-501.V2/static/js/2.74eab375.chunk.js.map",
-    "static/js/3.126d060a.chunk.js": "/experiment-501.V2/static/js/3.126d060a.chunk.js",
-    "static/js/3.126d060a.chunk.js.map": "/experiment-501.V2/static/js/3.126d060a.chunk.js.map",
-    "index.html": "/experiment-501.V2/index.html",
-    "service-worker.js": "/experiment-501.V2/service-worker.js",
-    "service-worker.js.map": "/experiment-501.V2/service-worker.js.map",
-    "static/css/2.6a92fc6a.chunk.css.map": "/experiment-501.V2/static/css/2.6a92fc6a.chunk.css.map",
-    "static/css/main.98143add.chunk.css.map": "/experiment-501.V2/static/css/main.98143add.chunk.css.map",
-    "static/js/2.74eab375.chunk.js.LICENSE.txt": "/experiment-501.V2/static/js/2.74eab375.chunk.js.LICENSE.txt",
-    "static/media/katex.min.css": "/experiment-501.V2/static/media/KaTeX_Typewriter-Regular.c5c02d76.ttf"
+    "main.css": "/poche/static/css/main.98143add.chunk.css",
+    "main.js": "/poche/static/js/main.a9e4a6fb.chunk.js",
+    "main.js.map": "/poche/static/js/main.a9e4a6fb.chunk.js.map",
+    "runtime-main.js": "/poche/static/js/runtime-main.8fd93030.js",
+    "runtime-main.js.map": "/poche/static/js/runtime-main.8fd93030.js.map",
+    "static/css/2.4ba9670a.chunk.css": "/poche/static/css/2.4ba9670a.chunk.css",
+    "static/js/2.53d5d425.chunk.js": "/poche/static/js/2.53d5d425.chunk.js",
+    "static/js/2.53d5d425.chunk.js.map": "/poche/static/js/2.53d5d425.chunk.js.map",
+    "static/js/3.126d060a.chunk.js": "/poche/static/js/3.126d060a.chunk.js",
+    "static/js/3.126d060a.chunk.js.map": "/poche/static/js/3.126d060a.chunk.js.map",
+    "index.html": "/poche/index.html",
+    "service-worker.js": "/poche/service-worker.js",
+    "service-worker.js.map": "/poche/service-worker.js.map",
+    "static/css/2.4ba9670a.chunk.css.map": "/poche/static/css/2.4ba9670a.chunk.css.map",
+    "static/css/main.98143add.chunk.css.map": "/poche/static/css/main.98143add.chunk.css.map",
+    "static/js/2.53d5d425.chunk.js.LICENSE.txt": "/poche/static/js/2.53d5d425.chunk.js.LICENSE.txt",
+    "static/media/katex.min.css": "/poche/static/media/KaTeX_Typewriter-Regular.c5c02d76.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.0ef048a0.js",
-    "static/css/2.6a92fc6a.chunk.css",
-    "static/js/2.74eab375.chunk.js",
+    "static/js/runtime-main.8fd93030.js",
+    "static/css/2.4ba9670a.chunk.css",
+    "static/js/2.53d5d425.chunk.js",
     "static/css/main.98143add.chunk.css",
-    "static/js/main.cac5d348.chunk.js"
+    "static/js/main.a9e4a6fb.chunk.js"
   ]
 }
