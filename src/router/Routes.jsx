@@ -1,6 +1,5 @@
 import React from "react";
-import { Redirect } from "@reach/router";
-import FadeInTransitionRouter from "./FadeInTransitionRouter";
+import { Redirect, Router } from "@reach/router";
 import CanvasWorkspace from "pages/canvas-workspace";
 import PanelWorkspace from "pages/panel-workspace/panel-workspace";
 import Library from "pages/library/library";
@@ -10,7 +9,7 @@ import AppShell from "components/shell/shell";
 
 export default function Routes(props) {
   return (
-    <FadeInTransitionRouter>
+    <Router>
       <Redirect from="/" to="poche" noThrow />
       <AppShell path="/poche">
         <CanvasWorkspace path="/c" />
@@ -19,6 +18,6 @@ export default function Routes(props) {
         <Settings path="/settings" />
         <Demo path="/demo" />
       </AppShell>
-    </FadeInTransitionRouter>
+    </Router>
   );
 }
