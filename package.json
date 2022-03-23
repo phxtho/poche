@@ -78,6 +78,8 @@
     ]
   },
   "devDependencies": {
+    "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
+    "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@remirror/dev": "^1.0.20",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",

@@ -18,7 +18,8 @@
     "paths": {
       "@/*": ["./src/*", "./dist/*"]
     },
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "types": ["vite/client"]
   },
   "include": ["src"]
 }

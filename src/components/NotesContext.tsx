@@ -1,3 +1,5 @@
+import { createContext } from "react";
+
 export let defaultContextValue = {
   items: [],
   addItem: (items, item) => {
@@ -16,6 +18,6 @@ export const removeArrayItem = (array: any[], item: any): any[] =>
 export const addArrayItem = (array: any[], item: any): any[] =>
   !array.find((x) => x === item) ? [...array, item] : array;
 
-const NotesContext = React.createContext(defaultContextValue);
+const NotesContext = createContext(defaultContextValue);
 NotesContext.displayName = "NotesContext";
 export default NotesContext;
