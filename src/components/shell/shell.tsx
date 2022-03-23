@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import BackButton from "@/components/back-button/back-button";
 import SearchBar from "@/components/searchbar/searchbar";
 

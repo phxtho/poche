@@ -1,4 +1,4 @@
-import React, { useContext, useCallback, useEffect, useState } from "react";
+import { useContext, useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "@/db/pouch/notes";
 import { INote } from "@/model/interfaces";
 import { useNavigate } from "@reach/router";

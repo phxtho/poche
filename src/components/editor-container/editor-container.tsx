@@ -1,5 +1,5 @@
 /* Manage the editor's interaction with the db & global state */
-import React, { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import Editor from "@/components/remirror-editor/remirror-editor";
 import { updateNote, getNoteById } from "@/db/pouch/notes";
 import { useState } from "react";

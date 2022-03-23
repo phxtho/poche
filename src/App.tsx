@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo } from "react";
-import Routes from "@/router/Routes";
+import { useState, useMemo } from "react";
+import Router from "@/router/Routes";
 import "./App.css";
 import NoteContext, {
   addArrayItem,
@@ -30,7 +30,7 @@ function App() {
   return (
     <div className="App">
       <NoteContext.Provider value={contextValue}>
-        <Routes />
+        <Router />
       </NoteContext.Provider>
     </div>
   );

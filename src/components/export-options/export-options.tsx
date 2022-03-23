@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useHelpers } from "@remirror/react";
 import { FaMarkdown, FaHtml5 } from "react-icons/fa";
 import FileSaver from "file-saver";

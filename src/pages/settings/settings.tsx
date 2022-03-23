@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from "react";
+import { FunctionComponent, useState } from "react";
 import PeerDetailsModal from "@/components/peer-details-modal/peer-details-modal";
 import { ImQrcode } from "react-icons/im";
 import { BsUpcScan } from "react-icons/bs";
@@ -6,7 +6,7 @@ import PeerConnections from "@/components/peer-connections/peer-connections";
 import QRCodeScanner from "@/components/qr-code-scanner/qr-code-scanner";
 import FileUploadBtn from "@/components/file-upload-btn/file-upload-btn";
 import { Connect, Replicate } from "@/replication/webrtc";
-import ImportFromHtml from "utils/import/importHtml";
+import ImportFromHtml from "@/utils/import/importHtml";
 
 interface SettingsProps {}
 

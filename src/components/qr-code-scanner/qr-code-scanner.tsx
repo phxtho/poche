@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useState,
-  useEffect,
-} from "react";
+import { FunctionComponent, useCallback, useState, useEffect } from "react";
 import Modal, { Styles } from "react-modal";
 import jsQR from "jsqr";
 

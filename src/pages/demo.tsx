@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "@/components/searchbar/searchbar";
 import { Connect, Replicate } from "@/replication/webrtc";
 import QRCode from "qrcode";

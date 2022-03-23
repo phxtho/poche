@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState } from "react";
 import { useNavigate } from "@reach/router";
 import EditorContainer from "@/components/editor-container/editor-container";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";

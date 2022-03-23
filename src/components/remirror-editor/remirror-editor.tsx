@@ -1,6 +1,6 @@
 import "remirror/styles/all.css";
 import "./remirror-editor.css";
-import React, { forwardRef, useCallback, useImperativeHandle } from "react";
+import { forwardRef, useCallback, useImperativeHandle } from "react";
 import {
   BoldExtension,
   BlockquoteExtension,

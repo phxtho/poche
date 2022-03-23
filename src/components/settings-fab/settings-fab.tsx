@@ -1,5 +1,5 @@
 import { useNavigate } from "@reach/router";
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { BsGearWideConnected } from "react-icons/bs";
 
 interface SettingsFabProps {}

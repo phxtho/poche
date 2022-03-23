@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import { useCallback, useContext } from "react";
 import { VscAdd } from "react-icons/vsc";
 import { insertNote } from "@/db/pouch/notes";
 import NotesContext from "@/components/NotesContext";

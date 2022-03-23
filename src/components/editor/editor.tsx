@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { EditorState, Selection } from "prosemirror-state";
 import { DirectEditorProps, EditorView } from "prosemirror-view";
 import { schema } from "./schema";

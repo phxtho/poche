@@ -1,4 +1,3 @@
-import React from "react";
 import Canvas from "@/components/canvas/canvas";
 import SearchBar from "@/components/searchbar/searchbar";
 

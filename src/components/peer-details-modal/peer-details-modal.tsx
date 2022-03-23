@@ -1,9 +1,4 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  useCallback,
-} from "react";
+import { FunctionComponent, useState, useEffect, useCallback } from "react";
 import Modal, { Styles } from "react-modal";
 import QRCode from "qrcode";
 

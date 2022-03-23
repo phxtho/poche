@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent } from "react";
 import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
 import { search } from "@/db/pouch/notes";

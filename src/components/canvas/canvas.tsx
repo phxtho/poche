@@ -1,12 +1,10 @@
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Card from "@/components/card/card";
 import { ItemTypes, ICanvasCard, INote, ICanvas } from "@/model/interfaces";
 import { v4 as uuidv4 } from "uuid";
 import EditorContainer from "@/components/editor-container/editor-container";
-import { useSelector, useDispatch } from "react-redux";
-import { ADD_ITEM_TO_CANVAS, UPDATE_ITEM } from "store";
 import "./canvas.css";
 import NoteList from "@/components/note-list/note-list";
 
@@ -25,11 +23,7 @@ const Canvas = (props) => {
   const [mousePos, setMousePos] = useState<XYCoord>({ x: 0, y: 0 });
   const [noteListPos, setNoteListPos] = useState<XYCoord>({ x: 0, y: 0 });
 
-  const cards: ICanvasCard[] = useSelector(
-    (state: { cards: ICanvasCard[] }) => state.cards
-  );
-  // const dispatch = useDispatch();
-
+  const cards: ICanvasCard[] = [];
   const [, drop] = useDrop({
     accept: [ItemTypes.CARD, ItemTypes.COLLECTION],
     drop: (item: ICanvasCard, monitor) => {

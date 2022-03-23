@@ -1,4 +1,4 @@
-import React, { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent } from "react";
 import { INote } from "@/model/interfaces";
 import { deleteNote } from "@/db/pouch/notes";
 import { FiTrash, FiX } from "react-icons/fi";

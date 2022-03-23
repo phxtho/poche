@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useRef } from "react";
+import { FunctionComponent, useRef } from "react";
 import { FiUpload } from "react-icons/fi";
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;

@@ -1,5 +1,5 @@
 import applyDevTools from "prosemirror-dev-tools";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { unmountComponentAtNode } from "react-dom";
 import { useRemirrorContext } from "@remirror/react";
 
