@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { getNotes, onChange } from "db/pouch/notes";
-import { INote } from "model/interfaces";
+import { getNotes, onChange } from "@/db/pouch/notes";
+import { INote } from "@/model/interfaces";
 
 interface NoteListProps {
   handleNoteButtonClick(note: INote): any;

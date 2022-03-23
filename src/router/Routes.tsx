@@ -1,11 +1,11 @@
-import React from "react";
 import { Redirect, Router } from "@reach/router";
-import CanvasWorkspace from "pages/canvas-workspace";
-import PanelWorkspace from "pages/panel-workspace/panel-workspace";
-import Library from "pages/library/library";
-import Demo from "pages/demo";
-import Settings from "pages/settings/settings";
-import AppShell from "components/shell/shell";
+import CanvasWorkspace from "@/pages/canvas-workspace";
+import PanelWorkspace from "@/pages/panel-workspace/panel-workspace";
+import Library from "@/pages/library/library";
+import Demo from "@/pages/demo";
+import Settings from "@/pages/settings/settings";
+import AppShell from "@/components/shell/shell";
+// TODO: Upgrade to react router
 
 export default function Routes(props) {
   return (

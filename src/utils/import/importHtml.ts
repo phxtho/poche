@@ -1,4 +1,4 @@
-import { insertNote } from "db/pouch/notes";
+import { insertNote } from "@/db/pouch/notes";
 import { Renderer } from "html-to-prosemirror";
 
 export default function ImportFromHtml(files: FileList) {

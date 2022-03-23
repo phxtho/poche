@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { VscVm } from "react-icons/vsc";
-import { getPeers, onChange } from "db/pouch/peers";
-import { Connect } from "replication/webrtc";
+import { getPeers, onChange } from "@/db/pouch/peers";
+import { Connect } from "@/replication/webrtc";
 
 interface Props {}
 
@@ -10,7 +10,7 @@ const PeerConnections = () => {
 
   useEffect(() => {
     getPeers().then((val) => setPeers(val));
-    onChange((_) => getPeers().then((val) => setPeers(val)));
+    onChange((_: any) => getPeers().then((val) => setPeers(val)));
 
     return () => {
       setPeers([]);

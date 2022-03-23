@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SearchBar from "components/searchbar/searchbar";
-import { Connect, Replicate } from "replication/webrtc";
+import SearchBar from "@/components/searchbar/searchbar";
+import { Connect, Replicate } from "@/replication/webrtc";
 import QRCode from "qrcode";
 import jsQR from "jsqr";
-import PeerConnections from "components/peer-connections/peer-connections";
+import PeerConnections from "@/components/peer-connections/peer-connections";
 
 export default function Demo() {
   const [peerId, setPeerId] = useState<string>("");

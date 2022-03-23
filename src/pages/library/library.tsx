@@ -1,13 +1,13 @@
 import React, { useContext, useCallback, useEffect, useState } from "react";
-import { getNotes, onChange } from "db/pouch/notes";
-import { INote } from "model/interfaces";
+import { getNotes, onChange } from "@/db/pouch/notes";
+import { INote } from "@/model/interfaces";
 import { useNavigate } from "@reach/router";
-import AddNoteFAB from "components/add-note-fab/add-note-fab";
+import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { VscKebabVertical } from "react-icons/vsc";
-import NoteOptionsModal from "components/note-options-modal/note-options-modal";
+import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";
 import "./library.css";
-import NotesContext from "components/NotesContext";
-import SettingsFab from "components/settings-fab/settings-fab";
+import NotesContext from "@/components/NotesContext";
+import SettingsFab from "@/components/settings-fab/settings-fab";
 
 export default function Library() {
   const [allNotes, setAllNotes] = useState<INote[]>([]);
@@ -93,9 +93,7 @@ export default function Library() {
         </table>
 
         <SettingsFab />
-        <AddNoteFAB
-          handleClick={(id) => navigate(`/poche/p#${id}`)}
-        />
+        <AddNoteFAB handleClick={(id) => navigate(`/poche/p#${id}`)} />
       </div>
 
       <NoteOptionsModal

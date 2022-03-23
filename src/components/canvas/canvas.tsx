@@ -1,14 +1,14 @@
 import React, { useCallback, useState } from "react";
 import { DndProvider, useDrop, XYCoord } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Card from "components/card/card";
-import { ItemTypes, ICanvasCard, INote, ICanvas } from "model/interfaces";
+import Card from "@/components/card/card";
+import { ItemTypes, ICanvasCard, INote, ICanvas } from "@/model/interfaces";
 import { v4 as uuidv4 } from "uuid";
-import EditorContainer from "components/editor-container/editor-container";
+import EditorContainer from "@/components/editor-container/editor-container";
 import { useSelector, useDispatch } from "react-redux";
 import { ADD_ITEM_TO_CANVAS, UPDATE_ITEM } from "store";
 import "./canvas.css";
-import NoteList from "components/note-list/note-list";
+import NoteList from "@/components/note-list/note-list";
 
 function CanvasContainer() {
   return (

@@ -4,7 +4,7 @@ import { DirectEditorProps, EditorView } from "prosemirror-view";
 import { schema } from "./schema";
 import { basicPlugins } from "./plugins";
 import "./editor.css";
-import { PMState } from "model/interfaces";
+import { PMState } from "@/model/interfaces";
 
 interface EditorProps {
   onFocus?;

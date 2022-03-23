@@ -1,6 +1,6 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { IPeer } from "model/interfaces";
+import { IPeer } from "@/model/interfaces";
 
 PouchDB.plugin(Upsert);
 

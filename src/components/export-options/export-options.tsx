@@ -2,11 +2,11 @@ import React, { FunctionComponent } from "react";
 import { useHelpers } from "@remirror/react";
 import { FaMarkdown, FaHtml5 } from "react-icons/fa";
 import FileSaver from "file-saver";
-import { INote } from "model/interfaces";
-import MenuItem from "components/menu-item/menu-item";
+import { INote } from "@/model/interfaces";
+import MenuItem from "@/components/menu-item/menu-item";
 
 interface ExportOptionsProps {
-  onRequestClose?;
+  onRequestClose?: any;
   note: INote;
 }
 

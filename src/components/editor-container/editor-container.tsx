@@ -1,13 +1,13 @@
 /* Manage the editor's interaction with the db & global state */
 import React, { useCallback, useEffect, useRef } from "react";
-import Editor from "components/remirror-editor/remirror-editor";
-import { updateNote, getNoteById } from "db/pouch/notes";
+import Editor from "@/components/remirror-editor/remirror-editor";
+import { updateNote, getNoteById } from "@/db/pouch/notes";
 import { useState } from "react";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react";
 import { Extension, RemirrorEventListenerProps } from "@remirror/core";
-import NoteOptionsModal from "components/note-options-modal/note-options-modal";
+import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";
 import { useLocation } from "@reach/router";
-import ExportOption from "components/export-options/export-options";
+import ExportOption from "@/components/export-options/export-options";
 import "./editor-container.css";
 
 interface EditorContainerProps {

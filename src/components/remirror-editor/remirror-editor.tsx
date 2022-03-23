@@ -27,13 +27,13 @@ import {
   RemirrorEventListener,
   RemirrorEventListenerProps,
 } from "@remirror/core";
-import { PMState } from "model/interfaces";
+import { PMState } from "@/model/interfaces";
 import {
   LinkExtension,
   ImageExtension,
   MathInlineExtension,
   SupportedLanguages,
-} from "components/remirror-editor/extensions";
+} from "@/components/remirror-editor/extensions";
 
 interface EditorProps {
   onFocus?: (

@@ -1,6 +1,6 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { INote, PMState, SearchResult } from "model/interfaces";
+import { INote, PMState, SearchResult } from "@/model/interfaces";
 import Fuse from "fuse.js";
 import { v4 as uuidv4 } from "uuid";
 import Debug from "pouchdb-debug";

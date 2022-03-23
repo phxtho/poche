@@ -1,10 +1,10 @@
 import React, { useContext, FunctionComponent } from "react";
 import { useState } from "react";
 import { VscSearch } from "react-icons/vsc";
-import { search } from "db/pouch/notes";
+import { search } from "@/db/pouch/notes";
 import "./searchbar.css";
-import { SearchResult } from "model/interfaces";
-import NotesContext from "components/NotesContext";
+import { SearchResult } from "@/model/interfaces";
+import NotesContext from "@/components/NotesContext";
 import Fuse from "fuse.js";
 import { useNavigate, useLocation } from "@reach/router";
 

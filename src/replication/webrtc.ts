@@ -1,7 +1,7 @@
 import Peer from "peerjs";
-import { getNotes, updateNote } from "db/pouch/notes";
-import { upsertPeer } from "db/pouch/peers";
-import { IPeer } from "model/interfaces";
+import { getNotes, updateNote } from "@/db/pouch/notes";
+import { upsertPeer } from "@/db/pouch/peers";
+import { IPeer } from "@/model/interfaces";
 
 let id: string;
 let peer: Peer;

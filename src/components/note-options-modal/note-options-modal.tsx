@@ -1,26 +1,27 @@
 import React, { useContext, FunctionComponent } from "react";
-import { INote } from "model/interfaces";
-import { deleteNote } from "db/pouch/notes";
+import { INote } from "@/model/interfaces";
+import { deleteNote } from "@/db/pouch/notes";
 import { FiTrash, FiX } from "react-icons/fi";
 import Modal, { Styles } from "react-modal";
-import NotesContext from "components/NotesContext";
-import MenuItem from "components/menu-item/menu-item";
+import NotesContext from "@/components/NotesContext";
+import MenuItem from "@/components/menu-item/menu-item";
 
 interface NoteOptionsModalProps {
   note?: INote;
   isOpen?: boolean;
-  onAfterOpen?;
-  onRequestClose?;
+  onAfterOpen?: any;
+  onRequestClose?: any;
 }
 
 const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
   Modal.setAppElement("#root");
 
   const { items, removeItem } = useContext(NotesContext);
+  const noteId = props.note?.id;
 
   return (
     <Modal
-      isOpen={props.isOpen}
+      isOpen={props.isOpen ?? false}
       onAfterClose={props.onAfterOpen}
       onRequestClose={props.onRequestClose}
       overlayClassName="rounded-lg max-w-xl mx-auto"
@@ -31,7 +32,7 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
           {props.children}
           <MenuItem
             onClick={() => {
-              removeItem(items, props.note.id);
+              removeItem(items, noteId);
               props.onRequestClose();
             }}
           >
@@ -40,8 +41,8 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
 
           <MenuItem
             onClick={() => {
-              removeItem(items, props.note.id);
-              deleteNote(props.note.id);
+              removeItem(items, noteId);
+              deleteNote(noteId ?? "");
               props.onRequestClose();
             }}
           >

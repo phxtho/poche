@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { ICanvasCard } from "model/interfaces";
+import { ICanvasCard } from "@/model/interfaces";
 import "./card.css";
 
 declare interface CardProps {

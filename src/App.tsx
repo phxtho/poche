@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
-import Routes from "router/Routes";
+import Routes from "@/router/Routes";
 import "./App.css";
 import NoteContext, {
   addArrayItem,
   removeArrayItem,
-} from "components/NotesContext";
+} from "@/components/NotesContext";
 
 function App() {
   const [noteContext, setNoteContext] = useState({
