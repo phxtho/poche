@@ -3,6 +3,7 @@ import { useHelpers } from "@remirror/react";
 import { FaMarkdown, FaHtml5 } from "react-icons/fa";
 import FileSaver from "file-saver";
 import { INote } from "model/interfaces";
+import MenuItem from "components/menu-item/menu-item";
 
 interface ExportOptionsProps {
   onRequestClose?;
@@ -11,45 +12,43 @@ interface ExportOptionsProps {
 
 const ExportOptions: FunctionComponent<ExportOptionsProps> = (props) => {
   const { getHTML, getMarkdown } = useHelpers();
+  const exportHtml = () => {
+    const htmlContent = `<!DOCTYPE html>
+    <html>
+    <head>
+      <link href="https://cdn.jsdelivr.net/npm/base-css-theme@1.1.3/base.css" rel="stylesheet">
+    </head>
+    <body style="padding: 16px;">${getHTML()}</body>
+    </html>`;
+
+    let fileName = `${props.note.title}.html`;
+    let fileBlob = new Blob([htmlContent], {
+      type: "text/plain;charset=utf-8",
+    });
+    FileSaver.saveAs(fileBlob, fileName);
+
+    props.onRequestClose?.();
+  };
+
+  const exportMarkdown = () => {
+    let fileName = `${props.note.title}.md`;
+    let fileBlob = new Blob([getMarkdown()], {
+      type: "text/plain;charset=utf-8",
+    });
+    FileSaver.saveAs(fileBlob, fileName);
+
+    props.onRequestClose?.();
+  };
+
   return (
     <>
-      <button
-        className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
-        onClick={() => {
-          const htmlContent = `<!DOCTYPE html>
-          <html>
-          <head>
-            <link href="https://cdn.jsdelivr.net/npm/base-css-theme@1.1.3/base.css" rel="stylesheet">
-          </head>
-          <body style="padding: 16px;">${getHTML()}</body>
-          </html>`;
+      <MenuItem onClick={exportHtml}>
+        <span>Export HTML</span> <FaHtml5 />
+      </MenuItem>
 
-          let fileName = `${props.note.title}.html`;
-          let fileBlob = new Blob([htmlContent], {
-            type: "text/plain;charset=utf-8",
-          });
-          FileSaver.saveAs(fileBlob, fileName);
-
-          props.onRequestClose?.();
-        }}
-      >
-        <FaHtml5 className="mx-auto" /> Export HTML
-      </button>
-
-      <button
-        className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
-        onClick={() => {
-          let fileName = `${props.note.title}.md`;
-          let fileBlob = new Blob([getMarkdown()], {
-            type: "text/plain;charset=utf-8",
-          });
-          FileSaver.saveAs(fileBlob, fileName);
-
-          props.onRequestClose?.();
-        }}
-      >
-        <FaMarkdown className="mx-auto" /> Export Markdown
-      </button>
+      <MenuItem onClick={exportMarkdown}>
+        <span>Export Markdown</span> <FaMarkdown />
+      </MenuItem>
     </>
   );
 };

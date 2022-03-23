@@ -4,6 +4,7 @@ import { deleteNote } from "db/pouch/notes";
 import { FiTrash, FiX } from "react-icons/fi";
 import Modal, { Styles } from "react-modal";
 import NotesContext from "components/NotesContext";
+import MenuItem from "components/menu-item/menu-item";
 
 interface NoteOptionsModalProps {
   note?: INote;
@@ -11,16 +12,6 @@ interface NoteOptionsModalProps {
   onAfterOpen?;
   onRequestClose?;
 }
-
-const modalStyle: Styles = {
-  content: {
-    borderRadius: ".5rem",
-    height: "fit-content",
-    maxWidth: "40rem",
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
-};
 
 const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
   Modal.setAppElement("#root");
@@ -32,32 +23,30 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
       isOpen={props.isOpen}
       onAfterClose={props.onAfterOpen}
       onRequestClose={props.onRequestClose}
-      style={modalStyle}
+      overlayClassName="rounded-lg max-w-xl mx-auto"
     >
       <div>
         <h1 className="text-center mb-2">actions</h1>
         <div className="flex flex-col space-y-4">
           {props.children}
-          <button
-            className="w-full h-16 rounded-lg shadow-md hover:shadow-lg hover:bg-gray-200"
+          <MenuItem
             onClick={() => {
               removeItem(items, props.note.id);
               props.onRequestClose();
             }}
           >
-            <FiX className="mx-auto" /> Close
-          </button>
+            <span>Close</span> <FiX />
+          </MenuItem>
 
-          <button
-            className="w-full h-16 rounded-lg shadow-md bg-red-500 text-white hover:shadow-lg hover:bg-red-600"
+          <MenuItem
             onClick={() => {
               removeItem(items, props.note.id);
               deleteNote(props.note.id);
               props.onRequestClose();
             }}
           >
-            <FiTrash className="mx-auto" /> Delete
-          </button>
+            <span>Delete</span> <FiTrash />
+          </MenuItem>
         </div>
       </div>
     </Modal>
