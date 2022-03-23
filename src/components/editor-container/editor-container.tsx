@@ -6,7 +6,7 @@ import { useState } from "react";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react";
 import { Extension, RemirrorEventListenerProps } from "@remirror/core";
 import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";
-import { useLocation } from "@reach/router";
+import { useLocation } from "react-router-dom";
 import ExportOption from "@/components/export-options/export-options";
 import "./editor-container.css";
 

@@ -6,7 +6,7 @@ import "./searchbar.css";
 import { SearchResult } from "@/model/interfaces";
 import NotesContext from "@/components/NotesContext";
 import Fuse from "fuse.js";
-import { useNavigate, useLocation } from "@reach/router";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);

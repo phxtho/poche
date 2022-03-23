@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import { useNavigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import { VscChevronLeft } from "react-icons/vsc";
 
 interface BackButtonProps {}

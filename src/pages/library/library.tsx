@@ -1,7 +1,7 @@
 import { useContext, useCallback, useEffect, useState } from "react";
 import { getNotes, onChange } from "@/db/pouch/notes";
 import { INote } from "@/model/interfaces";
-import { useNavigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";

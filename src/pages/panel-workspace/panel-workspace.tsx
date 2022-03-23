@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react";
-import { useNavigate } from "@reach/router";
+import { useNavigate } from "react-router-dom";
 import EditorContainer from "@/components/editor-container/editor-container";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
