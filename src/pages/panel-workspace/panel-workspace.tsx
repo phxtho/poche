@@ -4,7 +4,7 @@ import EditorContainer from "@/components/editor-container/editor-container";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
 import Toolbar from "@/components/remirror-editor/toolbar";
-import NotesContext from "@/components/NotesContext";
+import { NotesContext } from "@/components/NotesContext";
 import "./panel-workspace.css";
 
 export default function PanelWorkspace() {

@@ -3,7 +3,7 @@ import { INote } from "@/model/interfaces";
 import { deleteNote } from "@/db/pouch/notes";
 import { FiFile, FiTrash, FiX } from "react-icons/fi";
 import Modal from "react-modal";
-import NotesContext from "@/components/NotesContext";
+import { NotesContext } from "@/components/NotesContext";
 import MenuItem from "@/components/menu-item/menu-item";
 
 interface NoteOptionsModalProps {
@@ -46,7 +46,7 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
           {items.find((id) => id === noteId) && (
             <MenuItem
               onClick={() => {
-                removeItem(items, noteId);
+                removeItem(noteId);
                 props.onRequestClose();
               }}
             >
@@ -56,7 +56,7 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
 
           <MenuItem
             onClick={() => {
-              removeItem(items, noteId);
+              removeItem(noteId);
               deleteNote(noteId ?? "");
               props.onRequestClose();
             }}

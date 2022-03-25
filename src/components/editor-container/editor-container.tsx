@@ -85,7 +85,7 @@ const EditorContainer = (props: EditorContainerProps) => {
       <div
         id={props.id}
         ref={elRef}
-        className="w-full md:w-5/12 lg:w-1/3 shadow-lg rounded-lg p-5 lg:mr-4 mb-4 editor-container"
+        className="w-full md:w-5/12 lg:w-1/3 hover:shadow-lg rounded-lg p-5 lg:mr-4 mb-4 editor-container"
       >
         <div className="flex justify-between">
           <textarea

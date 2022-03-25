@@ -4,7 +4,7 @@ import { VscSearch } from "react-icons/vsc";
 import { search } from "@/db/pouch/notes";
 import "./searchbar.css";
 import { SearchResult } from "@/model/interfaces";
-import NotesContext from "@/components/NotesContext";
+import { NotesContext } from "@/components/NotesContext";
 import Fuse from "fuse.js";
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function SearchBar() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
 
-  const { items, addItem } = useContext(NotesContext);
+  const { addItem } = useContext(NotesContext);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -52,7 +52,7 @@ export default function SearchBar() {
                 key={val.item.id}
                 onResultClick={() => {
                   setQuery("");
-                  addItem(items, val.item.id);
+                  addItem(val.item.id);
                   if (location.pathname !== pathToPanel) navigate(pathToPanel);
                 }}
                 result={val}

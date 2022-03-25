@@ -6,7 +6,7 @@ import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";
 import "./library.css";
-import NotesContext from "@/components/NotesContext";
+import { NotesContext } from "@/components/NotesContext";
 import SettingsFab from "@/components/settings-fab/settings-fab";
 
 export default function Library() {
@@ -57,7 +57,7 @@ export default function Library() {
                       <button
                         className="truncate w-full transition duration-250 ease-in-out bg-gradient-to-r hover:from-gray-100 hover:to-gray-200"
                         onClick={() => {
-                          addItem(items, note.id);
+                          addItem(note.id);
                           navigate(`/poche/p#${note.id}`);
                         }}
                       >
