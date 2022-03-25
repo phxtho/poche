@@ -1,5 +1,5 @@
 import { FunctionComponent } from "react";
-import BackButton from "@/components/back-button/back-button";
+import NavigationButtons from "@/components/navigation-buttons/navigation-buttons";
 import { Outlet } from "react-router-dom";
 import MenuButton from "../menu-button/menu-button";
 import SideNav from "../side-nav/side-nav";
@@ -12,7 +12,7 @@ const AppShell: FunctionComponent<AppShellProps> = (props) => {
       <div className="w-full flex justify-between items-center mb-2 p-2">
         <MenuButton />
         <div>
-          <BackButton />
+          <NavigationButtons />
         </div>
       </div>
       <div className="flex">
