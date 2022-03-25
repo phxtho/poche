@@ -13,7 +13,7 @@ const SideNav: FunctionComponent<SideNavProps> = () => {
   return (
     <div
       className={`h-fit bg-gray-200 backdrop-blur-lg rounded-r-xl shadow-lg flex flex-col space-y-2 items-center py-5 px-1  shrink-0 fixed bottom-0 top-0 left-0 my-auto 
-      md:h-full md:w-48 md:relative md:rounded-none md:my-0 md:shadow-none md:bg-white
+      md:w-32
       ${navOpen ? "block" : "hidden"}`}
     >
       <MenuItem onClick={() => navigate(paths.home)}>
