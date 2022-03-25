@@ -6,6 +6,7 @@ import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
 import Toolbar from "@/components/remirror-editor/toolbar";
 import { NotesContext } from "@/components/NotesContext";
 import "./panel-workspace.css";
+import { paths } from "@/router/Routes";
 
 export default function PanelWorkspace() {
   const { items } = useContext(NotesContext);
@@ -17,7 +18,7 @@ export default function PanelWorkspace() {
 
   useEffect(() => {
     if (items.length === 0) {
-      navigate("/poche");
+      navigate(paths.home);
     }
   }, [items]);
 

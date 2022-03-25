@@ -7,6 +7,7 @@ import { SearchResult } from "@/model/interfaces";
 import { NotesContext } from "@/components/NotesContext";
 import Fuse from "fuse.js";
 import { useNavigate, useLocation } from "react-router-dom";
+import { paths } from "@/router/Routes";
 
 export default function SearchBar() {
   const [focused, setFocused] = useState(false);
@@ -17,7 +18,6 @@ export default function SearchBar() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const pathToPanel = "/poche/p";
 
   const Search = (query: string) => {
     search(query).then((res) => setResults(res));
@@ -53,7 +53,8 @@ export default function SearchBar() {
                 onResultClick={() => {
                   setQuery("");
                   addItem(val.item.id);
-                  if (location.pathname !== pathToPanel) navigate(pathToPanel);
+                  if (location.pathname !== paths.panelWorkspace)
+                    navigate(paths.panelWorkspace);
                 }}
                 result={val}
               />

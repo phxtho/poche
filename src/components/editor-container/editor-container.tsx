@@ -102,8 +102,8 @@ const EditorContainer = (props: EditorContainerProps) => {
           />
           <div className="flex space-x-2">
             <button
-              className={`h-4 w-4 rounded-full border hover:bg-gray-700 hover:border-gray-700 ${
-                focused ? "border-black bg-black" : "border-gray-400"
+              className={`h-4 w-4 rounded-full opacity-80 border hover:bg-gray-800 hover:border-gray-800 ${
+                focused ? "border-gray-200 bg-gray-200" : "border-gray-200"
               }`}
               onClick={() => setNoteOptionsOpen(true)}
             />

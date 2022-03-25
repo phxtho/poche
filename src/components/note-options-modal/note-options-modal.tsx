@@ -25,7 +25,7 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
       onAfterClose={props.onAfterOpen}
       onRequestClose={props.onRequestClose}
       overlayClassName="fixed inset-0 bg-[rgba(30,30,30,.5)]"
-      className="bg-gray-100 backdrop-blur-lg rounded-t-xl absolute w-full bottom-0 left-0 right-0 p-4 mx-auto max-w-2xl "
+      className="z-20 bg-gray-100 backdrop-blur-lg rounded-t-xl absolute w-full bottom-0 left-0 right-0 p-4 mx-auto max-w-2xl "
     >
       <div>
         <div className="flex justify-between mb-6">

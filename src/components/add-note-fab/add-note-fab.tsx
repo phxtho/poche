@@ -18,7 +18,7 @@ export default function AddNoteFAB(props) {
         const id = await createCard();
         props?.handleClick?.(id);
       }}
-      className="bg-gray-200 opacity-80 text-black backdrop-blur-xl rounded-full h-16 w-16 fixed right-8 bottom-8 flex justify-center items-center shadow-md hover:pointer hover:opacity-100 hover:bg-green-500 hover:text-white"
+      className="bg-gray-200  text-black backdrop-blur-xl rounded-full h-16 w-16 fixed right-1 bottom-12 md:right-8 md:bottom-8 flex justify-center items-center shadow-md hover:pointer hover:opacity-100 hover:bg-green-500 hover:text-white"
     >
       <FiPlus />
     </button>

@@ -7,7 +7,7 @@ import { VscKebabVertical } from "react-icons/vsc";
 import NoteOptionsModal from "@/components/note-options-modal/note-options-modal";
 import "./library.css";
 import { NotesContext } from "@/components/NotesContext";
-import SettingsFab from "@/components/settings-fab/settings-fab";
+import { paths } from "@/router/Routes";
 
 export default function Library() {
   const [allNotes, setAllNotes] = useState<INote[]>([]);
@@ -58,7 +58,7 @@ export default function Library() {
                         className="truncate w-full transition duration-250 ease-in-out bg-gradient-to-r hover:from-gray-100 hover:to-gray-200"
                         onClick={() => {
                           addItem(note.id);
-                          navigate(`/poche/p#${note.id}`);
+                          navigate(`${paths.panelWorkspace}#${note.id}`);
                         }}
                       >
                         <div className="flex flex-col text-left">
@@ -91,8 +91,6 @@ export default function Library() {
               })}
           </tbody>
         </table>
-
-        <SettingsFab />
         <AddNoteFAB handleClick={(id) => navigate(`/poche/p#${id}`)} />
       </div>
 

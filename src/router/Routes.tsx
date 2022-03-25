@@ -13,7 +13,7 @@ export default function Router(props) {
         <Route path="poche" element={<AppShell />}>
           <Route index element={<Library />} />
           <Route path="canvas" element={<CanvasWorkspace />} />
-          <Route path="p" element={<PanelWorkspace />} />
+          <Route path="panel" element={<PanelWorkspace />} />
           <Route path="settings" element={<Settings />} />
           <Route path="demo" element={<Demo />} />
         </Route>
@@ -21,3 +21,11 @@ export default function Router(props) {
     </BrowserRouter>
   );
 }
+
+const paths = {
+  home: "/poche",
+  settings: "/poche/settings",
+  panelWorkspace: "/poche/panel",
+};
+
+export { paths };
