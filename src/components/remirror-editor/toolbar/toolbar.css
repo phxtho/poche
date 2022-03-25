@@ -1,7 +1,8 @@
 .toolbar {
   display: flex;
-  background-color: black;
-  color: white;
+  background: rgba(242, 242, 242, 0.5);
+  backdrop-filter: blur(22px);
+  color: black;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -24,7 +25,8 @@
 
 .toolbar > button:hover,
 .toolbar > button.active {
-  background-color: rgba(255, 255, 255, 0.15);
+  background: rgba(30, 30, 30, 0.75);
+  color: white;
 }
 
 @media (min-width: 768px) {

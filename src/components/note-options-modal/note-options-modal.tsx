@@ -1,8 +1,8 @@
 import { useContext, FunctionComponent } from "react";
 import { INote } from "@/model/interfaces";
 import { deleteNote } from "@/db/pouch/notes";
-import { FiTrash, FiX } from "react-icons/fi";
-import Modal, { Styles } from "react-modal";
+import { FiFile, FiTrash, FiX } from "react-icons/fi";
+import Modal from "react-modal";
 import NotesContext from "@/components/NotesContext";
 import MenuItem from "@/components/menu-item/menu-item";
 
@@ -24,20 +24,35 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
       isOpen={props.isOpen ?? false}
       onAfterClose={props.onAfterOpen}
       onRequestClose={props.onRequestClose}
-      overlayClassName="rounded-lg max-w-xl mx-auto"
+      overlayClassName="fixed inset-0 bg-[rgba(30,30,30,.5)]"
+      className="bg-gray-100 backdrop-blur-lg rounded-t-xl absolute w-full bottom-0 left-0 right-0 p-4 mx-auto max-w-2xl "
     >
       <div>
-        <h1 className="text-center mb-2">actions</h1>
-        <div className="flex flex-col space-y-4">
-          {props.children}
-          <MenuItem
-            onClick={() => {
-              removeItem(items, noteId);
-              props.onRequestClose();
-            }}
+        <div className="flex justify-between mb-6">
+          <div className="flex items-center space-x-1 text-xl">
+            <FiFile />
+            <h2>{props.note?.title}</h2>
+          </div>
+          <button
+            className="rounded-full h-8 w-8 bg-gray-200 opacity-80 hover:bg-gray-800 hover:text-white  flex justify-center items-center"
+            onClick={props.onRequestClose}
           >
-            <span>Close</span> <FiX />
-          </MenuItem>
+            <FiX />
+          </button>
+        </div>
+
+        <div className="flex flex-col space-y-4 items-center">
+          {props.children}
+          {items.find((id) => id === noteId) && (
+            <MenuItem
+              onClick={() => {
+                removeItem(items, noteId);
+                props.onRequestClose();
+              }}
+            >
+              <span>Close</span> <FiX />
+            </MenuItem>
+          )}
 
           <MenuItem
             onClick={() => {

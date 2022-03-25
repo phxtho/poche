@@ -18,7 +18,7 @@ export default function AddNoteFAB(props) {
         const id = await createCard();
         props?.handleClick?.(id);
       }}
-      className="rounded-full h-16 w-16 fixed right-8 bottom-8 bg-black text-white flex justify-center items-center shadow-md hover:pointer border-2 border-white"
+      className="bg-gray-200 opacity-80 text-black backdrop-blur-xl rounded-full h-16 w-16 fixed right-8 bottom-8 flex justify-center items-center shadow-md hover:pointer hover:opacity-100 hover:bg-green-500 hover:text-white"
     >
       <VscAdd />
     </button>
