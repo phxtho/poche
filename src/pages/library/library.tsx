@@ -79,7 +79,14 @@ export default function Library() {
                       </button>
                     </td>
                     <td className="hidden md:block">
-                      {new Date(note.lastEditedTime).toLocaleString()}
+                      {new Date(note.lastEditedTime).toLocaleString(
+                        navigator.language,
+                        {
+                          year: "numeric",
+                          month: "long",
+                          day: "numeric",
+                        }
+                      )}
                     </td>
                     <td>
                       <button onClick={() => openNoteOptions(note)}>
