@@ -98,7 +98,9 @@ export default function Library() {
               })}
           </tbody>
         </table>
-        <AddNoteFAB handleClick={(id) => navigate(`/poche/p#${id}`)} />
+        <AddNoteFAB
+          handleClick={(id) => navigate(`${paths.panelWorkspace}/p#${id}`)}
+        />
       </div>
 
       <NoteOptionsModal
