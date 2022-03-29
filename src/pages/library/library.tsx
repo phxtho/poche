@@ -99,7 +99,7 @@ export default function Library() {
           </tbody>
         </table>
         <AddNoteFAB
-          handleClick={(id) => navigate(`${paths.panelWorkspace}/p#${id}`)}
+          handleClick={(id) => navigate(`${paths.panelWorkspace}#${id}`)}
         />
       </div>
 
