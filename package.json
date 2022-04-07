@@ -9,6 +9,7 @@
     "@remirror/pm": "^1.0.2",
     "@remirror/react": "^1.0.8",
     "@remirror/react-debugger": "^1.0.3",
+    "@tauri-apps/api": "^1.0.0-rc.3",
     "file-saver": "^2.0.5",
     "fuse.js": "^6.4.6",
     "html-to-prosemirror": "https://github.com/phxtho/html-to-prosemirror",
@@ -57,7 +58,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "tauri": "tauri"
   },
   "eslintConfig": {
     "extends": [
@@ -81,6 +83,7 @@
     "@esbuild-plugins/node-globals-polyfill": "^0.1.1",
     "@esbuild-plugins/node-modules-polyfill": "^0.1.4",
     "@remirror/dev": "^1.0.20",
+    "@tauri-apps/cli": "^1.0.0-rc.8",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.7.1",
