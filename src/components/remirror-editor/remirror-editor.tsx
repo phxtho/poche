@@ -14,6 +14,7 @@ import {
   CodeBlockExtension,
   HorizontalRuleExtension,
   MarkdownExtension,
+  YjsExtension,
 } from "remirror/extensions";
 import {
   EditorComponent,
@@ -34,6 +35,7 @@ import {
   MathInlineExtension,
   SupportedLanguages,
 } from "@/components/remirror-editor/extensions";
+import { getWebRTCProvider } from "@/utils/y-provider";
 
 interface EditorProps {
   onFocus?: (
@@ -46,6 +48,7 @@ interface EditorProps {
   ) => void;
   onChange?: RemirrorEventListener<Extension>;
   state?: PMState;
+  id: string;
 }
 
 const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
@@ -78,15 +81,22 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
           defaultLanguage: "typescript",
         }),
         new HorizontalRuleExtension(),
+        new YjsExtension({
+          // TODO: add user identification
+          getProvider: () => getWebRTCProvider(props.id, { name: "Username" }),
+        }),
       ],
       onError: handleOnError,
       content: props.state?.doc,
+      core: {
+        excludeExtensions: ["history"],
+      },
     });
 
     useImperativeHandle(ref, () => getContext() as any, [getContext]);
 
     return (
-      <div className="remirror-theme">
+      <div id={props.id} className="remirror-theme">
         <Remirror
           manager={manager}
           initialContent={state}

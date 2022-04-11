@@ -110,6 +110,7 @@ const EditorContainer = (props: EditorContainerProps) => {
           </div>
         </div>
         <Editor
+          id={note.id}
           state={note.state}
           onChange={handleOnChange}
           onBlur={handleBlur}
