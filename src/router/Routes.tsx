@@ -8,10 +8,10 @@ import CanvasWorkspace from "@/pages/canvas-workspace";
 
 export default function Router(props) {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/poche">
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="poche" element={<AppShell />}>
+          <Route path="/" element={<AppShell />}>
             <Route index element={<Library />} />
             <Route path="canvas" element={<CanvasWorkspace />} />
             <Route path="panel" element={<PanelWorkspace />} />
@@ -24,9 +24,9 @@ export default function Router(props) {
 }
 
 const paths = {
-  home: "/poche",
-  settings: "/poche/settings",
-  panelWorkspace: "/poche/panel",
+  home: "/",
+  settings: "/settings",
+  panelWorkspace: "/panel",
 };
 
 export { paths };
