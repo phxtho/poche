@@ -42,7 +42,8 @@ const EditorContainer = (props: EditorContainerProps) => {
 
   useEffect(() => {
     if (location.hash) {
-      const id = location.hash.substring(1);
+      const id = location.hash.substring(1); // remove leading #
+      // Scroll note into view
       if (props.id === id && elRef.current) {
         elRef.current.scrollIntoView({ behavior: "smooth" });
       }

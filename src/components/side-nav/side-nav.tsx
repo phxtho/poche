@@ -13,17 +13,17 @@ const SideNav: FunctionComponent<SideNavProps> = () => {
   return (
     <div
       className={`h-fit bg-gray-200 backdrop-blur-lg rounded-r-xl shadow-lg flex flex-col space-y-2 items-center py-5 px-1  shrink-0 fixed bottom-0 top-0 left-0 my-auto 
-      md:w-32
+      lg:w-32
       ${navOpen ? "block" : "hidden"}`}
     >
       <MenuItem onClick={() => navigate(paths.home)}>
-        <FiHome /> <span className="hidden md:block">Home</span>
+        <FiHome /> <span className="hidden lg:block">Home</span>
       </MenuItem>
       <MenuItem>
-        <FiSearch /> <span className="hidden md:block">Search</span>
+        <FiSearch /> <span className="hidden lg:block">Search</span>
       </MenuItem>
       <MenuItem onClick={() => navigate(paths.settings)}>
-        <FiSettings /> <span className="hidden md:block">Settings</span>
+        <FiSettings /> <span className="hidden lg:block">Settings</span>
       </MenuItem>
     </div>
   );
