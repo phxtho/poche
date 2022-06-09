@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { VscVm } from "react-icons/vsc";
 import { getPeers, onChange } from "@/db/pouch/peers";
-import { Connect } from "@/replication/webrtc";
 
 interface Props {}
 

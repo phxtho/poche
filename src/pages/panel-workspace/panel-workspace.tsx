@@ -1,38 +1,54 @@
 import { useEffect, useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import EditorContainer from "@/components/editor-container/editor-container";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
 import Toolbar from "@/components/remirror-editor/toolbar";
 import { NotesContext } from "@/components/NotesContext";
 import "./panel-workspace.css";
-import { paths } from "@/router/Routes";
+import { getNoteById } from "@/db/pouch/notes";
+import { VscFolderOpened } from "react-icons/vsc";
 
 export default function PanelWorkspace() {
-  const { items } = useContext(NotesContext);
+  const { items, addItem } = useContext(NotesContext);
 
   const [focusedEditorContext, setEditorContext] =
     useState<ReactFrameworkOutput<any>>();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    if (items.length === 0) {
-      navigate(paths.home);
+    // Open note specified in url hash
+    if (location.hash) {
+      const noteId = location.hash.substring(1); //remove leading #
+      if (noteId && !items.includes(noteId)) {
+        getNoteById(noteId).then((note) => {
+          if (note) addItem(noteId);
+        });
+      }
     }
-  }, [items]);
+  }, [location.hash]);
 
   return (
     <>
-      <div className="editor-list">
-        {items.map((item) => (
-          <EditorContainer
-            key={item}
-            id={item}
-            handleFocus={(editorCtx) => setEditorContext(editorCtx)}
-          />
-        ))}
-      </div>
+      {items.length > 0 && (
+        <div className="editor-list">
+          {items.map((item) => (
+            <EditorContainer
+              key={item}
+              id={item}
+              handleFocus={(editorCtx) => setEditorContext(editorCtx)}
+            />
+          ))}
+        </div>
+      )}
+      {items.length === 0 && (
+        <div className="absolute mx-auto top-1/2 w-full text-center text-gray-300">
+          <VscFolderOpened className="h-10 w-10 mx-auto" />
+          <h1>Workspace Empty</h1>
+        </div>
+      )}
 
       {focusedEditorContext && (
         <RemirrorContext.Provider value={focusedEditorContext}>
