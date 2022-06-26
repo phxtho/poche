@@ -5,6 +5,7 @@ import { FiFile, FiTrash, FiX } from "react-icons/fi";
 import Modal from "react-modal";
 import { NotesContext } from "@/components/NotesContext";
 import MenuItem from "@/components/menu-item/menu-item";
+import "./note-options-modal.css";
 
 interface NoteOptionsModalProps {
   note?: INote;

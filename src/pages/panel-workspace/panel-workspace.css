@@ -27,7 +27,7 @@
   }
 
   .editor-list > * {
-    min-width: 30vw;
+    min-width: 48vw;
     height: 85vh;
   }
 
@@ -37,6 +37,12 @@
 
   .editor-list > *:last-child {
     margin-right: auto;
+  }
+}
+
+@media (min-width: 1440px) {
+  .editor-list > * {
+    min-width: 44rem;
   }
 }
 

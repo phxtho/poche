@@ -46,6 +46,7 @@ interface EditorProps {
   ) => void;
   onChange?: RemirrorEventListener<Extension>;
   state?: PMState;
+  id: string;
 }
 
 const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
@@ -86,7 +87,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
     useImperativeHandle(ref, () => getContext() as any, [getContext]);
 
     return (
-      <div className="remirror-theme">
+      <div id={props.id} className="remirror-theme">
         <Remirror
           manager={manager}
           initialContent={state}

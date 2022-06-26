@@ -38,7 +38,7 @@ export default function Library() {
 
   return (
     <>
-      <div className="p-5">
+      <div className="p-5 md:px-14 lg:px-36">
         <table className="rounded-lg divide-y divide-gray-200 note-list shadow-md">
           <thead>
             <tr>
@@ -78,7 +78,7 @@ export default function Library() {
                         </div>
                       </button>
                     </td>
-                    <td className="hidden md:block">
+                    <td className="hidden lg:block">
                       {new Date(note.lastEditedTime).toLocaleString(
                         navigator.language,
                         {
