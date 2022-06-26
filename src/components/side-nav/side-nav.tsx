@@ -27,9 +27,6 @@ const SideNav: FunctionComponent<SideNavProps> = () => {
           <MenuItem>
             <FiSearch /> <span className="hidden lg:block">Search</span>
           </MenuItem>
-          <MenuItem onClick={() => navigate(paths.settings)}>
-            <FiSettings /> <span className="hidden lg:block">Settings</span>
-          </MenuItem>
         </motion.div>
       )}
     </AnimatePresence>
