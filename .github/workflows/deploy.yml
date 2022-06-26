@@ -1,5 +1,5 @@
 name: Build 🔧 & Deploy 🚀
-on: 
+on:
   push:
     branches: [main]
   workflow_dispatch:
@@ -14,4 +14,9 @@ jobs:
       - name: Install and Build 🔧
         run: |
           yarn
-          yarn deploy
+          yarn build
+
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
