@@ -39,6 +39,8 @@ const EditorContainer = (props: EditorContainerProps) => {
   // On init
   useEffect(() => {
     void initialiseNote();
+
+    return () => setNote(null);
   }, [initialiseNote]);
 
   useEffect(() => {

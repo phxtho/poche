@@ -1,50 +1,57 @@
-import { useContext, FunctionComponent } from "react";
+import { useContext, FunctionComponent, useEffect } from "react";
 import { useState } from "react";
-import { VscSearch } from "react-icons/vsc";
-import { search } from "@/db/pouch/notes";
+import { getNotes, search } from "@/db/pouch/notes";
 import "./searchbar.css";
-import { SearchResult } from "@/model/interfaces";
+import { INote, SearchResult } from "@/model/interfaces";
 import { NotesContext } from "@/components/NotesContext";
 import Fuse from "fuse.js";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { paths } from "@/router/Routes";
 
 export default function SearchBar() {
-  const [focused, setFocused] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
 
-  const { addItem } = useContext(NotesContext);
+  const { addItem, setSearchOpen } = useContext(NotesContext);
 
   const navigate = useNavigate();
-  const location = useLocation();
+
+  useEffect(() => {
+    searchMostRecentNotes().then(setResults);
+
+    return () => {
+      setResults([]);
+    };
+  }, []);
 
   const Search = (query: string) => {
     search(query).then((res) => setResults(res));
   };
 
+  const searchMostRecentNotes = async (): Promise<SearchResult[]> => {
+    return (await getNotes(10)).map((note) => {
+      return { item: note as unknown as INote, matches: [] };
+    });
+  };
+
   return (
     <div className="relative shadow-sm">
-      <div className="h-10 w-72  rounded-full flex justify-between pl-6 items-center relative">
+      <div className="h-10 w-full  rounded-full flex justify-between pl-6 items-center relative">
         <input
           placeholder="Search"
-          className="w-3/4 h-full bg-transparent overflow-ellipsis"
+          className="w-full h-full bg-transparent overflow-ellipsis"
           type="text"
           value={query}
-          onChange={(e) => {
+          onChange={async (e) => {
             const { value } = e.target;
             setQuery(value);
-            Search(value);
+            if (value) Search(value);
+            else setResults(await searchMostRecentNotes());
           }}
-          onFocus={(e) => setFocused(true)}
-          onBlur={(e) => setFocused(false)}
         />
-        <button className="h-10 w-10 rounded-full bg-black text-white flex justify-center items-center">
-          <VscSearch />
-        </button>
       </div>
 
-      {query !== "" && results.length > 0 && (
+      {results.length > 0 && (
         <div className="search-results rounded-b-lg overflow-hidden">
           {results.map((val) => {
             return (
@@ -53,8 +60,8 @@ export default function SearchBar() {
                 onResultClick={() => {
                   setQuery("");
                   addItem(val.item.id);
-                  if (location.pathname !== paths.panelWorkspace)
-                    navigate(paths.panelWorkspace);
+                  navigate(`${paths.panelWorkspace}#${val.item.id}`);
+                  setSearchOpen(false);
                 }}
                 result={val}
               />
@@ -67,7 +74,7 @@ export default function SearchBar() {
 }
 
 interface SearchBarResultProps {
-  onResultClick?;
+  onResultClick;
   result: SearchResult;
 }
 
@@ -80,9 +87,9 @@ const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
 
   return (
     <button
-      className="result bg-white text-left p-2"
-      onClick={(_) => {
-        onResultClick?.();
+      className="result bg-white text-left py-2 px-6 h-14"
+      onClick={() => {
+        onResultClick();
       }}
     >
       <div className="text-sm">
@@ -93,6 +100,10 @@ const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
             } else return null;
           })}
         {!matchTitle && result.item.title}
+
+        {!matchTitle && !result.item.title && (
+          <span className="italic opacity-50">No Title</span>
+        )}
       </div>
       <div className="text-xs font-extralight">
         {matchText &&
@@ -102,6 +113,10 @@ const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
             } else return null;
           })}
         {!matchText && result.item.text}
+
+        {!matchText && !result.item.text && (
+          <span className="italic opacity-50">Empty</span>
+        )}
       </div>
     </button>
   );
