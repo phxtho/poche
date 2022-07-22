@@ -15,7 +15,6 @@ export default function PanelWorkspace() {
   const [focusedEditorContext, setEditorContext] =
     useState<ReactFrameworkOutput<any>>();
 
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {

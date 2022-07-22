@@ -66,7 +66,7 @@ export default function Library() {
                             <span>{note.title || "No Title"}</span>
                             <span
                               className={`rounded-full h-2 w-2 bg-green-500 ${
-                                items.find((el) => el == note.id)
+                                items.find((el) => el === note.id)
                                   ? "inline"
                                   : "hidden"
                               } `}
@@ -98,9 +98,7 @@ export default function Library() {
               })}
           </tbody>
         </table>
-        <AddNoteFAB
-          handleClick={(id) => navigate(`${paths.panelWorkspace}#${id}`)}
-        />
+        <AddNoteFAB />
       </div>
 
       <NoteOptionsModal
