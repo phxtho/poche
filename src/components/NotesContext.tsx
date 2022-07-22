@@ -6,6 +6,8 @@ interface INoteContext {
   removeItem(item: string): any;
   navOpen: boolean;
   toggleNav(): any;
+  searchOpen: boolean;
+  setSearchOpen(isOpen: boolean): any;
 }
 
 export let initalState: INoteContext = {
@@ -14,6 +16,8 @@ export let initalState: INoteContext = {
   removeItem: () => {},
   navOpen: false,
   toggleNav: () => {},
+  searchOpen: false,
+  setSearchOpen: () => {},
 };
 
 export const removeArrayItem = (array: any[], item: any): any[] =>
@@ -57,9 +61,24 @@ const NoteContextProvider: FunctionComponent = (props) => {
     setCtx({ ...ctx, navOpen: !ctx.navOpen });
   }, [ctx]);
 
+  const setSearchOpen = useCallback(
+    (isOpen: boolean) => {
+      setCtx({ ...ctx, searchOpen: isOpen });
+    },
+    [ctx]
+  );
+
   return (
     <div className="App">
-      <NotesContext.Provider value={{ ...ctx, addItem, removeItem, toggleNav }}>
+      <NotesContext.Provider
+        value={{
+          ...ctx,
+          addItem,
+          removeItem,
+          toggleNav,
+          setSearchOpen,
+        }}
+      >
         {props.children}
       </NotesContext.Provider>
     </div>

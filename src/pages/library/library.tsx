@@ -18,8 +18,8 @@ export default function Library() {
   const { items, addItem } = useContext(NotesContext);
 
   const fetchAllNotes = useCallback(async () => {
-    const response = (await getNotes()) as any;
-    setAllNotes(response);
+    const response = (await getNotes()) as unknown as INote[];
+    if (response) setAllNotes(response);
   }, [setAllNotes]);
 
   const openNoteOptions = (note: INote) => {

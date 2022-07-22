@@ -67,7 +67,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new BlockquoteExtension(),
         new LinkExtension({ defaultTarget: "_blank", autoLink: true }),
         new HeadingExtension({}),
-        new BulletListExtension({}),
+        new BulletListExtension({ enableSpine: true }),
         new OrderedListExtension(),
         new TaskListExtension(),
         new ImageExtension({ enableResizing: true }),

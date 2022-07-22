@@ -65,11 +65,22 @@ export async function deleteNote(id: string) {
   }
 }
 
-export async function getNotes(): Promise<
-  PouchDB.Core.ExistingDocument<PouchDB.Core.AllDocsMeta>[]
-> {
+export async function getNotes(
+  pageSize: number = 25,
+  offSet: number = 0,
+  startkey?: string
+): Promise<PouchDB.Core.ExistingDocument<PouchDB.Core.AllDocsMeta>[]> {
   try {
-    let result = await db.allDocs({ include_docs: true });
+    if (!startkey) {
+      startkey = (await db.allDocs({ limit: 1 })).rows[0].id;
+    }
+
+    let result = await db.allDocs({
+      limit: pageSize,
+      skip: offSet,
+      include_docs: true,
+      startkey,
+    });
     return result?.rows?.map((row) => row.doc);
   } catch (error) {
     console.log(`ERROR fetching all notes \n${error}`);

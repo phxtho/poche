@@ -1,7 +1,7 @@
 import { FunctionComponent, useContext } from "react";
 import { NotesContext } from "@/components/NotesContext";
-import MenuItem from "../menu-item/menu-item";
-import { FiHome, FiSearch, FiSettings } from "react-icons/fi";
+import MenuItem from "@/components/menu-item/menu-item";
+import { FiHome, FiSearch } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@/router/Routes";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,7 +10,7 @@ interface SideNavProps {}
 
 const SideNav: FunctionComponent<SideNavProps> = () => {
   const navigate = useNavigate();
-  const { navOpen } = useContext(NotesContext);
+  const { navOpen, setSearchOpen, searchOpen } = useContext(NotesContext);
   return (
     <AnimatePresence>
       {navOpen && (
@@ -24,7 +24,7 @@ const SideNav: FunctionComponent<SideNavProps> = () => {
           <MenuItem onClick={() => navigate(paths.home)}>
             <FiHome /> <span className="hidden lg:block">Home</span>
           </MenuItem>
-          <MenuItem>
+          <MenuItem onClick={() => setSearchOpen(!searchOpen)}>
             <FiSearch /> <span className="hidden lg:block">Search</span>
           </MenuItem>
         </motion.div>

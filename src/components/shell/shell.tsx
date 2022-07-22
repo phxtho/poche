@@ -3,6 +3,7 @@ import NavigationButtons from "@/components/navigation-buttons/navigation-button
 import { Outlet } from "react-router-dom";
 import MenuButton from "@/components/menu-button/menu-button";
 import SideNav from "@/components/side-nav/side-nav";
+import SearchModal from "@/components/search-modal/search-modal";
 
 interface AppShellProps {}
 
@@ -21,6 +22,7 @@ const AppShell: FunctionComponent<AppShellProps> = (props) => {
         </div>
         <SideNav />
       </div>
+      <SearchModal />
     </div>
   );
 };
