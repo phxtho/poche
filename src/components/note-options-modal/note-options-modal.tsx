@@ -43,7 +43,6 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
         </div>
 
         <div className="flex flex-col space-y-4 items-center">
-          {props.children}
           {items.find((id) => id === noteId) && (
             <MenuItem
               onClick={() => {
@@ -54,6 +53,8 @@ const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
               <span>Close</span> <FiX />
             </MenuItem>
           )}
+
+          {props.children}
 
           <MenuItem
             onClick={() => {

@@ -72,7 +72,8 @@ export async function getNotes(
 ): Promise<PouchDB.Core.ExistingDocument<PouchDB.Core.AllDocsMeta>[]> {
   try {
     if (!startkey) {
-      startkey = (await db.allDocs({ limit: 1 })).rows[0].id;
+      const { rows } = await await db.allDocs({ limit: 1 });
+      if (rows.length > 0) startkey = rows[0].id;
     }
 
     let result = await db.allDocs({

@@ -1,4 +1,4 @@
-import { useContext, FunctionComponent, useEffect } from "react";
+import { useContext, FunctionComponent, useEffect, useRef } from "react";
 import { useState } from "react";
 import { getNotes, search } from "@/db/pouch/notes";
 import "./searchbar.css";
@@ -15,9 +15,11 @@ export default function SearchBar() {
   const { addItem, setSearchOpen } = useContext(NotesContext);
 
   const navigate = useNavigate();
+  const inputRef = useRef<HTMLInputElement>();
 
   useEffect(() => {
     searchMostRecentNotes().then(setResults);
+    inputRef.current.focus();
 
     return () => {
       setResults([]);
@@ -38,6 +40,7 @@ export default function SearchBar() {
     <div className="relative shadow-sm">
       <div className="h-10 w-full  rounded-full flex justify-between pl-6 items-center relative">
         <input
+          ref={inputRef}
           placeholder="Search"
           className="w-full h-full bg-transparent overflow-ellipsis"
           type="text"
@@ -87,7 +90,7 @@ const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
 
   return (
     <button
-      className="result bg-white text-left py-2 px-6 h-14"
+      className="result bg-white text-left py-2 px-6 h-14 focus:bg-gray-100 hover:bg-gray-100"
       onClick={() => {
         onResultClick();
       }}
