@@ -1,5 +1,5 @@
 import { useEffect, useContext, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import EditorContainer from "@/components/editor-container/editor-container";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
 import { ReactFrameworkOutput, RemirrorContext } from "@remirror/react-core";
@@ -10,7 +10,7 @@ import { getNoteById } from "@/db/pouch/notes";
 import { VscFolderOpened } from "react-icons/vsc";
 
 export default function PanelWorkspace() {
-  const { items, addItem } = useContext(NotesContext);
+  const { items, addItem, setActiveNote } = useContext(NotesContext);
 
   const [focusedEditorContext, setEditorContext] =
     useState<ReactFrameworkOutput<any>>();
@@ -37,7 +37,10 @@ export default function PanelWorkspace() {
             <EditorContainer
               key={item}
               id={item}
-              handleFocus={(editorCtx) => setEditorContext(editorCtx)}
+              handleFocus={(editorCtx) => {
+                setEditorContext(editorCtx);
+                setActiveNote(item);
+              }}
             />
           ))}
         </div>
