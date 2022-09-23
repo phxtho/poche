@@ -7,12 +7,14 @@ import SearchModal from "@/components/search-modal/search-modal";
 import { NotesContext } from "@/components/NotesContext";
 import useKeyboardShortcut from "use-keyboard-shortcut";
 import useCreateNote from "@/hooks/useCreateNote";
+import useCloseActiveNote from "@/hooks/useCloseNote";
 
 interface AppShellProps {}
 
 const AppShell: FunctionComponent<AppShellProps> = (props) => {
   const { setSearchOpen, searchOpen } = useContext(NotesContext);
   const createNote = useCreateNote();
+  const closeActiveNote = useCloseActiveNote();
 
   const defaultShortcutOptions = {
     ignoreInputFields: false,
@@ -24,9 +26,15 @@ const AppShell: FunctionComponent<AppShellProps> = (props) => {
     () => setSearchOpen(!searchOpen),
     defaultShortcutOptions
   );
+
   useKeyboardShortcut(["Control", "N"], () => createNote(), {
-    ...defaultShortcutOptions,
-    overrideSystem: true,
+    ignoreInputFields: true,
+    repeatOnHold: false,
+  });
+
+  useKeyboardShortcut(["Control", "W"], () => closeActiveNote(), {
+    ignoreInputFields: true,
+    repeatOnHold: false,
   });
 
   return (
