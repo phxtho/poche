@@ -1,16 +1,12 @@
-import { FunctionComponent } from "react";
+import { FC, PropsWithChildren } from "react";
 import { motion } from "framer-motion";
 
-interface MenuItemProps {
+interface MenuItemProps extends PropsWithChildren {
   className?: string;
   onClick?: any;
 }
 
-const MenuItem: FunctionComponent<MenuItemProps> = ({
-  children,
-  className,
-  onClick,
-}) => {
+const MenuItem: FC<MenuItemProps> = ({ children, className, onClick }) => {
   return (
     <motion.button
       whileTap={{ scale: 0.9 }}

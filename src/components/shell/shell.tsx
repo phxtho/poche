@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { FC, PropsWithChildren, useContext } from "react";
 import NavigationButtons from "@/components/navigation-buttons/navigation-buttons";
 import { Outlet } from "react-router-dom";
 import MenuButton from "@/components/menu-button/menu-button";
@@ -9,9 +9,7 @@ import useKeyboardShortcut from "use-keyboard-shortcut";
 import useCreateNote from "@/hooks/useCreateNote";
 import useCloseActiveNote from "@/hooks/useCloseNote";
 
-interface AppShellProps {}
-
-const AppShell: FunctionComponent<AppShellProps> = (props) => {
+const AppShell: FC = () => {
   const { setSearchOpen, searchOpen } = useContext(NotesContext);
   const createNote = useCreateNote();
   const closeActiveNote = useCloseActiveNote();

@@ -1,4 +1,4 @@
-import { useContext, FunctionComponent } from "react";
+import { useContext, FC, PropsWithChildren } from "react";
 import { INote } from "@/model/interfaces";
 import { deleteNote } from "@/db/pouch/notes";
 import { FiFile, FiTrash, FiX } from "react-icons/fi";
@@ -7,14 +7,14 @@ import { NotesContext } from "@/components/NotesContext";
 import MenuItem from "@/components/menu-item/menu-item";
 import "./note-options-modal.css";
 
-interface NoteOptionsModalProps {
+interface NoteOptionsModalProps extends PropsWithChildren {
   note?: INote;
   isOpen?: boolean;
   onAfterOpen?: any;
   onRequestClose?: any;
 }
 
-const NoteOptionsModal: FunctionComponent<NoteOptionsModalProps> = (props) => {
+const NoteOptionsModal: FC<NoteOptionsModalProps> = (props) => {
   Modal.setAppElement("#root");
 
   const { items, removeItem } = useContext(NotesContext);

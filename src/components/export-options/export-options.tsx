@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import { FC } from "react";
 import { useHelpers } from "@remirror/react";
 import { FaMarkdown, FaHtml5 } from "react-icons/fa";
 import FileSaver from "file-saver";
@@ -10,7 +10,7 @@ interface ExportOptionsProps {
   note: INote;
 }
 
-const ExportOptions: FunctionComponent<ExportOptionsProps> = (props) => {
+const ExportOptions: FC<ExportOptionsProps> = (props) => {
   const { getHTML, getMarkdown } = useHelpers();
   const exportHtml = () => {
     const htmlContent = `<!DOCTYPE html>

@@ -1,4 +1,4 @@
-import { useContext, FunctionComponent, useEffect, useRef } from "react";
+import { useContext, FC, useEffect, useRef } from "react";
 import { useState } from "react";
 import { getNotes, search } from "@/db/pouch/notes";
 import "./searchbar.css";
@@ -81,7 +81,7 @@ interface SearchBarResultProps {
   result: SearchResult;
 }
 
-const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
+const SearchBarResult: FC<SearchBarResultProps> = ({
   result,
   onResultClick,
 }) => {
@@ -128,7 +128,7 @@ const SearchBarResult: FunctionComponent<SearchBarResultProps> = ({
 interface HiglightMatchProps {
   match: Fuse.FuseResultMatch;
 }
-const HighlightMatch: FunctionComponent<HiglightMatchProps> = ({ match }) => {
+const HighlightMatch: FC<HiglightMatchProps> = ({ match }) => {
   const [[start, end]] = match.indices;
   return (
     <>

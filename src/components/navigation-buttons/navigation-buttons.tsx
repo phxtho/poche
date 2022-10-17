@@ -1,11 +1,9 @@
-import { FunctionComponent } from "react";
+import { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-interface NavigationButtonsProps {}
-
-const NavigationButtons: FunctionComponent<NavigationButtonsProps> = () => {
+const NavigationButtons: FC = () => {
   const navigate = useNavigate();
   return (
     <div className="flex space-x-4">

@@ -1,11 +1,9 @@
-import { FunctionComponent, useContext } from "react";
+import { FC, useContext } from "react";
 import Modal from "react-modal";
 import SearchBar from "@/components/searchbar/searchbar";
 import { NotesContext } from "@/components/NotesContext";
 
-interface SearchModalProps {}
-
-const SearchModal: FunctionComponent<SearchModalProps> = () => {
+const SearchModal: FC = () => {
   Modal.setAppElement("#root");
 
   const { setSearchOpen, searchOpen } = useContext(NotesContext);
