@@ -2,7 +2,7 @@ import {
   Node as ProsemirrorNode,
   Mark,
   Schema,
-  DOMOutputSpecArray,
+  DOMOutputSpec,
 } from "prosemirror-model";
 
 const calcYchangeDomAttrs = (attrs: any, domAttrs: any = {}) => {
@@ -29,7 +29,7 @@ export const nodes = {
     content: "inline*",
     group: "block",
     parseDOM: [{ tag: "p" }],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       return ["p", calcYchangeDomAttrs(node.attrs), 0];
     },
   },
@@ -41,7 +41,7 @@ export const nodes = {
     group: "block",
     defining: true,
     parseDOM: [{ tag: "blockquote" }],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       return ["blockquote", calcYchangeDomAttrs(node.attrs), 0];
     },
   },
@@ -51,7 +51,7 @@ export const nodes = {
     attrs: { ychange: { default: null } },
     group: "block",
     parseDOM: [{ tag: "hr" }],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       return ["hr", calcYchangeDomAttrs(node.attrs)];
     },
   },
@@ -75,7 +75,7 @@ export const nodes = {
       { tag: "h5", attrs: { level: 5 } },
       { tag: "h6", attrs: { level: 6 } },
     ],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       return ["h" + node.attrs.level, calcYchangeDomAttrs(node.attrs), 0];
     },
   },
@@ -91,7 +91,7 @@ export const nodes = {
     code: true,
     defining: true,
     parseDOM: [{ tag: "pre", preserveWhitespace: "full" as "full" }],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       return ["pre", calcYchangeDomAttrs(node.attrs), ["code", 0]];
     },
   },
@@ -126,7 +126,7 @@ export const nodes = {
         },
       },
     ],
-    toDOM(node: ProsemirrorNode): DOMOutputSpecArray {
+    toDOM(node: ProsemirrorNode): DOMOutputSpec {
       const domAttrs = {
         src: node.attrs.src,
         title: node.attrs.title,
@@ -142,7 +142,7 @@ export const nodes = {
     group: "inline",
     selectable: false,
     parseDOM: [{ tag: "br" }],
-    toDOM(): DOMOutputSpecArray {
+    toDOM(): DOMOutputSpec {
       return ["br"];
     },
   },
@@ -170,7 +170,7 @@ export const marks = {
         },
       },
     ],
-    toDOM(node: Mark): DOMOutputSpecArray {
+    toDOM(node: Mark): DOMOutputSpec {
       return ["a", node.attrs, 0];
     },
   },
@@ -179,7 +179,7 @@ export const marks = {
   // Has parse rules that also match `<i>` and `font-style: italic`.
   em: {
     parseDOM: [{ tag: "i" }, { tag: "em" }, { style: "font-style=italic" }],
-    toDOM(): DOMOutputSpecArray {
+    toDOM(): DOMOutputSpec {
       return ["em", 0];
     },
   },
@@ -202,7 +202,7 @@ export const marks = {
           /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null,
       },
     ],
-    toDOM(): DOMOutputSpecArray {
+    toDOM(): DOMOutputSpec {
       return ["strong", 0];
     },
   },
@@ -210,7 +210,7 @@ export const marks = {
   // :: MarkSpec Code font mark. Represented as a `<code>` element.
   code: {
     parseDOM: [{ tag: "code" }],
-    toDOM(): DOMOutputSpecArray {
+    toDOM(): DOMOutputSpec {
       return ["code", 0];
     },
   },
@@ -221,7 +221,7 @@ export const marks = {
     },
     inclusive: false,
     parseDOM: [{ tag: "ychange" }],
-    toDOM(node: Mark): DOMOutputSpecArray {
+    toDOM(node: Mark): DOMOutputSpec {
       return [
         "ychange",
         { ychange_user: node.attrs.user, ychange_state: node.attrs.state },
@@ -239,4 +239,6 @@ export const marks = {
 //
 // To reuse elements from this schema, extend or read from its
 // `spec.nodes` and `spec.marks` [properties](#model.Schema.spec).
+
+// @ts-ignore
 export const schema = new Schema({ nodes, marks });
