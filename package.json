@@ -49,6 +49,7 @@
     "yjs": "^13.5.41"
   },
   "scripts": {
+    "prepare": "husky install",
     "dev": "npm run build:css && vite",
     "build": "npm run build:css && tsc && vite build",
     "build:css": "tailwindcss -o src/index.css",
