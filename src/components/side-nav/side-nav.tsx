@@ -1,4 +1,4 @@
-import { FunctionComponent, useContext } from "react";
+import { FC, useContext } from "react";
 import { NotesContext } from "@/components/NotesContext";
 import MenuItem from "@/components/menu-item/menu-item";
 import { FiHome, FiSearch } from "react-icons/fi";
@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 interface SideNavProps {}
 
-const SideNav: FunctionComponent<SideNavProps> = () => {
+const SideNav: FC = () => {
   const navigate = useNavigate();
   const { navOpen, setSearchOpen, searchOpen } = useContext(NotesContext);
   return (

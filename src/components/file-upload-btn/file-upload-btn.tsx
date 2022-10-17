@@ -1,4 +1,4 @@
-import { FunctionComponent, useRef } from "react";
+import { FC, useRef } from "react";
 import { FiUpload } from "react-icons/fi";
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
@@ -10,7 +10,7 @@ interface FileUploadBtnProps {
   accept?: string;
 }
 
-const FileUploadBtn: FunctionComponent<FileUploadBtnProps> = ({
+const FileUploadBtn: FC<FileUploadBtnProps> = ({
   onUpload,
   maxFileSize = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   multiple = false,

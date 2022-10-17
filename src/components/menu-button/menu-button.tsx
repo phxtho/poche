@@ -1,11 +1,9 @@
-import { FunctionComponent, useContext } from "react";
+import { FC, useContext } from "react";
 import { FiMenu } from "react-icons/fi";
 import { NotesContext } from "@/components/NotesContext";
 import { motion } from "framer-motion";
 
-interface MenuButtonProps {}
-
-const MenuButton: FunctionComponent<MenuButtonProps> = () => {
+const MenuButton: FC = () => {
   const { toggleNav } = useContext(NotesContext);
   return (
     <motion.button

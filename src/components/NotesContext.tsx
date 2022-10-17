@@ -1,4 +1,10 @@
-import { createContext, FunctionComponent, useCallback, useState } from "react";
+import {
+  createContext,
+  FC,
+  PropsWithChildren,
+  useCallback,
+  useState,
+} from "react";
 
 interface INoteContext {
   items: string[];
@@ -34,11 +40,11 @@ const NotesContext = createContext(initalState);
 NotesContext.displayName = "NotesContext";
 export { NotesContext };
 
-const NoteContextProvider: FunctionComponent = ({ children }) => {
+const NoteContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [ctx, setCtx] = useState<INoteContext>(initalState);
 
   const addItem = useCallback(
-    (item) => {
+    (item: any) => {
       const { items } = ctx;
       if (!items.find((x) => x === item)) {
         setCtx({
@@ -51,7 +57,7 @@ const NoteContextProvider: FunctionComponent = ({ children }) => {
   );
 
   const removeItem = useCallback(
-    (item) => {
+    (item: any) => {
       const { items } = ctx;
       setCtx({
         ...ctx,

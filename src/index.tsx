@@ -1,15 +1,15 @@
 import { StrictMode } from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "@/styles/tailwind.css";
 import "./index.css";
 import App from "@/App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
-ReactDOM.render(
+const container = document.getElementById("root");
+createRoot(container!).render(
   <StrictMode>
     <App />
-  </StrictMode>,
-  document.getElementById("root")
+  </StrictMode>
 );
 
 serviceWorkerRegistration.register();
