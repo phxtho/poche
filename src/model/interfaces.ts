@@ -25,7 +25,7 @@ export interface INote {
   createdTime: number;
   lastEditedTime: number;
   meta: object;
-  state: PMState;
+  doc: any;
   text: string;
 }
 

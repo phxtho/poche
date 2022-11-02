@@ -1,5 +1,5 @@
 import { useContext, useCallback, useEffect, useState } from "react";
-import { getNotes, onChange } from "@/db/pouch/notes";
+import { getNotes } from "@/db/pouch/notes";
 import { INote } from "@/model/interfaces";
 import { useNavigate } from "react-router-dom";
 import AddNoteFAB from "@/components/add-note-fab/add-note-fab";
@@ -29,7 +29,6 @@ export default function Library() {
 
   useEffect(() => {
     fetchAllNotes();
-    onChange(fetchAllNotes);
 
     return () => {
       setAllNotes([]);
