@@ -19,15 +19,11 @@ import {
   EditorComponent,
   ReactFrameworkOutput,
   Remirror,
+  useEditorEvent,
   useRemirror,
+  useRemirrorContext,
 } from "@remirror/react";
-import {
-  Extension,
-  InvalidContentHandler,
-  RemirrorEventListener,
-  RemirrorEventListenerProps,
-} from "@remirror/core";
-import { PMState } from "@/model/interfaces";
+import { Extension, InvalidContentHandler } from "@remirror/core";
 import {
   LinkExtension,
   ImageExtension,
@@ -36,16 +32,10 @@ import {
 } from "@/components/remirror-editor/extensions";
 
 interface EditorProps {
-  onFocus?: (
-    params: RemirrorEventListenerProps<Extension>,
-    event: Event
-  ) => void;
-  onBlur?: (
-    params: RemirrorEventListenerProps<Extension>,
-    event: Event
-  ) => void;
-  onChange?: RemirrorEventListener<Extension>;
-  state?: PMState;
+  onFocus?: (event: Event) => void;
+  onBlur?: (docText: string) => void;
+  onChange?: (docAsJSON: any) => void;
+  docJSON?: any;
   id: string;
 }
 
@@ -58,6 +48,15 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
       },
       []
     );
+
+    const useOnFocus = () => {
+      useEditorEvent("focus", props.onFocus);
+    };
+
+    const useOnBlur = () => {
+      const docText = useRemirrorContext().helpers.getText();
+      useEditorEvent("blur", () => props.onBlur(docText));
+    };
 
     const { manager, state, setState, getContext } = useRemirror({
       extensions: () => [
@@ -81,7 +80,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new HorizontalRuleExtension(),
       ],
       onError: handleOnError,
-      content: props.state?.doc,
+      content: props.docJSON,
     });
 
     useImperativeHandle(ref, () => getContext() as any, [getContext]);
@@ -93,14 +92,11 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
           initialContent={state}
           onChange={(params) => {
             setState(params.state);
-            props.onChange?.(params);
+            if (!params.firstRender) {
+              props.onChange?.(params.state.doc.toJSON());
+            }
           }}
-          onFocus={(params, event) => {
-            props.onFocus?.(params, event);
-          }}
-          onBlur={(params, event) => {
-            props.onBlur?.(params, event);
-          }}
+          hooks={[useOnFocus, useOnBlur]}
         >
           <EditorComponent />
         </Remirror>
