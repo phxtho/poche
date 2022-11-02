@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getNotes, onChange } from "@/db/pouch/notes";
+import { getNotes } from "@/db/pouch/notes";
 import { INote } from "@/model/interfaces";
 
 interface NoteListProps {
@@ -16,7 +16,6 @@ const NoteList = (props: NoteListProps) => {
 
   useEffect(() => {
     fetchAllNotes();
-    onChange(fetchAllNotes);
   }, [fetchAllNotes]);
 
   return (
