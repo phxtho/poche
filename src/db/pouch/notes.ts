@@ -1,19 +1,14 @@
 import PouchDB from "pouchdb";
 import Upsert from "pouchdb-upsert";
-import { INote, PMState, SearchResult } from "@/model/interfaces";
+import { INote, SearchResult } from "@/model/interfaces";
 import Fuse from "fuse.js";
 import { v4 as uuidv4 } from "uuid";
-import Debug from "pouchdb-debug";
 
 PouchDB.plugin(Upsert);
 
-//Enables debugging
-// PouchDB.plugin(Debug);
-// PouchDB.debug.enable("*");
-
 let db = new PouchDB("notes");
 
-export const defaultState = { type: "doc", content: [{ type: "paragraph" }] };
+export const emptyDoc = { type: "doc", content: [{ type: "paragraph" }] };
 
 export async function updateNote(inputDocument: INote) {
   try {
@@ -32,7 +27,7 @@ export async function insertNote(
   id?: string,
   title?: string,
   meta?: object,
-  state?: PMState,
+  doc?: any,
   createdTime?: string,
   lastEditedTime?: string
 ) {
@@ -42,7 +37,7 @@ export async function insertNote(
       id: null,
       title: title || null,
       meta: meta || {},
-      state: state || defaultState,
+      doc: doc || emptyDoc,
       createdTime: createdTime || Date.now(),
       lastEditedTime: lastEditedTime || Date.now(),
     };

@@ -10,6 +10,7 @@ import { useLocation } from "react-router-dom";
 import ExportOption from "@/components/export-options/export-options";
 import "./editor-container.css";
 import { AnimatePresence, motion } from "framer-motion";
+import { INote } from "@/model/interfaces";
 
 interface EditorContainerProps {
   id: string;
@@ -17,7 +18,7 @@ interface EditorContainerProps {
 }
 
 const EditorContainer = (props: EditorContainerProps) => {
-  const [note, setNote] = useState<any>();
+  const [note, setNote] = useState<INote>();
   const [focused, setFocused] = useState(false);
   const [noteOptionsOpen, setNoteOptionsOpen] = useState<boolean>(false);
 
@@ -29,9 +30,10 @@ const EditorContainer = (props: EditorContainerProps) => {
   const initialiseNote = useCallback(async () => {
     if (props.id) {
       // try fetch the note from the db
-      let doc = await getNoteById(props.id);
-      if (doc) {
-        setNote(doc);
+      let note = (await getNoteById(props.id)) as unknown as INote;
+
+      if (note) {
+        setNote(note);
       }
     }
   }, [props.id]);
@@ -54,10 +56,10 @@ const EditorContainer = (props: EditorContainerProps) => {
   }, [location.hash, props.id]);
 
   const handleOnChange = useCallback(
-    (docStateJSON: any) => {
+    (doc: any) => {
       const updatedNote = {
         ...note,
-        state: docStateJSON,
+        doc: doc,
         lastEditedTime: Date.now(),
       };
       setNote(updatedNote);
@@ -118,7 +120,7 @@ const EditorContainer = (props: EditorContainerProps) => {
           </div>
           <Editor
             id={note.id}
-            docJSON={note.state}
+            doc={note.doc}
             onChange={handleOnChange}
             onBlur={handleBlur}
             onFocus={handleFocus}

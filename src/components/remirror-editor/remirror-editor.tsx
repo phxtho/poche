@@ -35,7 +35,7 @@ interface EditorProps {
   onFocus?: (event: Event) => void;
   onBlur?: (docText: string) => void;
   onChange?: (docAsJSON: any) => void;
-  docJSON?: any;
+  doc?: any;
   id: string;
 }
 
@@ -48,7 +48,6 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
       },
       []
     );
-
     const useOnFocus = () => {
       useEditorEvent("focus", props.onFocus);
     };
@@ -80,7 +79,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new HorizontalRuleExtension(),
       ],
       onError: handleOnError,
-      content: props.docJSON,
+      content: props.doc,
     });
 
     useImperativeHandle(ref, () => getContext() as any, [getContext]);
