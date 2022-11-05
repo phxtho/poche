@@ -11,6 +11,7 @@ import ExportOption from "@/components/export-options/export-options";
 import "./editor-container.css";
 import { AnimatePresence, motion } from "framer-motion";
 import { INote } from "@/model/interfaces";
+import TagInput from "@/components/tag-input/tag-input";
 
 interface EditorContainerProps {
   id: string;
@@ -98,7 +99,7 @@ const EditorContainer = (props: EditorContainerProps) => {
             <textarea
               placeholder="Title"
               defaultValue={note?.title}
-              className="font-semibold text-4xl w-11/12"
+              className="font-semibold text-4xl h-12 w-11/12"
               onChange={(e) => {
                 let title = e.target.value;
                 title.replace(/\n/, "");
@@ -118,6 +119,7 @@ const EditorContainer = (props: EditorContainerProps) => {
               />
             </div>
           </div>
+          <TagInput />
           <Editor
             id={note.id}
             doc={note.doc}
