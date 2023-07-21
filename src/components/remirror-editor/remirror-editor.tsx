@@ -28,6 +28,7 @@ import {
   LinkExtension,
   ImageExtension,
   MathInlineExtension,
+  MathBlockExtension,
   SupportedLanguages,
 } from "@/components/remirror-editor/extensions";
 
@@ -72,6 +73,7 @@ const Editor = forwardRef<ReactFrameworkOutput<Extension>, EditorProps>(
         new CodeExtension(),
         new UnderlineExtension(),
         new MathInlineExtension(),
+        new MathBlockExtension(),
         new CodeBlockExtension({
           supportedLanguages: SupportedLanguages,
           defaultLanguage: "typescript",
